@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200;500;800&display=swap');
+
+:root{
+    --white:#E9EDEF;
+    --black:#1D1415;
+    --gray:#A7A6B0;
+    --dk-red:#610301;
+    --red:#B02B0A;
+    --mint:#9BC08A;
+    --green:#283508;
+    --blue:#3F5E91;
+}
+*{padding: 0;margin: 0px;box-sizing: border-box; font-family: 'Assistant', sans-serif;}
+
+h1{margin: 0;padding: 0;font-size: 75px;}
+h2{font-size: 35px; padding-bottom: 25px;}
+    h2 span{font-weight: 100;}
+
+.container{max-width: 1200px; width: 100%; margin: 0 auto; padding: 50px;}
+.container.smaller{max-width:700px; margin: 0 auto;}
+.container.smaller h2{text-align: center;}
+
+.flex{display: flex;align-items: flex-start;justify-content: center; flex-wrap: wrap;}
+
+.col-2{width: 50%;}
+    .col-2:nth-of-type(1){padding-left: 25px;}
+    .col-2:nth-of-type(2){padding-right: 25px;}
+
+/* messages */
+.error-messages{padding:10px 0;}
+.error{color:var(--red);}
+.info{color:var(--blue);}
+
+/* form */
+form{width: 100%;}
+form label.title{display: block; font-size: 18px; padding-bottom: 15px; padding-top: 25px; font-weight: 900;}
+form input:not(.submit):not([name="under_30"]), form textarea{border:none; border-bottom:solid 1px var(--black); color:var(--black); padding:15px 5px; display: block; width: 100%;}
+    form input:focus,form textarea:focus{outline: none; border-bottom:solid 1px var(--red);}
+form textarea{height:150px;}
+form .submit{bottom: none; width: 100%; display: block; background-color:var(--red); border: none; padding: 15px; text-transform: uppercase;color:var(--white); margin-top: 25px; border:solid 3px var(--red); transition: all .25s ease-in;}
+    form .submit:hover{cursor: pointer; background-color: transparent; color:var(--red); transition: all .25s ease-in;}
+form span{padding-top: 15px; display: block; }
+form span label{margin-right: 25px;}
+
+
+/* HOME */
+.page-home .banner{background-image:url("/static/img/dessert.jpg");}
+.banner{position: relative; height: 500px; background-size: cover; background-repeat: no-repeat; background-position: center; display: flex; align-items: flex-end; flex-wrap: wrap;}
+    .banner:before{content:''; height: ; width: 100%; height: 100%; position: absolute; top: 0;left: 0; background-color:rgba(29, 20, 21, .5);}
+.banner .container{position: relative; z-index: 1; color:var(--white); padding-bottom:25px; }
+.banner h1,.banner p{width: 100%;}
+.banner .subtitl{font-size: 25px; font-weight: 100;}
+
+.page-home .info-messages{width: 100%; text-align: center; background-color:var(--blue); color:var(--white); margin-bottom: 25px;}
+.page-home .info-messages .error{color:var(--white); padding: 15px;}
+
+/* DASHBOARD */
+.page-dashboard .banner{background-image:url("/static/img/donuts.jpg");}
+.settings a{color:var(--white); text-decoration: none;}
+.settings a:hover{color:var(--mint);}
+
+/* table */
+.row{width: 100%; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; padding-bottom: 15px;}
+.row > p{width: 33.33%;}
+.row > .title{ font-weight: 600; font-size: 20px;}
+    /* links */
+    .page-dashboard .links a{text-decoration: none; color:var(--black);}
+    .page-dashboard .links a:hover{color:var(--mint);}
+    .page-dashboard .links .delete{color:var(--red);}
+
+/* RECIPES */
+.page-recipes .banner{background-image:url("/static/img/cake.jpg");}
+
+/* SINGLE PAGE */
+.page-single .banner{background-image:url("/static/img/cookies.jpg");}
+.content > span{width: 200px; display: inline-block; padding-bottom: 25px; font-weight: 900;}
+
+/* EDIT */
+.page-edit .banner{background-image:url("/static/img/ice-cream.jpg");}

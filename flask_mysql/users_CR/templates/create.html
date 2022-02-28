@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+    <div class="container">
+        <a href="/">Back</a>
+        <h1>Add User</h1>
+        <form action="/new_user" method="POST">
+            <label for="first_name">Last Name</label>
+            <input type="text" name="first_name" id="">
+            <label for="last_name">First Name</label>
+            <input type="text" name="last_name" id="">
+            <label for="email">Email</label>
+            <input type="text" name="email" id="">
+            <input type="submit" value="Add User" class="submit">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singel Recipe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="page-single">
+    <div class="banner">
+        <div class="container ">
+            <div class="settings"><a href="/dashboard">Dashboard</a> | <a href="/logout">Logout</a></div>
+            <h1>Welcome {{ user_id.first_name }}!</h1>
+            <p class="subtitl">Create a new delicate decadent deliriously dreamy delicious delight!</p>
+        </div>
+    </div>
+
+    <main>
+        <div class="container">
+            <h2>{{ recipe_id.name }}</h2>
+            <p class="content description"><span>Description:</span> {{ recipe_id.description}}</p>
+            <p class="content instruction"><span>Instruction:</span> {{ recipe_id.instruction}}</p>
+            <p class="content made_on"><span>Made on:</span> {{ recipe_id.under_30}}</p>
+            <p class="content date"><span>Date:</span> Made on: {{ recipe_id.made_on.strftime('%B %m, %Y')}}</p>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="home">Home</a>
+        <h1> {{indv_user.first_name}} {{indv_user.last_name}}'s Info </h1>
+        <div class="profile-info">
+            <p><strong>Name</strong>: {{indv_user.first_name}} {{indv_user.last_name}} </p>   
+            <p><strong>Email</strong>: {{indv_user.email}}</p>
+            <p><strong>Created On</strong>: {{ indv_user.created_at.strftime('%B %d, %Y') }}</p>
+            <p><strong>Last Updated On: </strong>{{ indv_user.updated_at.strftime('%B %d, %Y') }} at {{ indv_user.updated_at.strftime('%I:%M %p') }}</p>
+            <div class="actions"><a href="/edit/{{ indv_user.id }}">Edit</a><a href="/delete/{{ indv_user.id }}">Delete</a></div>
+        </div>
+    </div>
+</body>
+</html>

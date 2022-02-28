@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojo Survey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Dojo Survey</h1>
+        <div class="error-messages">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <p>You have some errors, please double check your answers</p>
+                    <ol>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ol>
+                {% endif %}
+            {% endwith %}
+        </div>
+        <form action="/rendering_result" method="post">
+            <input type="text" name="code_name" id="code_name" placeholder="Code Name">
+            <input type="text" name="species" id="species" placeholder="Species">
+
+            <select name="talents" id="talents">
+                <option value="" deselect>--- Unusual Talent ---</option>
+                <option value="kung fu">Kung Fu</option>
+                <option value="invisibility">Invisibility</option>
+                <option value="comedy">Comedy</option>
+                <option value="flying">Flying</option>
+                <option value="long_life">Long Life</option>
+                <option value="no_unusual_talent">No Unusual Talent</option>
+            </select>
+
+            <select name="langauge" id="langauge">
+                <option value="" deselect>--- Language ---</option>
+                <option value="Eeglish">English</option>
+                <option value="telepath">Telepath</option>
+                <option value="sign_language">Sign Langauge</option>
+                <option value="roaring">Roaring</option>
+                <option value="clicks">Clicks</option>
+                <option value="music_notes">Music Notes</option>
+                <option value="other"Other>Other</option>
+            </select>
+
+            <input type="text" name="home_planet" id="home_planet" placeholder="Home Planet">
+
+            <textarea name="comment" id="comment" cols="30" rows="10" placeholder="What is you reason for visting earth and how long will you be staying?"></textarea>
+            <button type="submit">Submit Alien Immigration Form</button>
+        </form>
+    </div>
+</body>
+</html>

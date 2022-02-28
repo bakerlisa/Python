@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&display=swap');
+
+:root{
+    --black:#022840;
+    --white:#fff;
+    --white-blue:#D8E6F2;
+    --blue:#51718C;
+    --lt-blue:#ADC5D9;
+    --dk-blue:#1D4259;
+
+    --red:#D91A1D;
+
+    --green:#0C9932;
+}
+
+/* ========================================== 
+GLOBAL 
+========================================== */
+*{position: 0; margin: 0; box-sizing: border-box; font-family: 'Lora', serif;}
+
+h1{padding-bottom: 25px;}
+
+button,.button,.submit{background-color:var(--white-blue); color:var(--blue); text-decoration: none; padding: 10px 25px; display: inline-block; opacity: 1; transform-origin: center; transform: scale(1); transition: all .18s ease-out;}
+button:hover,.button:hover,.submit:hover{cursor: pointer; color:var(--black); opacity: .9; transform: scale(.9); transition: all .18s ease-in;
+    box-shadow: 2px 2px 30px 0px rgba(0,0,0,0.25);
+    -webkit-box-shadow: 2px 2px 30px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 2px 2px 30px 0px rgba(0,0,0,0.25);}
+body{height: 100vh;
+    background: rgb(216,230,242);
+    background: linear-gradient(198deg, rgba(216,230,242,0.2) 35%, rgba(81,113,140,0.2) 50%, rgba(2,40,64,0.2) 100%);
+}
+
+.container{max-width: 600px; margin: 25px auto; background-color:var(--dk-blue); padding: 50px; color:var(--white); border-right:solid 15px var(--black);  border-bottom:solid 15px var(--black); }
+
+/* form */
+form{display: flex;align-items: center;justify-content: start;flex-wrap: wrap;}
+form label{width: 75px;}
+form #email{width: calc(100% - 200px); padding: 10px; height:41px; border:solid 3px transparent; transition: .25s ease-in;}
+    form #email:focus{outline: none; border:solid 3px var(--lt-blue); transition: .25s ease-in;}
+form .submit{width: 100px; background-color:var(--lt-blue); border:none; padding: 12px 5px; text-transform: uppercase; height:41px;}
+
+/* error-messages */
+.error-messages p{color:var(--red);padding-bottom: 25px;}
+
+/* approve */
+.approve-messages p{color:var(--green); padding-bottom: 25px;} 
+
+/* ========================================== 
+PAGES 
+========================================== */
+
+/* results */
+.emails p{padding-bottom: 10px; display: flex; justify-content: space-between; flex-wrap: wrap;}
+.emails p a{color:var(--lt-blue); text-decoration: none;}
+.add{margin-top: 25px; margin-left: auto; display: block; max-width: 200px;}
+/* 404 */
+.error-404{text-align: center;}

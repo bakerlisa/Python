@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authors and Books</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Home</h1>
+        <div class="row flex">
+            <div class="col-2 add-author fav-wrapper">
+                <div class="inner">
+                    <h2><span>Add: </span> New Author</h2>
+                    <form action="/add_author" method="POST">
+                        <input type="text" name="name" id="name" placeholder="Author Name">
+
+                        <input type="submit" value="Add Author" class="submit">
+                    </form>
+                </div>
+            </div>
+            <div class="col-2 all-authors add-fav">
+                <h2>Browser Current Authors</h2>
+                <div class="all-authors">
+                    {% for author in authors %}
+                        <a href="/authors/{{ author.id }}" class="submit"> {{ author.name }}</a>
+                    {% endfor %}
+                </div>
+                <a href="/books" class="button">Add Book</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="home">Home</a>
+        <h1>Edit User</h1>
+        <form action="/update_user/{{indv_user.id}}" method="POST">
+            <label for="first_name">First Name</label>
+            <input type="text" name="first_name" id="" placeholder="{{indv_user.first_name}}">
+            <label for="last_name">Last Name</label>
+            <input type="text" name="last_name" id="" placeholder="{{indv_user.last_name}}">
+            <label for="email">Email</label>
+            <input type="text" name="email" id="" placeholder="{{indv_user.email}}">
+            <input type="submit" value="Edit User" class="submit">
+        </form>
+        <div class="actions"><a href="/{{ indv_user.id }}">Show User</a></div>
+    </div>
+</body>
+</html>

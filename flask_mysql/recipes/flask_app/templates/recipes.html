@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+</head>
+<body class="page-recipes">
+    <div class="banner">
+        <div class="container ">
+            <div class="settings"><a href="/dashboard">Dashboard</a> | <a href="/logout">Logout</a></div>
+            <h1>Welcome {{user_id.first_name }}!</h1>
+            <p class="subtitl">Create a new delicate decadent deliriously dreamy delicious delight!</p>
+        </div>
+    </div>
+
+    <main>
+        <div class="container smaller">
+            <h2>Decadent Delicate's Denomination</h2>
+            <div class="error-messages">
+                {% with errors = get_flashed_messages(category_filter=["reciepe"]) %}
+                    {% if errors %}
+                        {%- for msg in errors %}
+                            <p class="error">{{ msg }}</p>
+                        {% endfor -%}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <form action="/add_recipe" method="post">
+                <input type="text" name="name" value='{{ session["dessert"].name }}' id="" placeholder="Name">
+                <textarea type="text" name="description" id="" placeholder="Description">{{ session["dessert"].description }}</textarea>
+                <textarea type="text" name="instruction" id="" placeholder="Instruction">{{ session["dessert"].instruction }}</textarea>
+                <span>
+                    <label for="under_30" class="title"> Made Under 30 Minutes?</label>
+                    <input type="radio" name="under_30" value="false">
+                    <label for="under_30">No</label>
+
+                    <input type="radio" name="under_30" value="true" checked>
+                    <label for="under_30" >Yes!!</label>
+                </span>
+
+                <label for="made_on" class="title">Made On</label>
+                <input type="date" id="start" name="made_on" value='{{ session["dessert"].made_on }}'  value=""  placeholder="Made On">
+
+                <input type="submit" value="Create" class="submit">
+            </form>
+            
+        </div>
+    </main>
+</body>
+</html>

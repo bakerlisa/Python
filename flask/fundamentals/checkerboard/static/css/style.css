@@ -1,0 +1,9 @@
+*{box-sizing: border; padding: 0;margin: 0; font-family: 'Rowdies', cursive;}
+
+.row{display: flex; align-items: center;justify-content: center; flex-wrap: wrap;}
+.row .box{width: 50px; height: 50px; }
+    .row:nth-child(even) .box:nth-child(even),
+    .row:nth-child(odd) .box:nth-child(odd){background-color: black;}
+    .row:nth-child(even) .box:nth-child(odd),
+    .row:nth-child(odd) .box:nth-child(even){background-color: red;}
+h1{text-align: center; padding: 25px 0; }

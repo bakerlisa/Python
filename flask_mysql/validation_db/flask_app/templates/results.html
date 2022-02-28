@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <h1>Email Address Entered:</h1>
+        <div class="approve-messages">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        <div class="emails">
+            {% for email in all_emails %}
+                <p>{{ email.email }} <a href="/delete/{{ email.id }}">Delete</a></p>
+            {% endfor %}
+        </div>
+        <a href="/" class="button add">Add Email Address</a>
+    </main>
+</body>
+</html>

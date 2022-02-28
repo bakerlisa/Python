@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Title: </title>
+</head>
+<body>
+    <a href="/">Home</a>
+    <h1>Author Book Page</h1>
+    <div class="row">
+        <div class="col-2">
+            <h2> Favorite:</h2>
+            <p>Favorites By:</p>
+            <div class="row flex">
+                <div class="title title">Title</div>
+                <div class="title pages"># of Pages</div>
+            </div>
+            <div class="row flex">
+                <div class="title"></div>
+                <div class="pages"></div>
+            </div>
+        </div>
+        <div class="col-2">
+            <h2>Add Author's Favorite!</h2>
+            <form action="/save_authors_favs" method="post">
+                <select name="fav_id" id="">
+                    <option value="" label>Choose Book</option>
+                    {% for book in author_favs_list %}
+                        <option value="{{ book.id }}">{{ book.name }}</option>
+                    {% endfor %}
+                </select>
+                <input type="hidden" name="author_id" value="{{ id }}">
+                <input type="submit" value="Add">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

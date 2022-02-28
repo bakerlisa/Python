@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojo {{ ninjas_in_dojo[0].dojo.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+</head>
+<body>
+    <div class="conatiner dojo">
+        <a class="back" href="/dojos">Home</a>
+        <h1>Welcome to Dojo  {{ ninjas_in_dojo[0].dojo.name }}</h1>
+        <p class="subtitle">Checkout This Years Roster!</p>
+        <div class="row flex">
+            <div class="fname title">First Name</div>
+            <div class="lname title">Last Name</div>
+            <div class="age title">Age</div>
+        </div>
+        {% for ninja in ninjas_in_dojo %}   
+        <div class="row flex info">
+            <p class="fname">{{ ninja.first_name }}</p>
+            <p class="lname"> {{ ninja.last_name }}</p>
+            <p class="age">{{ ninja.age }}</p>
+        </div>  
+        {% endfor %}
+    </div>
+</body>
+</html>

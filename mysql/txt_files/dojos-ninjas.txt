@@ -1,0 +1,36 @@
+INSERT INTO dojos (created_at,name) VALUES (NOW(),"Jackie");
+INSERT INTO dojos (created_at,name) VALUES (NOW(),"Chan");
+INSERT INTO dojos (created_at,name) VALUES (NOW(),"Ching Lee");
+INSERT INTO dojos (created_at,name) VALUES (NOW(),"Beverly Hills Ninja");
+
+DELETE  FROM dojos WHERE id < 6;
+
+INSERT INTO dojos (created_at,name) VALUES(NOW(), "Hassan-i Sabbah");
+INSERT INTO dojos (created_at,name) VALUES (NOW(), "Creed");
+INSERT INTO dojos (created_at,name) VALUES (NOW(), "Temple");
+
+INSERT INTO ninjas (created_at,first_name,last_name,age,dojo_ID) VALUES(NOW(),"Lisa","Broadhead",31,7);
+INSERT INTO ninjas (created_at,first_name,last_name,age,dojo_ID) VALUES(NOW(),"Elliot","Broadhead",31,5);
+INSERT INTO ninjas (created_at,first_name,last_name,age,dojo_ID) VALUES(NOW(),"Gus","Broadhead",10,6);
+
+UPDATE ninjas SET dojo_id = 6 WHERE id = 5;
+
+
+INSERT INTO ninjas (created_at,first_name,last_name,age,dojo_ID) VALUES(NOW(),"Hannibal","Smith",40,6)
+INSERT INTO ninjas (created_at,first_name,last_name,age,dojo_ID) VALUES(NOW(),"Jack","Ripper",140,6);
+INSERT INTO ninjas (created_at,first_name,last_name,age,dojo_ID) VALUES("Captian","America",200,5);
+UPDATE ninjas SET dojo_id = 6 WHERE id = 6;
+
+INSERT INTO ninjas (created_at,first_name,last_name,age,dojo_ID) VALUES(NOW(),"STAR","Wars",55,5)
+INSERT INTO ninjas (created_at,first_name,last_name,age,dojo_ID) VALUES(NOW(),"STAR","Trek",35,5)
+INSERT INTO ninjas (created_at,first_name,last_name,age,dojo_ID) VALUES(NOW(),"Buzz","LightYear",15,5)
+
+
+SELECT * FROM dojos;
+SELECT * FROM ninjas;
+
+SELECT * FROM ninjas  WHERE dojo_ID = 5;
+
+SELECT * FROM ninjas WHERE dojo_id = 7;
+
+SELECT * FROM ninjas ORDER BY id DESC LIMIT 1;

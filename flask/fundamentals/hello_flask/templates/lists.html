@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lists</title>
+</head>
+<body>
+    <h1>Lists</h1>
+    <ol>
+        {% for x in random_numbers %}
+            {% if x  >= 30 %}
+                <li>{{ x }}</li>
+            {%  endif %}
+        {% endfor %}
+
+        {% for student in students %}
+        {% if student['age'] < 30 %}
+                <div>Name: {{ student['name']  }}</div>
+                <div>Age: {{ student['age'] }}</div>
+                {%  endif %}
+        {% endfor %}
+
+    </ol>
+</body>
+</html>

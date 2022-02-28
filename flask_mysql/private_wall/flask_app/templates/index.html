@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Registraion</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
+</head>
+<body class="page-home">
+    <main>
+        <div class="container flex">
+            {% if 'id' in session %}    
+                <div class="settings"><a href="/wall">Dashboard</a></div>
+            {% endif %}
+            <h1>Login and Registration </h1>
+            <div class="info-messages">
+                {% with errors = get_flashed_messages(category_filter=["info"]) %}
+                    {% if errors %}
+                        {%- for msg in errors %}
+                            <p class="error">{{ msg }}</p>
+                        {% endfor -%}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <div class="col-2 login">
+                <h2>Register</h2>
+                <div class="error-messages">
+                    {% with errors = get_flashed_messages(category_filter=["error"]) %}
+                        {% if errors %}
+                            {%- for msg in errors %}
+                                <p class="error">{{ msg }}</p>
+                            {% endfor -%}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+
+                <form action="/new_user" method="POST">
+                    <input type="text" name="first_name" id="" placeholder="First Name" value="{{ session['form'].first_name }}">
+                    <input type="text" name="last_name" id="" placeholder="Last Name" value="{{ session['form'].last_name }}">
+                    <input type="text" name="email" id="" placeholder="email@format.com" value="{{ session['form'].email }}">
+                    <input type="password" name="password" id="" placeholder="Password" value="{{ session['form'].password }}">
+                    <input type="password" name="confirm_password" id="" placeholder="Confirm Password" value="{{ session['form'].confirm_password }}">
+
+                    <input type="submit" value="register" class="submit">
+                </form>
+            </div>
+            <div class="col-2 registartion">
+                <h2>Login</h2>
+                <div class="error-messages">
+                    {% with errors = get_flashed_messages(category_filter=["login"]) %}
+                        {% if errors %}
+                            {%- for msg in errors %}
+                                <p class="error">{{ msg }}</p>
+                            {% endfor -%}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+
+                <form action="/user_login" method="POST">
+                    <input type="text" name="email" id="" placeholder="email">
+                    <input type="password" name="password" id="" placeholder="password">
+                    <input type="submit" value="Login" class="submit">
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

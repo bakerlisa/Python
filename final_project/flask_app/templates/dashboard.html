@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Registraion</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
+</head>
+<body class="page-home">
+    <main>
+        <div class="container flex">
+            {% if 'id' in session %}    
+                <div class="settings"><a href="/wall">Dashboard</a> | Messages | <a href="/user_settings">user settings</a> |<a href="/group_dashboard">Group Dashboard</a> | <a href="/messages">Messages</a> <a href="/join_group">Join Group</a> 
+                 <a href="/logout">Logout</a></div>
+            {% endif %}
+            <h1>Dashboard</h1>
+            <h2>Welcome {{ user_info.first_name}}</h2>
+            <div class="error-messages">
+                {% with errors = get_flashed_messages(category_filter=["request"]) %}
+                    {% if errors %}
+                        {%- for msg in errors %}
+                            <p class="error">{{ msg }}</p>
+                        {% endfor -%}
+                    {% endif %}
+                {% endwith %}
+            </div>
+
+            <h3>Join a Flock</h3>
+            <form action="/submit_join_request" method="POST">
+                <!-- if they're not in a group yet -->
+                <select name="group_id" id="">
+                    <option value="">Join a Flock</option>
+                    {% for group in all_groups %}
+                        <option value="{{ group.id }}">{{ group.name }}</option>
+                    {% endfor %}
+                </select>
+                <textarea name="mesage" id="" cols="30" rows="10">
+                    {{user_info.first_name}} {{user_info.last_name}} would like to join your group!
+                </textarea>
+                <input type="hidden" name="user_id" value="{{ user_info.id }}">
+
+
+                <input type="submit" value="Join!">
+            </form>
+            <h3><a href="/create_flock"> Create a flock </a></h3>
+        </div>
+    </main>
+</body>
+</html>

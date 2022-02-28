@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Title: </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="indv-books">
+<!-- 
+    ===============================================================
+    ===============================================================
+    
+    BOOKS PAGE indv_book.html = books/#
+
+    ==============================================================================================================================
+-->
+    <div class="container">
+        <a href="/" class="back">Home</a>
+        <div class="row flex">
+            <div class="col-2 add-fav">
+                <h2><span>Book:</span> {{ book_info.name }} </h2>
+
+                <p class="subtitle">Favorited By Authors:</p>
+                <div class="row flex all-authors">
+                    {% for author in all_book_author_favs %}
+                        <a href="/authors/{{author.id}}"> {{author.name}} </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-2 fav-wrapper">
+                <div class="inner">
+                    <h2><span>Add to</span> Author's Favorite</h2>
+                    <form action="/add_to_author_fav" method="POST">
+                        <select name="author_id" id="author_id">
+                            {% for author in authors %}
+                                <option value="{{ author.id }}">{{ author.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <!-- NEED TO GET BOOK ID -->
+                        <input type="hidden" name="book_id" value="{{book_info.id}}">
+                        <input type="submit" value="Add" class="submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

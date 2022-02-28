@@ -1,0 +1,28 @@
+NOTES:
+1. wireframe
+2. clickable prototype
+3. Erd
+4. final backend application
+
+ONE TO ONE:
+It's where one table relates to another table. name to one address
+
+ONE TO MANY:
+Where id can link to many results: like one person, many orders
+
+MANY TO MANY:
+where you have an inbetween table that links products to orders. 1 person, links to many orders and those many orders can link to different products. But we split them all out and linkthem with forgien keys so our code is DRY
+
+NORMILIZATIN: 
+-Where we take our table data and make it DRY with 3 steps (mostyle 2 but the 3 one is in there)
+-where we take large tables and make them smaller so we don't ever repeat ourselves (excepts in the foreign keys and numbers used - that is what we use to link data to other tables)
+
+1. normalilization 1- more seeing that we can break our info out into the different tables - hit form one then you can get to form 2, you can't get to form 2 sithout getting to form 1 
+    ** EVERY COLUMNE ONE VALUE **
+2. Norm 2 - if you see anywhere where info is being repeated- break it out into its own talbe
+    ** EVERY VALUE MUST BE UNQUIE **
+3. Norm 3 - passes bot 1 and 2 before we get to thress - and you won't typically make it here
+    ** ONE COLUMNE CAN'T DEPEND ON ANOTHER (publisher/book example) **
+
+
+

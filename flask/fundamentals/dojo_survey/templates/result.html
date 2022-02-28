@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container results">
+        <h1>You've Been Approved!!</h1>
+        <p class="title">Code Name:</p>
+        <p>{{ session['code_name'] }}</p>
+        
+        <p class="title">Secret Reason for Visiting:</p>
+        <p>{{ session['mission'] }}</p>
+        
+        <p class="title">Skill to Learn While on Earth:</p>
+        <p>{{ session['talents'] }}</p>
+        
+        <p class="title">Truth or Dare</p>
+        <p>{{ session['truth_dare'] }}</p>
+        
+        <p class="title">Pet</p>
+        <p> {% for pet in session['pets'] %}    
+           {{ pet }}
+        {% endfor %}</p>
+
+        <p class="title">Comments:</p>
+        <p>{{ session['reason']}}</p>
+
+        <a href="/" class="home">Home</a>
+    </div>
+</body>
+</html>

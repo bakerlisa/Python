@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back">Home</a>
+        <div class="row flex">
+            <div class="col-2  fav-wrapper">
+                <h2>New Books</h2>
+                <form action="/add_book" method="POST">
+                    <input type="text" name="name" id="" placeholder="Book Title">
+                    <input type="number" name="num_pages" id="" placeholder="Number of Pages">
+                    <input type="submit" value="Add Book" class="submit">
+                </form>
+
+            </div>
+            <div class="col-2  add-fav">
+                <h2>All Books</h2>
+                <div class="all-books all-authors">
+                    {% for book in all_books %}
+                        <a href="/books/{{ book.id }}">{{ book.name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<!-- 
+    1. Display all books
+    2. link all books to an indv page
+    3. add books
+    4. DONE - Go back to home
+ -->

@@ -1,0 +1,61 @@
+/* ============================================= 
+GLOBAL 
+============================================= */
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200;500;800&display=swap');
+
+:root{
+    --white:#E9EDEF;
+    --black:#1D1415;
+    --gray:#A7A6B0;
+    --dk-red:#610301;
+    --red:#B02B0A;
+    --mint:#9BC08A;
+    --green:#283508;
+    --blue:#3F5E91;
+}
+*{padding: 0;margin: 0px;box-sizing: border-box; font-family: 'Assistant', sans-serif;}
+
+.red{color:var(--red);}
+
+h1{margin: 0;padding: 0;font-size: 75px;}
+h2{font-size: 35px; padding-bottom: 25px;}
+    h2 span{font-weight: 100;}.flex{display: flex;align-items: flex-start;justify-content: center; flex-wrap: wrap;}
+h3{font-size: 30px; width: 100%; padding: 25px 0;}
+
+.col-2{width: 50%;}
+    .col-2:nth-of-type(1){padding-left: 25px;}
+    .col-2:nth-of-type(2){padding-right: 25px;}
+
+/* messages */
+.error-messages{padding:10px 0;}
+.error{color:var(--red);}
+.info{color:var(--blue);}
+
+/* container */
+.container{max-width: 1200px; width: 100%; margin: 0 auto; padding: 50px;}
+.container.smaller{max-width:700px; margin: 0 auto;}
+.container.smaller h2{text-align: center;}
+
+.row{display: flex;}
+.ttl,.ntw,.rd,.act{font-weight: 900;width: 20%;}
+
+/* ============================================= 
+PAGES 
+============================================= */
+
+/* DASHBOARD */
+.other{padding-top: 50px;}
+
+/* LOCK */
+.page-lock{text-align: center;}
+.page-lock h1{width: 100%; padding-bottom: 25px;}
+.page-lock p{display: block; width: 100%; padding-bottom: 15px; color:var(--black);}
+.page-lock img{display: block;margin-bottom: 25px;}
+
+/* SHOW */
+.page-show p{ width: 100%;  display: block; padding-bottom: 10px;}
+.page-show p span{font-weight: 900; width: 200px; display: inline-block;}
+
+/* ============================================= 
+MEDIA QUERIES 
+============================================= */

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Show</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
+</head>
+    <body class="page-show">
+        <main>
+            <div class="container smaller flex">
+                <div class="welcome"><a href="/logout">Logout</a> | <a href="/">Dashboard</a> | <a href="/new">Add</a></div>
+
+                <h1>Single Show Page</h1>
+                <p><span>Release Date:: </span>{{ show_data["release_date"] }}</p>
+                <p><span>Network: </span>{{ show_data["network"] }}</p>
+                <p><span>Description:</span>{{ show_data["description"] }}</p>
+                <p><span>Posted By:</span> </p>
+                <p><span>Likes:</span> {{ likes[0]["count"] }}</p>
+            </div>
+        </main>
+</body>
+</html>

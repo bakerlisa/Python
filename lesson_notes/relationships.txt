@@ -1,0 +1,14 @@
+================= MORNING =================
+
+RELATIONSHIPS:
+- Front to back when adding new functinality
+- you need to put every feild from the database in your init function
+- If you are calling a query make sure you match the paceholder and %()s maetch
+    -make sure if you're making a query you pass the same number of values
+    -if you just want to update one value, wither uer another query OR make sure that you don't change the values from the 
+- if you have the NOW() you don't have to pass in the NOW() in your function
+-method not allowed, proabaly menas you didn't set up your method to be a post
+
+
+
+================= AFTERNOON =================

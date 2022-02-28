@@ -1,0 +1,20 @@
+SCHEDULE: 
+1. Fundamentals
+    -var, data sets, loops, 
+2. OOP
+3. Flask - framework 
+4. relational database - MySQL
+5. MVC w/ full Stack
+
+
+TIPS:
+1. be present
+    -particapte in calls dicsussios and assigements
+2. be humble
+    -you don't know everything
+3. do the work
+    -try to do the assigments 3 x's, day before, day of, and end of day of
+4. be curious
+    -find things that interst you and put it in your code
+5. collobrate Be respectful 
+    -treat others better than you would yourself

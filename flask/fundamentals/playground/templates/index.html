@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playgound</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@100;400&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <h1>Welcome to the Playground</h1>
+    <div class="box-wrapper">
+        {% for x in range(0,num) %}
+            <div class="box" style="background-color:{{color}}"></div>
+        {% endfor %}
+    </div>
+</body>
+
+<style>
+    body{text-align: center; font-family: 'IBM Plex Sans Thai Looped', sans-serif;}
+    h1{font-size:45px;}
+    .box-wrapper{display: flex;align-items: center;justify-content: center; gap:10px; flex-wrap: wrap;}
+    .box{background-color: blue; height:150px; width: 16%; border:solid 3px black; transform-origin: center; transform: rotateY(0deg); opacity: 1 ;}
+        .box:hover{cursor: pointer; transition: all .25s ease-in; transform: rotateY(90deg); opacity: 0 ;}
+</style>
+
+</html>

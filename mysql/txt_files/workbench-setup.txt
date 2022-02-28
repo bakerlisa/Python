@@ -1,0 +1,12 @@
+INSERT INTO users (first_name, last_name) VALUES("Lisa","Broadhead");
+INSERT INTO users (first_name, last_name) VALUES("Natalie","Baker");
+INSERT INTO users (first_name, last_name) VALUES("Julie","Smith");
+INSERT INTO users (first_name, last_name) VALUES("Hannah","Montana");
+INSERT INTO users (first_name, last_name) VALUES("Alex","Hic");
+INSERT INTO users (first_name, last_name) VALUES("Harry","Potter");
+
+DELETE FROM users WHERE first_name = "Lisa";
+DELETE FROM users WHERE id = 6;
+UPDATE users SET first_name = 'Ron', last_name='Potter' WHERE id = 10;
+
+SELECT * FROM users;

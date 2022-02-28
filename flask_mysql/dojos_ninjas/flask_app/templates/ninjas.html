@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninjas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+</head>
+<body>
+    <div class="conatiner ninja">
+    <a class="back" href="/dojos">Home</a>
+        <h1>New Ninjas</h1>
+        <p>All listed Dojos are accepting new recurits. If you have what it takes to train with some of the top ninjas in the world at thr most gruling dojos, join today.</p>
+        <form action="/create_new_ninja" method="post">
+            <label for="Dojo"></label>
+            <select name="dojo_id" id="dojo_id">
+                {% for dojo in get_all_dojos %}    
+                    <option value="{{dojo.id}}">{{ dojo.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="first_name">First Name</label>
+            <input type="text" name="first_name" id="first_name">
+
+            <label for="last_name">Last Name</label>
+            <input type="text" name="last_name" id="last_name">
+
+            <label for="age">Age</label>
+            <input type="num" name="age" id="age" max="16" min="45">
+
+            <input type="submit" value="Create" class="button submit">
+        </form>
+    </div>
+</body>
+</html>

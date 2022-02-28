@@ -1,0 +1,81 @@
+SQL: 
+1:1
+    user - SSN
+    user - drivers license
+    user - email
+    user - address
+    user - credit card
+
+1:M
+    user - address  
+    user - multiple credit cards
+    teacher - student
+    state - city
+    post - comments
+
+M:M
+    users - friends
+    books - authors
+    movies - actors
+
+
+Normilization:
+1. Each Value should only have one Value
+2. Don't repeat values: example, movies categories and we have multiple movies that fit in multipl geners, put categories into its own column
+3. some columns can't be dependent on other columns: 
+
+
+============================ READING NOTES ============================
+- LIKE "%e" - % (wildcard) means anything before the last character
+    -Y% - starts with
+    -%Y ends with 
+    -%y% has a y in it somewhere
+    -Y%o%d - starts with y, has an o and ends with a d
+    -a%a%a% - would look for a word with 3 a's
+- '_'  single character wildcard
+- NOT LIKE 0r <>
+- LIMIT - limits the number of users
+- OFFSET adjust the starting point
+    -use LIMIT and OFFSET together you get the staring point and how many times it'll run
+    -LIMIT 3 OFFSET 2 or LIMMIT 3,2
+- IN checks in a lists
+- BETWEEN range
+- XOR
+- AS - can rename your column
+
+FUNCTIONS
+    text:
+    -CONCAT()
+        CONCAT('Mr. '. first_name. ' '. 'last_name')
+
+    -CONTACT_WS - adds the white space for us
+    -LENGTH 
+    -LOWER - makes all elements to lowercase
+
+    date: - has to be on a datetime column
+    -HOUR - hour 
+    -DAYNAME - day of the week
+    -MONTH - gets us the MONTH
+    -NOW - gets the time right now
+    -DATE_FORMAT( ) - if you want to format your date differently (Feb. 8 / 22 or Wednesday Febrauary 14)
+        -SELECT DATE_FORMAT(joined_datetime, %W %M %e %Y);
+        -chekc W3Schools to make sure the format is right
+
+1:1
+SELECT * FROM customers 
+JOIN addresses ON addresses.id = customers.address_id;
+
+1:M
+SELECT * FROM orders 
+JOIN items_orders ON orders.id = items_orders.order_id 
+JOIN items ON items.id = items_orders.item_id;
+
+
+
+
+
+
+QUESTIONS:
+?Does the join change the data? or is it just a way to bring 2 talbes together and examine their DATA
+
+    

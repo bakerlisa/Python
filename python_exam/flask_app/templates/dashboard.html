@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
+</head>
+<body>
+    <div class="nav-bar">
+        <div class="welcome"><a href="/logout">Logout</a> | <a href="/">Home</a> | <a href="/new">Add</a></div>
+    </div>  
+    <h1>Howdy {{ user_info.first_name }}</h1>
+
+    <h2 class="other">All TV Your Shows</h2>
+    <div class="row title flex">
+        <p class="ttl">Title</p>
+        <p class="ntw">Network</p>
+        <p class="rd">Release Date</p>
+        <p class="act">Actions</p>
+    </div>
+    
+    {% for show in all_user_shows %}
+        <div class="row">
+            <p class="title">{{ show.title }}</p>
+            <p class="network">{{ show.network }}</p>
+            <p class="network">{{ show.release_date.strftime('%B %m, %Y')}}</p>
+                <p><a href="/show/{{ show.id }}">Show</a> | <a href="/edit/{{ show.id }}">Edit</a> | <a href="/delete/{{ show.id}}">Delete</a>
+                </p>
+                
+        </div>
+    {% endfor %}
+    
+
+
+
+
+
+    <h2 class="other">Explore Other TV Shows</h2>
+    <div class="row title flex">
+        <p class="ttl">Title</p>
+        <p class="ntw">Network</p>
+        <p class="rd">Release Date</p>
+        <p class="act">Actions</p>
+    </div>
+    
+        {% for db_show in all_db_shows %}
+        <div class="row">
+            <p class="title">{{ db_show.title }}</p>
+            <p class="network">{{ db_show.network }}</p>
+            <p class="network">{{ db_show.release_date.strftime('%B %m, %Y')}}</p>
+            {% if db_show.user_id == session['id'] %}
+                <p>
+                    <a href="/show/{{ db_show.id }}">Show</a> | 
+                    <a href="/like/{{ db_show.id }}">Like</a> | 
+                    <a href="/unlike/{{ db_show.id}}">unlike</a>
+                    <a href="/show/{{ db_show.id }}">Show</a> | 
+                    <a href="/edit/{{ db_show.id }}">Edit</a> | 
+                    <a href="/delete/{{ db_show.id}}">Delete</a>
+                </p>
+            {% else %}
+                <p><a href="/show/{{ db_show.id }}">Show</a> | <a href="/like/{{ db_show.id }}">Like</a> | 
+                    <a href="/unlike/{{ db_show.id}}">unlike</a></p>
+            {% endif %}
+            </div>
+        {% endfor %}
+
+        <!-- if use_id = show.user_id and show.id = show.show_id 
+                show like button
+            else:
+                show unlike button -->
+<!-- <div>=====================</div>
+{{ users_shows_likes|length }} -->
+<h2 class="other">Black Belt:</h2>
+<div class="row title flex">
+    <p class="ttl">Title</p>
+    <p class="ntw">Network</p>
+    <p class="rd">Release Date</p>
+    <p class="act">Actions</p>
+</div>
+
+{% for likes in users_shows_likes %}
+<div class="row">
+    <p class="title">{{ likes.show["title"] }}</p>
+    <p class="network">{{ likes.show["network"] }}</p>
+    <p class="network">{{ likes.show["release_date"].strftime('%B %m, %Y') }}</p>
+    {% if session["id"]  ==  likes.user_id %}
+            <!-- If the users and the show_id match -->
+        {% if likes.show['id']  ==  likes.show_id  %}
+            <a href="/unlike/{{ likes.show['id'] }}">unlike</a> |
+        {% else %}
+            <a href="/like/{{ likes.show['id']  }}">Like</a> |
+        {% endif %}
+
+        <a href="/show/{{ likes.show['id'] }}">Show</a> | 
+        <a href="/edit/{{ likes.show['id'] }}">Edit</a> | 
+        <a href="/delete/{{ likes.show['id'] }}">Delete</a>
+    {% else %}
+
+        <a href="/show/{{ likes.show['id'] }}">Show</a> | 
+            {% if likes.show['id']  ==  likes.show_id  %}
+                <a href="/unlike/{{ likes.show['id']  }}">Unlike</a> 
+            {% else %}
+                <a href="/like/{{ likes.show['id']  }}">Like</a> 
+            {% endif %}
+
+    {% endif %}
+    </div>
+{% endfor  %}
+</body>
+</html>

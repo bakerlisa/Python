@@ -1,0 +1,61 @@
+/* GLOBAL */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;900&display=swap');
+
+:root{
+    --white:#fff;
+    --black:#000;
+    --yellow:#DF974B;
+    --orange:#CBAD9E;
+    --red:#96272B;
+        --dk-red:#2B0D12;
+    --teal:#15616D;
+    --dk-blue:#001524;
+    --blue:#224F70;
+    --purple:#624552;
+
+}
+
+.red{color:var(--red);}
+
+*{padding: 0;margin: 0; box-sizing: border-box; font-family: 'Lato', sans-serif;}
+.container{max-width: 1000px; margin: 0 auto; }
+.flex{display: flex;align-items: flex-start;justify-content: center;flex-wrap: wrap;}
+
+.col-2{width: 50%; padding-top: 25px; padding-bottom: 50px;}
+    .col-2:nth-of-type(2){padding-right:50px}
+    .col-2:nth-of-type(3){padding-left:50px}
+    .col-2 h2,.col-2 h1{padding-bottom: 25px;}
+
+h1{font-size: 70px; color:var(--black); width: 100%; display: block;}
+    h1 span{font-weight: 300;}
+h2{font-size: 45px;}
+h3{display: block;width: 100%; visibility: color:var(--black);}
+
+/* messages */
+.error-messages{padding:10px 0;}
+.error{color:var(--red);}
+.info{color:var(--blue);}
+
+/* form */
+form input{width: 100%;display: block; margin-bottom: 5px;padding: 10px;}
+
+/* ======================================== 
+PAGE 
+======================================== */
+
+/* HOME */
+.page-home h1,.page-home h3{text-align: center;}
+    /* message */
+    .page-home .info-messages{width: 100%;}
+    .page-home .info-messages .error{background-color:var(--blue); color:var(--white); padding: 10px; text-align: center; margin:15px 0}
+
+/* WALL */
+.nav-bar{width: 100%;}
+
+/* LOCK */
+.page-lock{text-align: center;}
+.page-lock h1{width: 100%; padding-bottom: 25px;}
+.page-lock p{display: block; width: 100%; padding-bottom: 15px; color:var(--black);}
+
+/* ERROR */
+.page-error h1{text-align: center;}

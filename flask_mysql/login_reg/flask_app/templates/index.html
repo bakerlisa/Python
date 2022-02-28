@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="container ">
+        <div class="row flex">
+            {% if 'id' in session: %}
+                <a href="logout" class="button logout">Logout</a>
+            {% endif %}
+            <h1>Girl Scout Cookies!</h1>
+            <div class="col-2 peach">
+                <h2>Registration</h2>
+                <div class="error-messages">
+                    {% with errors = get_flashed_messages(category_filter=["reg"]) %}
+                        {% if errors %}
+                            {%- for msg in errors %}
+                                <p class="error">{{ msg }}</p>
+                            {% endfor -%}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+
+                <form action="/registration" method="POST">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" name="first_name" value="{{
+                        session['form'].first_name }}">
+
+                    <label for="last_name">Last Name</label>
+                    <input type="text" name="last_name" id="last_name" value="{{
+                        session['form'].last_name }}">
+
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" id="email"  value="{{
+                        session['form'].email }}">
+
+                        <label for="gender">Gender:</label>
+                        <div class="radio-wrapper">
+                            <span>
+                                <input type="radio" name="gender" value="male">
+                                <label for="male" class="radio">Male</label>
+                            </span>
+                            <span>
+                                <input type="radio" name="gender" value="female" >
+                                <label for="female" class="radio">Female</label>
+                            </span>
+                            <span>
+                                <input type="radio" name="gender" value="other" >
+                                <label for="other" class="radio">Other</label>
+                            </span>
+                            <span>
+                                <input type="radio" name="gender" value="alien" >
+                                <label for="alien" class="radio">Alien</label>
+                            </span>
+                        </div>
+
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password"  value="{{
+                        session['form'].password }}">
+
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" name="confirm_password" id="confirm_password"  value="{{
+                        session['form'].confirm_password }}">
+
+                    <input type="submit" value="Register" class="submit">
+                </form>
+            </div>
+
+            <div class="col-2 peach">
+                <h2>Login</h2>
+                <div class="error-messages">
+                {% with errors = get_flashed_messages(category_filter=["login"]) %}
+                        {% if errors %}
+                            {%- for msg in errors %}
+                                <p class="error login">{{ msg }}</p>
+                            {% endfor -%}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <form action="/login" method="post">
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" id="email">
+
+                    <label for="password">Passwrod</label>
+                    <input type="password" name="password" id="passwrod">
+
+                    <input type="submit" value="Login" class="submit">
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

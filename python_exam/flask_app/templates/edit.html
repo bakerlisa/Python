@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Show</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
+</head>
+<body>
+    <body class="page-home">
+        <main>
+            <div class="container smaller flex">
+                <div class="welcome"><a href="/logout">Logout</a> | <a href="/">Home</a> | <a href="/new">Add</a></div>
+                <h1>Edit Show</h1>
+                <form action="/edit_show" method="post">
+                    <input type="text" name="title" value='{{ single_show.title }}' id="" placeholder="Title">
+                    <input type="text" name="network" value='{{ single_show.network }}' id="" placeholder="Network">
+                    <textarea type="text" name="description" id="" placeholder="Description">{{ single_show.description }}</textarea>
+                    <label for="release_date" class="title">Release Date:</label>
+                    <input type="date" id="start" name="release_date" value="{{ single_show.release_date.strftime('%Y-%m-%d') }}"  value=""  placeholder="Release Date">
+    
+                    <input type="hidden" name="id" value="{{ single_show.id }}">
+    
+                    <input type="submit" value="Update" class="submit">
+                </form>
+            </div>
+        </main>
+</body>
+</html>

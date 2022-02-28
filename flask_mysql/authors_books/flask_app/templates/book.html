@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+</head>
+<body>
+    <a href="/">Home</a>
+    <div class="row">
+        <div class="col-2">
+            <h2>New Books</h2>
+            <form action="/add_book" method="POST">
+                <label for="name">Title: </label>
+                <input type="text" name="name" id="">
+                <label for="num_of_pages">Number of Pages: </label>
+                <input type="text" name="num_pages" id="">
+                <input type="submit" value="Add Book">
+            </form>
+
+        </div>
+        <div class="col-2">
+            <h2>All Books</h2>
+            <div class="all-books">
+                {% for book in all_books %}
+                    <a href="/books/{{book.id}}">{{book.name}}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<!-- 
+    1. Display all books
+    2. link all books to an indv page
+    3. add books
+    4. DONE - Go back to home
+ -->

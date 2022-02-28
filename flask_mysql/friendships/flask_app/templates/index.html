@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friendships</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <div class="banner home">
+        <div class="inner">
+            <h1>Friendships</h1>
+            <p class="saying">Good Friends are Like Stars, You Don't Always See Them but You Know They're Always There</p>
+            <p class="author">-Old Saying Colored Magnet</p>
+        </div>
+    </div>
+    <main>
+        <div class="container flex">
+            <div class="col-2">
+                <h1>Friendships</h1>
+                <div class="row friends-table">
+                    <p class="user title">User</p>
+                    <p class="user friend">Friends</p>
+                    {% for friends in all_friends %}
+                        <p class="user">{{ friends.first_name }} {{ friends.last_name}}</p>
+                        <p class="friend">{{ friends.friend_frist }} {{ friends.friend_last}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-2">
+                <h2>Add User</h2>
+                <form action="/add_user" method="POST">
+                    <input type="text" name="first_name" id="first_name" placeholder="First Name">
+
+                    <input type="text" name="last_name" id="last_name" placeholder="Last Name">
+                    <input type="submit" value="Add User" class="submit">
+                </form>
+
+                <h2 class="title-two">Create Friendhsip</h2>
+                <form action="/create_friendship" method="POST" class="friendship">
+                    <select name="user_id" id="" placeholder="User">
+                        <option value="" selected disabled>User</option>
+                        {% for user in users %}     
+                            <option value="{{ user.id }}">{{ user.first_name}} {{ user.last_name}} </option>
+                        {% endfor %}
+                    </select>
+
+                    <select name="friend_id" id="">
+                        <option value="" selected disabled>Friend</option>
+                        {% for user in users %}     
+                            <option value="{{ user.id }}">{{ user.first_name}} {{ user.last_name}} </option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" value="Add Friend" class="submit create">
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

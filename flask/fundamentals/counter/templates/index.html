@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="banner">
+        <h1>How many Cookies did you eat today??</h1>
+        <p class="num">{{ session['clicker'] }}</p>
+    </div>
+    <div class="container">
+        
+        <img class="cookieman" src="{{ url_for('static', filename='img/hunger-cookies-eater (1).jpg') }}" alt="Businessman eating a cookie" />
+        <div class="content">
+            <a class="count button" href="/count_cookies">Ate a Cookie</a>
+            <a class="button clear" href="/reset">Reset</a>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+:root{
+    --white:#fff;
+    --black:#0C030D;
+    --black:rgb(118, 118, 118);
+    --blue:#5B788D;
+    --lt-blue:#95BDCF;
+    --purple:#69136F;
+    --lav:#9F91DA;
+    --green:#1D4F43;
+}
+
+*{margin: 0;padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif;}
+
+body{position: relative; height: 100vh; width: 100vw; background-color:var(--black);}
+    body:before{ content:''; background-image: url('/static/img/feathers.jpg'); position: absolute; top: 0;left: 0; height: 100%; width:100%; opacity: .5   ;}
+    body:after{content:''; height:100%; width: 100%; position: absolute; top: 0; left: 0;
+    background: rgb(34,47,77);
+    background: radial-gradient(circle, rgba(34,47,77,0.5) 35%, rgba(58,35,64,0.5) 50%, rgba(0,0,0,1) 100%);}
+
+.popup-prompt{position: absolute; top: 50%;transform: translateY(-50%); max-width:600px; margin: 0 auto; border-radius:10px; left: 0; right: 0; text-align: center; padding: 50px; background: var(--lt-blue); position: relative; z-index: 10; 
+    box-shadow: 2px 2px 36px 0px rgba(0,0,0,0.48);
+    -webkit-box-shadow: 2px 2px 36px 0px rgba(0,0,0,0.48);
+    -moz-box-shadow: 2px 2px 36px 0px rgba(0,0,0,0.48);
+    }
+.popup-prompt h1{padding-bottom:15px;}
+.popup-prompt p{padding-bottom: 25px;}
+
+/* form */
+form input{padding:10px; border:none; border-radius: 2px;}
+form #guess{width: 200px; border:solid 2px transparent;}
+form #guess:focus{border:solid 2px var(--green); outline:none;}
+form .submit{background-color:var(--green); color:var(--white); text-transform: uppercase;}
+form .submit:hover{cursor: pointer; opacity: .85;}
+
+.message{padding-top: 15px; color:var(--pink); font-size: 25px; font-weight: 900;}

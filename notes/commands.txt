@@ -1,0 +1,24 @@
+COMMANDS:
+- launch python termainal python3
+- exit python terminal
+    exit()
+- print to console
+    - print()
+        *echo PHP
+        *console.log() JS
+        * cout << var << endl; C++
+- no ; in python
+- # single comment
+- "" double line comment
+- pass - if you don't have vals or anythign in classe' or functins
+- ??yuples, slice,  and can oyu not use assigment operatros with it
+
+
+
+pipenv shell - activate flask shell
+exit  - to leave
+
+python3 server.py
+
+
+

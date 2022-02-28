@@ -1,0 +1,46 @@
+INSERT INTO users (first_name,last_name) VALUES("Jane","Austen");
+INSERT INTO users (first_name,last_name) VALUES("Emily","Dickinson");
+INSERT INTO users (first_name,last_name) VALUES("Fyodor","Dostoevsky");
+INSERT INTO users (first_name,last_name) VALUES("William","Shakespeare");
+INSERT INTO users (first_name,last_name) VALUES("Lau","Tzu");
+
+INSERT INTO books (title) VALUES("C");
+UPDATE books SET title = 'C Sharp' WHERE id = 1;
+
+INSERT INTO books (title) VALUES("Ruby");
+INSERT INTO books (title) VALUES("Java");
+INSERT INTO books (title) VALUES("PHP");
+INSERT INTO books (title) VALUES("Ruby");
+
+UPDATE books SET title = 'C#' WHERE id = 1;
+
+UPDATE users SET first_name="Bill" WHERE id = 4;
+INSERT INTO favorites_books (author_ID,book_ID) VALUES(1,1);
+INSERT INTO favorites_books (author_ID,book_ID) VALUES(1,2);
+INSERT INTO favorites_books(author_ID,book_ID) VALUES(2,3);
+INSERT INTO favorites_books (author_ID,book_ID) VALUES(4,1);
+INSERT INTO favorites_books (author_ID,book_ID) VALUES(4,2);
+INSERT INTO favorites_books (author_ID,book_ID) VALUES(4,3);
+INSERT INTO favorites_books (author_ID,book_ID) VALUES(4,4);
+INSERT INTO favorites_books (author_ID,book_ID) VALUES(4,5);
+
+SELECT * FROM users 
+LEFT JOIN favorites_books 
+ON users.id = favorites_books.author_ID
+WHERE favorites_books.book_ID = 3;
+
+DELETE FROM favorites_books WHERE book_id = 3 LIMIT 1;
+
+INSERT INTO  favorites_books(author_ID,book_ID) VALUES(5,2);
+
+SELECT * FROM users
+LEFT JOIN favorites_books
+ON users.id = favorites_books.author_ID
+LEFT JOIN books
+ON favorites_books.book_ID = books.id
+WHERE books.id = 3;
+
+SELECT * fron users
+LEFT JOIN favorites_books
+ON users.id = favorites_books.author_ID
+WHERE book.id = 5;

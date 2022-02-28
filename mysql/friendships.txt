@@ -1,0 +1,52 @@
+INSERT INTO users (first_name,last_name) VALUES("Amy","Giver");
+INSERT INTO users (first_name,last_name) VALUES("Eli","Byers");
+INSERT INTO users (first_name,last_name) VALUES("Kermit","Giver");
+INSERT INTO users (first_name,last_name) VALUES("Kermit","The Frog");
+INSERT INTO users (first_name,last_name) VALUES("Big","Bird");
+INSERT INTO users (first_name,last_name) VALUES("Harry","Yellow");
+
+INSERT INTO friendships (user_ID,friend_ID) VALUES (1,2);
+INSERT INTO friendships (user_ID,friend_ID) VALUES (1,4);
+INSERT INTO friendships (user_ID,friend_ID) VALUES (1,6);
+
+INSERT INTO friendships(user_ID,friend_ID) VALUES(2,1);
+INSERT INTO friendships(user_ID,friend_ID) VALUES(2,3);
+INSERT INTO friendships(user_ID,friend_ID) VALUES(2,5);
+
+INSERT INTO friendships(user_ID,friend_ID) VALUES(3,2);
+INSERT INTO friendships(user_ID,friend_ID) VALUES(3,5);
+
+INSERT INTO friendships(user_ID,friend_ID) VALUES(4,3);
+
+INSERT INTO friendships(user_ID,friend_ID) VALUES(5,1);
+INSERT INTO friendships(user_ID,friend_ID) VALUES(5,6);
+
+INSERT INTO friendships(user_ID,friend_ID) VALUES(6,2);
+INSERT INTO friendships(user_ID,friend_ID) VALUES(6,3);
+
+SELECT * FROM users
+JOIN friendships
+ON users.id = friendships.user_id
+LEFT JOIN users as users2
+ON users2.id = friendships.friend_id;
+
+SELECT users.first_name,users.last_name FROM friendships
+JOIN users ON friendships.user_ID = users.id 
+WHERE friendships.user_ID = 1;
+
+SELECT count(users2.first_name) AS friend_count FROM friendships
+JOIN users ON users.id = friendships.friend_id
+JOIN users AS users2 ON friendships.user_ID = users2.id;
+
+SELECT users.first_name, users.last_name, count(users2.first_name) AS friend_count FROM friendships
+JOIN users ON users.id = friendships.friend_id
+JOIN users AS users2 ON friendships.user_ID = users2.id 
+GROUP BY friend_id;
+
+SELECT users.first_name, users.last_name, users2.first_name, users2.last_name
+FROM friendships
+JOIN users ON users.id = friendships.friend_id
+JOIN users AS users2 ON friendships.user_ID = users2.id
+WHERE users.id = 3
+ORDER BY users2.first_name ASC;
+

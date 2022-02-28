@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojo Survey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Dojo Survey</h1>
+        <form action="/rendering_result" method="post">
+            <label for="code_name" class="title">Code Name:</label>
+            <input type="text" name="code_name" id="code_name" placeholder="Code Name">
+
+            <label for="mission" class="title">Secret Reason for Visiting</label>
+            <select name="mission" id="mission">
+                <option value="destroy" deselect>--- Reason for Visiting ---</option>
+                <option value="destroy">Destroy</option>
+                <option value="rule">Rule</option>
+                <option value="enlighten">Enlighten</option>
+                <option value="party">Party</option>
+                <option value="Live in Peace">Live in Peace</option>
+                <option value="steals lots of money and rule the world!">Get lots of money so I can do whatever I want!!!</option>
+            </select>
+
+            <label for="talents" class="title">Skill to Learn While on Earth</label>
+            <select name="talents" id="talents">
+                <option value="destroy" deselect>--- Skill to Learn ---</option>
+                <option value="kung fu">kung Fu</option>
+                <option value="beat boxing">beat boxing</option>
+                <option value="comedy">Comedy</option>
+                <option value="flying">Flying</option>
+                <option value="micdrop moments">MicDrop Moments</option>
+            </select>
+            <span>
+                <label for="tof" class="title">Truth or Dare:</label>
+                <input type="radio" id="dare" name="truth_dare" value="dare">
+                <label for="dare">Dare!</label>
+                <input type="radio" id="truth" name="truth_dare" value="truth">
+                <label for="truth">Truth</label>
+            </span>
+
+            <span>
+                <label for="pet" class="title">I Would Like a Pet:</label>
+                <input type="checkbox" id="panther" name="pet" value="Panther">  
+                <label for="panther">Panther</label>
+
+                <input type="checkbox" name="pet" value="racoon">
+                <label for="racoon">Racoon</label>
+
+                <input type="checkbox" name="pet" value="skunk">
+                <label for="skunk">Skunk</label>
+
+                <input type="checkbox" name="pet" value="fox">
+                <label for="fox">Fox</label>
+
+                <input type="checkbox" name="pet" value="dragon">
+                <label for="dragon">Dragon</label>
+            </span>
+
+            <label for="reason" class="title">Comments</label>
+            <textarea name="reason" id="reason" cols="30" rows="10" placeholder="What is you reason for visting earth and how long will you be staying?"></textarea>
+            <button type="submit">Submit Alien Immigration Form</button>
+        </form>
+    </div>
+</body>
+</html>

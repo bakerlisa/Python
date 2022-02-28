@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indv Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="home">Home</a>
+        <h1> {{user_id.first_name}} {{user_id.last_name}}'s Info </h1>
+        <div class="profile-info">
+            <p><strong>Name</strong>: {{user_id.first_name}} {{user_id.last_name}} </p>   
+            <p><strong>Email</strong>: {{user_id.email}}</p>
+            <p><strong>Created On</strong>: {{ user_id.created_at.strftime('%B %d, %Y') }}</p>
+            <p><strong>Last Updated On: </strong>{{ user_id.updated_at.strftime('%B %d, %Y') }} at {{ user_id.updated_at.strftime('%I:%M %p') }}</p>
+            <div class="actions"><a href="/edit/{{ user_id.id }}">Edit</a><a href="/delete/{{ user_id.id }}">Delete</a></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+</head>
+<body class="page-dashboard">
+    <div class="banner">
+        <div class="container">
+            <div class="settings"><a href="/create">Create</a> | <a href="/logout">Logout</a></div>
+            <h1>Welcome {{user_id.first_name }}!</h1>
+            <p class="subtitl">Your recipes await...Nom Nom Nom Nom!</p>
+        </div>
+    </div>
+
+    <main>
+        <div class="container flex">
+            <div class="row">
+                <p class="title recipe">Name</p>
+                <p class="title thiry">Made in 30 minutes</p>
+                <p class="title links">Actions</p>
+            </div>
+            {% for recipe in all_recipes %}
+                <div class="row">
+                    <p class="recipe">{{ recipe.name }}</p>
+                    <p class="thirty">{{ recipe.under_30 }}</p>
+                    <p class="links">
+                        <a href="/recipes/{{ recipe.id }}" class="view">View Instructions</a> | 
+                        <a href="/edit/{{ recipe.id }}" class="edit">Edit</a> | 
+                        <a href="/delete/{{ recipe.id }}" class="delete">Delete</a>
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>

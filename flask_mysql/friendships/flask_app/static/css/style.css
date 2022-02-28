@@ -1,0 +1,65 @@
+/* GLOBAL */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;900&display=swap');
+
+:root{
+    --white:#fff;
+    --black:#000;
+    --yellow:#DF974B;
+    --orange:#CBAD9E;
+    --red:#96272B;
+        --dk-red:#2B0D12;
+    --teal:#15616D;
+    --blue:#001524;
+    --purple:#624552;
+
+}
+
+*{padding: 0;margin: 0; box-sizing: border-box; font-family: 'Playfair Display', serif;}
+.container{max-width: 1000px; margin: 0 auto; color:var(--teal);}
+.flex{display: flex;align-items: flex-start;justify-content: center;flex-wrap: wrap;}
+
+.col-2{width: 50%; padding-top: 25px; padding-bottom: 50px;}
+    .col-2:nth-of-type(1){padding-right:50px}
+    .col-2:nth-of-type(2){padding-left:50px}
+    .col-2 h2,.col-2 h1{padding-bottom: 25px;}
+
+h1,h2{font-size: 30px; color:var(--black);}
+
+
+/* HOME */
+.banner{  background-size:cover; background-position: center; height:500px; display: flex;align-items: center;justify-content: center; position: relative;}
+    .banner.home{background-image: url('/static/img/friends.jpg');}
+    .banner.friendships{background-image: url('/static/img/beach.jpg');}
+    .banner:before{content:''; height: 100%; width: 100%; background-color: rgba(0, 21, 36, .6); position: absolute;}
+.banner .inner{display: flex;align-items: center;justify-content: center;flex-wrap: wrap; flex-direction: column; color:var(--white);position: relative;z-index: 10;}
+    .banner .inner h1{font-size: 60px; color:var(--white);}
+    .banner .saying{font-size:18px; padding-top: 15px;} 
+    .banner .author{font-weight: 100;font-size: 14px; padding-top: 15px; font-style: italic;}
+.banner .add-friend{text-decoration: none;color:var(--white);position: absolute;top: 25px; right: 25px;}
+.banner .add-friend:hover{color:var(--orange);}
+
+/* friends table */
+.friends-table{display: flex; flex-wrap: wrap; align-items: center;justify-content:flex-start;}
+.friends-table .user,.friends-table .friend{width: 50%; padding: 15px;}
+.friends-table .user,.friends-table .friend{border-bottom:solid 2px var(--teal); color:var(--teal);}
+.friends-table .user.title,.friends-table .user.friend{background-color:var(--teal); color:var(--white);}
+.title-two{padding-top: 25px;}
+
+form label{display: block;width: 100%; padding-bottom: 5px; padding-top: 10px; color:var(--black);}
+form input:not(.submit){display: block;width: 100%; padding: 10px 10px; border-radius: 0; border: solid 2px var(--teal); background-color:var(--teal); color:var(--white); margin-bottom: 10px; transition: all .25s ease-in;}
+    ::placeholder{color: var(--white);}
+    form input:not(.submit):focus{outline: none; background-color: transparent; transition: all .25s ease-in; color:var(--teal);}
+form select{width: 100%; padding: 10px 5px; border-radius: 0; color: white; background: var(--teal); border:none;}
+.submit{background-color:var(--yellow); color:var(--white); border: none; padding:15px 25px; font-weight: 500; margin-top: 15px; margin-left: auto; display: block;max-width:100px; text-align: center; border:solid 2px var(--yellow); transition: all .25s ease-in;}
+    .submit:hover{background-color: transparent; color:var(--yellow); cursor: pointer; transition: all .25s ease-in;}
+form .create{margin-top: 25px; max-width: 300px;}
+.friendship select{margin-bottom: 10px;}
+
+/* FRIENDSHIPS */
+.container.flex.friendships{padding-top: 25px;}
+.friends-list{display: flex;align-items: start;justify-content: start; flex-wrap: wrap;}
+.friends-list li{width: 50%; padding-bottom: 5px; list-style: none;}
+.friends-list li a{color:var(--teal); text-decoration: none;}
+.friends-list li a:hover{color:var(--orange);}
+.subtitle{color:var(--orange);
+

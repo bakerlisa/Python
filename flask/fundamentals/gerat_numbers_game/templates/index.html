@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Great Numbers game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="popup-prompt">
+        <h1>Great Numbers Game!</h1>
+        <p> I'm thinking of a number between 1-100!</p>
+        <form action="/guess" method="post">
+            <input type="number" name="guess" id="guess" min="0" max="100">
+            <input type="submit" value="submit" class="submit">
+        </form>
+        <div class="message">
+            {% if guess %}
+                {% if guess > sum %}    
+                    <span class="high">A Little High</span>
+                {% elif sum > guess %}
+                    <span class="low">hmm...too low</span>
+                {% elif sum == guess %}
+                    <span class="low">Bing! Bing! Bing! {{ guess }}</span>
+                    <a href="/">Restart</a>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

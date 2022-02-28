@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Individual Pages</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <a href="/">Back</a>
+        <h1> {{ user_id.first_name}} {{ user_id.last_name}}'s Info </h1>
+        <div class="profile-info">
+            <p><strong>Name</strong>: {{ user_id.first_name}} {{ user_id.last_name }}</p>   
+            <p><strong>Email</strong>: {{ user_id.email }}</p>
+            <p><strong>Created_at</strong>: {{ user_id.created_at }}</p>
+        </div>
+    </div>
+</body>
+</html>

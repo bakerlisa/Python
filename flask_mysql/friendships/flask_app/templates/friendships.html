@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friendships</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
+</head>
+<body>
+    <div class="banner friendships">
+        <a href="/" class="add-friend"><i class="fa-solid fa-house"></i></a>
+        <div class="inner">
+            <h1>Friendships</h1>
+            <p class="saying">Because of you, I laugh a little harder, cry a little less, and smile a lot more.</p>
+            <p class="author">-Unknown</p>
+        </div>
+    </div>
+    <main>
+        <div class="container flex friendships">
+            <div class="col-2">
+                <!-- <p class="subtitle">Click to add them as your friend!</p> -->
+                <h2>{{ user_id.first_name }}, Your Friends!</h2>
+                <ul class="friends-list">
+                    {% for friend in all_friends %}
+                        <li>{{ friend.friend_frist }} {{ friend.friend_last }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="col-2">
+                <img src="https://i1.wp.com/www.dailycal.org/assets/uploads/2015/03/Best-friends-1426096079.gif?ssl=1"/>
+            </div>
+
+        </div>
+    </main>
+</body>
+</html>

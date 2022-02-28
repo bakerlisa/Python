@@ -1,0 +1,60 @@
+/* ================================================
+GLOBAL 
+================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;500;700&display=swap');
+
+:root{
+    --white:#fff;
+    --black:#04060D;
+    --dk-green:#1F260F;
+    --olive:#3B4018;
+    --peach:#BFB2AA;
+    --white-peach:#D9CCC5;
+
+
+    --red:#CA736D;
+    --green:#A1BFAF;
+}
+
+*{padding: 0;margin: 0;box-sizing: border-box; font-family: 'Hind Siliguri', sans-serif; color:var(--black);}
+
+body{position: relative; min-height:100vh;}
+body:before{content:'';height: 100%; width: 100%; background-image:url("/static/img/background.jpg"); opacity: .1; position: absolute; top: 0;left: 0;z-index: -1; background-position: center;}
+
+h1{width: 100%; text-align: center; padding: 50px 25px; font-size: 45px;}
+h3{font-size: 25px; padding-bottom: 10px;}
+
+.button{}
+    button:before{content:''; height:100px; width: 200px; position: absolute; bottom:-100px; left: 0;right: 0;}
+.logout{text-align: right; text-decoration: none; display: block; width: 100%;}
+    .logout:hover{color:var(--olive);}
+
+.flex{display: flex;align-items: flex-start;justify-content: flex-start; flex-wrap: wrap;}
+.container{max-width: 1000px; margin: 0 auto; padding: 25px;}
+
+.col-2{width: calc(50% - 25px); padding: 25px;}
+    .col-2:nth-of-type(1){margin-right: 25px;}
+    .col-2:nth-of-type(2){margin-left: 25px;}
+
+form label:not(.radio){display: block;width: 100%; padding-top: 15px;}
+form input:not(.submit){width: 100%; padding: 10px; border:solid 2px var(--dk-green);}
+form .submit{display: block; max-width: 200px; text-align: center; border-radius: 0; border:solid 3px var(--olive); color:var(--white); background-color:var(--dk-green); padding: 10px 25px; margin:25px 0 0 auto; position: relative; overflow: hidden; text-transform: uppercase;}
+    form .submit:hovee{cursor: pointer;}
+form .radio-wrapper{display: flex;}
+form .radio-wrapper span{width: 25%; display: flex; align-items: center;}
+form .radio-wrapper input{width: 25px;}
+form .radio-wrapper label{display: initial;}
+
+/* messages */
+.error-messages{padding-top: 15px;}
+.error{color:var(--red);}
+
+
+/* ================================================
+PAGES 
+================================================ */
+.peach{background-color:var(--white-peach);}
+
+/* ================================================
+MEDIA QUERIES
+================================================ */

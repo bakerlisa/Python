@@ -1,0 +1,12 @@
+{
+	"SQL-update": {
+		"prefix": "upp",
+		"body": [
+			"UPDATE table_name SET column_name1 = 'some_value', column_name2='another_value' WHERE condition(s)"
+		],
+		"description": "upda"
+	}
+
+
+
+}

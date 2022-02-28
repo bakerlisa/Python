@@ -1,0 +1,49 @@
+:root{
+    --black:#10403B;
+    --white:#fff;
+    --gray:#BFBFBF;
+    --dk-gray:#4C5958;
+    --yellow:#FFBF0A;
+    --green:#127369;
+    --mint:#8AA6A3;
+    --blue:#6C8DA6;
+    --red:red;
+}
+
+*{padding: 0;margin: 0;box-sizing: border-box; font-family: 'Inter', sans-serif; color:var(--gray); word-wrap: break-word;}
+
+.container{max-width: 500px; margin: 0 auto; background-color:var(--black); padding: 25px; border-radius:10px;  margin-top: 25px; }
+h1{ margin-bottom: 25px; }
+
+.container form{display: flex; flex-wrap: wrap; flex-direction: column; color:var(--black);}
+.container form label{padding-bottom: 5px; }
+.container form label.title{width: 100%;display: block; color:var(--blue);}
+.container form label[for="tof"].title,
+.container form label[for="pet"].title,
+.container form label[for="reason"].title{padding-top: 10px;}
+.container form input,.container form textarea{padding: 10px; outline: none; margin-top: 5px; margin-bottom: 15px; border:solid 3px transparent; color:var(--black);}
+.container form input:focus,.container form textarea:focus,.container form select:focus{color:var(--green); outline: none; border:solid 3px var(--mint);}
+.container form select{padding: 10px; margin-bottom: 15px; color:var(--dk-gray); border:solid 3px transparent;}
+form button{background-color:var(--yellow); color:var(--black); border:none; padding:15px; font-size:16px; font-weight: 900; transition: all .25s ease-in;}
+form button:hover{opacity: .8; cursor: pointer; transition: all .25s ease-in;}
+.container form option{color:var(--dk-gray);}
+    ::placeholder {
+        color: var(--dk-gray);
+    }
+    ::-moz-selection {
+        color: var(--dk-gray);
+    }
+      
+    ::selection {
+        color: var(--dk-gray);
+    }
+
+/* ERROR */
+.error-messages ol{padding: 15px 0;}
+.error-messages li{color:var(--red); list-style-position: inside; padding-bottom: 5px;}
+
+
+/* RESULTS */
+.results .title{font-weight: 900; color:var(--white); padding-top: 20px;}
+.home{display: block;text-transform: none; color:var(--yellow);margin-top: 25px; text-decoration: none; text-align: right;}
+.home:hover{color:var(--gray);}

@@ -1,0 +1,17 @@
+INSERT INTO users (first_name,last_name,email) VALUES("Harry","Potter","harry.potter@hogwarts.com);
+INSERT INTO users (first_name,last_name,email) VALUES("Hermione","Granger","hermione.granger@hogwarts.com");
+INSERT INTO users (first_name,last_name,email) VALUES("Ron","Weasley","ron.weasley@hogwarts.com");
+
+SELECT * FROM users;
+
+UPDATE users SET email = 'lisa@lisa.com' WHERE id  = 3;
+SELECT email FROM users WHERE id = 1;
+
+SELECT * FROM users ORDER BY id DESC LIMIT 1;
+
+UPDATE users SET last_name = "Pancakes" WHERE id = 3;
+
+DELETE FROM users WHERE id = 2;
+
+SELECT * FROM users ORDER BY first_name;
+SELECT * FROM users ORDER BY first_name DESC;

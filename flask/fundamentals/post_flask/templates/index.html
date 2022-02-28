@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Lesson</title>
+</head>
+<body>
+    <h1>Index Hello Bananas!</h1>
+    <!-- Route that the page will go to after we hit submit-->
+    <!-- Make sure the method is set -->
+    <form action="/users" method="post">
+        <label for='name'>Name:</label>
+        <!-- The name tags are passed in the URL, and from there we can grab them -->
+        <input type='text' name='name'>
+
+        <label for='email'>Email:</label>
+        <input type='text' name='email'>
+
+        <input type='submit' value='create user'>
+    </form>
+</body>
+</html>
+
+<!-- 
+1. Ground up project build
+2. {{ render var/data }}
+3. {% logic %}
+4. redirect
+5. request
+6. sessions
+7. routes
+8. forms ,submission, storeage, redicted and moved the data to a new form
+
+
+
+Don't render on a post -->

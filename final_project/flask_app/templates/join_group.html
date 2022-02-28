@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join a Flock</title>
+</head>
+<body>
+    <h1>Join a Flock</h1>
+    {% for flock in all_groups %}
+        <p class="name"><span>Name:</span> {{ flock.name }}</p>
+        <p class="city"><span>City:</span> {{ flock.city }}</p>
+        <p class="state"><span>State:</span> {{ flock.state }}</p>
+        <form action="/submit_join_request" method="post">
+            <textarea name="message" id="" cols="30" rows="10">
+                User: {{user_info.first_name}} Would like to join your book club
+            </textarea>
+            <input type="hidden" name="user_id" value="{{ user_info.id }}">
+            <input type="hidden" name="group_id" value="{{ flock.id }}">
+            <input type="submit" value="Join Group">
+        </form>
+    {% endfor %}
+</body>
+</html>

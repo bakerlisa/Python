@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends</title>
+</head>
+<body>
+    <h1>Friends!</h1>
+    <a href="/add_friend">Add a Friend!</a>
+
+    {% for friend in friends %}
+        <a href="{{ friend.id }}">{{ friend.first_name }} {{ friend.last_name }}</a>
+    {% endfor %}
+</body>
+</html>
+
+SELECT * FROM pets LEFT JOIN friends on pets.owner_id = friends.id ;

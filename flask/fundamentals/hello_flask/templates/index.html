@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Flask</title>
+    <!-- based on the folder structure on the right -->
+    <!-- linking a css style sheet -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    
+    <h1>Index Page</h1>
+<h3>Create a User</h3>
+{% for student in students %}
+    {{students}}
+<!-- <form action='/users' method='post'>
+    <label for='name'>Name:</label>
+    <input type='text' name='name'>
+    <label for='email'>Email:</label>
+    <input type='text' name='email'>
+    <input type='submit' value='create user'>
+</form> -->
+{% endfor %}
+
+
+    
+</body>
+</html>

@@ -1,0 +1,111 @@
+1. 
+SELECT Month(charged_datetime) as month,SUM(amount) as revenue FROM billing
+WHERE MONTH(charged_datetime) = 3;
+
+===============================================
+
+2. 
+SELECT clients.client_id, SUM(billing.amount) as total_revenue FROM clients
+LEFT JOIN billing
+ON billing.client_id = clients.client_id
+WHERE clients.client_id = 2;
+
+===============================================
+
+3. 
+SELECT sites.domain_name, clients.client_id FROM clients
+LEFT JOIN sites
+ON sites.client_id = clients.client_id
+WHERE clients.client_id = 10;
+
+===============================================
+
+4. 
+SELECT clients.client_id,CONCAT(clients.first_name, ' ' ,clients.last_name) as full_name, MONTH(created_datetime) as month,YEAR(created_datetime) as year FROM sites
+LEFT JOIN clients
+ON sites.client_id = clients.client_id
+WHERE clients.client_id = 1
+ORDER BY clients.client_id;
+
+SELECT clients.client_id,CONCAT(clients.first_name, ' ' ,clients.last_name) as full_name, MONTH(created_datetime) as month,YEAR(created_datetime) as year FROM sites
+LEFT JOIN clients
+ON sites.client_id = clients.client_id
+OR clients.client_id = 20
+ORDER BY clients.client_id;
+
+===============================================
+
+5. 
+SELECT * FROM sites
+LEFT JOIN leads
+ON leads.site_id = sites.site_id
+WHERE leads.registered_datetime < '2011/01/1' OR  leads.registered_datetime < '2011/02/15'
+ORDER BY leads.registered_datetime;
+
+===============================================
+
+6. 
+SELECT COUNT(clients.client_id),  CONCAT(clients.first_name, ' ', clients.last_name) as full_name FROM sites
+LEFT JOIN leads
+ON leads.site_id = sites.site_id
+LEFT JOIN clients
+ON clients.client_id = sites.client_id
+WHERE leads.registered_datetime < '2011/01/1' OR leads.registered_datetime < '2011/12/31'
+GROUP BY clients.first_name
+ORDER BY clients.first_name;
+
+===============================================
+
+7.  
+SELECT CONCAT(clients.first_name, ' ',clients.last_name), COUNT(leads.first_name), DATE_FORMAT(leads.registered_datetime, '%M'), YEAR(leads.registered_datetime) as year FROM clients
+LEFT JOIN sites
+ON sites.client_id = clients.client_id
+LEFT JOIN leads
+ON sites.site_id = leads.site_id
+WHERE leads.registered_datetime >'2011/01/01' AND leads.registered_datetime < '2011/06/30'
+GROUP BY clients.client_id;
+
+===============================================
+
+8. 
+SELECT CONCAT(clients.first_name, ' ', clients.last_name) as name, sites.domain_name as website, COUNT(sites.domain_name) as leads  FROM clients
+LEFT JOIN sites
+ON sites.client_id = clients.client_id
+LEFT JOIN leads
+ON sites.site_id = leads.site_id
+WHERE leads.registered_datetime > '2011/01/01' AND leads.registered_datetime < '2011/12.31'
+GROUP BY(sites.domain_name )
+ORDER BY clients.client_id;
+
+SELECT CONCAT(clients.first_name, ' ', clients.last_name) as name, sites.domain_name as website, COUNT(sites.domain_name) as leads  FROM clients
+LEFT JOIN sites
+ON sites.client_id = clients.client_id
+LEFT JOIN leads
+ON sites.site_id = leads.site_id
+GROUP BY(sites.domain_name )
+ORDER BY clients.client_id;
+
+===============================================
+
+9. 
+SELECT clients.client_id,CONCAT(clients.first_name, ' ',clients.last_name) as name, SUM(billing.amount), MONTH(charged_datetime) as month, YEAR(charged_datetime) as year FROM clients
+LEFT JOIN billing
+ON clients.client_id = billing.client_id
+GROUP BY clients.client_id, MONTH(charged_datetime)
+ORDER BY clients.client_id, billing.charged_datetime ;
+
+
+SELECT clients.client_id,CONCAT(clients.first_name, ' ',clients.last_name) as name, SUM(billing.amount), DATE_FORMAT(charged_datetime,'%M') as month, YEAR(charged_datetime) as year FROM clients
+LEFT JOIN billing
+ON clients.client_id = billing.client_id
+GROUP BY clients.client_id, MONTH(charged_datetime)
+ORDER BY clients.client_id, billing.charged_datetime;
+
+===============================================
+
+10. 
+SELECT CONCAT(clients.first_name, ' ', clients.last_name) as name, GROUP_CONCAT(sites.domain_name) as sites FROM clients 
+LEFT JOIN sites
+ON clients.client_id = sites.client_id 
+GROUP BY name 
+ORDER BY clients.first_name;

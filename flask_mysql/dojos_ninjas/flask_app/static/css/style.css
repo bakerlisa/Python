@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;700&display=swap');
+
+:root{
+    --white:#fff;
+    --gray:#dbdbdb;
+    --black:rgb(46, 46, 46);
+    --purple:#38184C;
+    --teal:#1C646D;
+    --dk-red:#1F0802;
+    --neon-green:#CEF09D;
+    --bright-green:#CEF09D;
+}
+
+*{padding: 0;margin: 0; box-sizing: border-box; font-family: 'Oswald', sans-serif; color:var(--black);}
+a{text-decoration: none;}
+a,li,p,button, label, input{font-size: 14px;}
+
+h1{margin-bottom: 25px;}
+h2{margin-bottom: 25px;}
+.subtitle{font-weight: 300;font-size: 25px; margin-bottom: 25px;}
+
+.back{text-align: right;display: block;}
+    .back:hover{color:var(--teal);}
+
+.conatiner{max-width: 1000px; margin: 0 auto; padding:50px 0;}
+.flex{display: flex;align-items: flex-start;justify-content: flex-start; flex-wrap: wrap;}
+.col-2{width: 50%;}
+    .col-2:nth-child(even){padding-right: 25px;}
+    .col-2:nth-child(odd){padding-left: 25px;}
+
+.button{border:none; background-color:var(--purple); color:var(--white); padding: 15px 25px; display: inline-block; transition: all .25s ease-in;}
+    .button:hover{cursor: pointer; background-color:var(--neon-green); color:var(--black); transition: all .25s ease-in;}
+
+form label{display:block; width:100%; padding-bottom: 5px;}
+form input:not(.submit){padding: 13px 5px; border: solid 2px var(--black);  transition: all .25s ease-in;}
+    form input:focus:not(.submit){outline:none;  border-color:transparent; border-bottom:solid 2px var(--black); transition: all .25s ease-in; }
+form input.submit{padding: 14px 20px;}
+    /* add ninja */
+    .home #dojo_name{width: calc(100% - 110px);}
+    .home .submit{width: 100px;}
+
+/* HOME */
+.home h1{text-align: center;padding-top: 25px; width: 100%;}
+.home .intro{padding-bottom: 50px;}
+.home .join{margin-left: auto; margin-top: 25px; display: block; max-width: 125px; text-align: center; margin-top: 25px;}
+
+/* DOJO */
+.dojo h1{margin-bottom: 0;}
+.row .title{font-weight: 900;background-color:var(--gray);}
+.fname, .lname, .age{width: 33.3%;  padding: 15px ; }
+.info:nth-child(odd){background-color:var(--neon-green);}
+
+/* NINJA */
+.ninja{max-width: 500px;}
+.ninja form{margin-top: 25px;}
+.ninja form select{width: 100%; border:solid 2px var(--black); padding: 10px;}
+.ninja form label{margin-top: 15px;}
+.ninja form input{width: 100%;}
+.ninja .button{margin-top: 25px;}
+
+/* ERROR */
+.error{text-align: center;}
+.error h1{padding-top: 25px; }
+
+@media all and (max-width:1000px){
+    .col-2{width: 50%;}
+}

@@ -1,0 +1,21 @@
+:root{
+    --white:#fff;
+        --off-white:#FFFDFC;
+    --black:#000;
+    --gray:#DEE2E6;
+        --dk-gray:#34393E;
+    --yellow:#887037;
+    --blue:#B4C5D6;
+        --dk-blue:#2F4357;
+}
+
+.row:not(.title), .row:not(.title):hover{transition: all .25s ease-in;}
+body{background-color:var(--off-white);}
+*{box-sizing: border-box; padding: 0; margin: 0; font-family: 'IBM Plex Sans Thai Looped', sans-serif;}
+.row{display: flex;align-items: center; justify-content: center; flex-wrap: wrap; width: 600px; max-width: 100%; margin: 0 auto; border-bottom:solid 1px var(--gray);}
+    .row:not(.title):hover{cursor: pointer; background-color:var(--gray); color:var(--dk-blue); }
+    .row.title{background-color:var(--dk-gray); color:var(--blue);}
+    .row.title .column{font-weight: 900;}
+.column{ padding: 15px; font-weight: 300;  width: 33.33%;}
+
+

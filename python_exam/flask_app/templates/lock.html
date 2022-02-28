@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lock File</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
+</head>
+<body class="page-lock">
+    <main>
+        <div class="container flex">
+            <h1 class="red">DANGER</h1>
+            <img src="/static/img/trap.gif" alt="megamind 'You've fallen into my trap' image">
+            <p><strong>If you're an instructor grading this exam</strong>. Your are now locked out and mush give me a <strong>black belt!</strong> and <strong>100 cool points</strong>!!!!</p>
+
+            
+            <p>The next time you atempt an acitivity like this, we'll log you off automatically and repoty your IP address to our site administrators. </p>
+            
+            <p>Your IP address is {{ session["ip"] }} has been recorded</p>
+
+            <p>Toodles!</p>
+
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Title: </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="author">
+<!-- 
+    ===============================================================
+    =============================================================== 
+        Author Book Page = author.html = authors/#
+        
+    ============================================================================================================================= 
+-->
+    <div class="container">
+        <a href="/" class="back">Home</a> 
+        <div class="row flex">
+            <div class="col-2 fav-wrapper">
+                <h1><span>Author:</span> {{ author_id.name }}'s  Favorite Books!</h1>
+                <div class="row flex titles">
+                    <div class="title">Title</div>
+                    <div class="pages"># of Pages</div>
+                </div>
+                    {% for book in authors_favs %}
+                        <div class="row flex">
+                            <a href="/books/{{ book.id }}" class="title">{{ book.name }}</a>
+                            <div class="pages">{{ book.num_pages }}</div>
+                        </div>    
+                    {% endfor %}
+                    <!-- <a href="/books" class="button light">View All Books</a> -->
+            </div>
+            <div class="col-2 add-fav">
+                <div class="inner">
+                    <h2>Add Author's Favorite!</h2>
+                    <form action="/add_to_book_favorites" method="POST"> 
+                        <select name="book_id" id="book_id">
+                            {% for book in all_books %}
+                                <option value="{{ book.id }}">{{ book.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <!-- NEED TO GET BOOK ID -->
+                        <input type="hidden" name="author_id" value="{{author_id.id}}">
+                        <input type="submit" value="Add" class="submit">
+                    </form> 
+                </div>      
+            </div>
+        </div>
+    </div>
+</body>
+</html>

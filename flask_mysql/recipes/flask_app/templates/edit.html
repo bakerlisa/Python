@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Recipe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="page-edit">
+    <div class="banner">
+        <div class="container">
+            <div class="settings"><a href="/dashboard">Dashboard</a> | <a href="/logout">Logout</a></div>
+            <h1>Edit Recipe</h1>
+            <p class="subtitl">Sugar brings happiness. Eating it once or twice a week in a dessert, that's what life is about.</p>
+        </div>
+    </div>
+
+    <main>
+        <div class="container smaller flex">
+            <h2><span>Edit:</span> {{ recipe.name }}</h2>
+            <form action="/update_recipe" method="post">
+                <input type="text" name="name" value='{{ recipe.name }}' id="" placeholder="Name">
+                <textarea type="text" name="description" id="" placeholder="Description">{{ recipe.description}}</textarea>
+                <textarea type="text" name="instruction" id="" placeholder="Instruction">{{ recipe.instruction }}</textarea>
+                <span>
+                    <label for="under_30" class="title"> Made Under 30 Minutes?</label>
+
+                    {% if under_30 == true %}    
+                        <label for="under_30" >Yes!!</label>
+                        <input type="radio" name="under_30" value="true" checked>
+                        
+                        <label for="under_30">No</label>
+                        <input type="radio" name="under_30" value="false">
+                    {% else %}
+                    <label for="under_30" >Yes!!</label>
+                    <input type="radio" name="under_30" value="false" checked>
+                    
+                    <label for="under_30">No</label>
+                        <input type="radio" name="under_30" value="true" >
+                    {% endif %}
+                    
+                </span>
+
+                <label for="made_on" class="title">Made On</label>
+                <input type="date" id="start" name="made_on" value="{{ recipe.made_on.strftime('%Y-%m-%d') }}">
+
+
+                
+
+                <input type="hidden" name="id" value="{{ recipe.id }}">
+
+                <input type="submit" value="Update" class="submit">
+            </form>
+        </div>
+    </main>
+</body>
+</html>
