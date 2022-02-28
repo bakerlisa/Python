@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join a Flock</title>
-</head>
+{% include 'header.html' %}
 <body>
+    {% include 'navigation.html' %}
     <h1>Join a Flock</h1>
     {% for flock in all_groups %}
         <p class="name"><span>Name:</span> {{ flock.name }}</p>
@@ -21,5 +15,4 @@
             <input type="submit" value="Join Group">
         </form>
     {% endfor %}
-</body>
-</html>
+    {% include 'footer.html' %}

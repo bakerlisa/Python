@@ -202,3 +202,10 @@ class User:
         query = "SELECT * FROM users WHERE id = %(id)s;"
         results = connectToMySQL('book_club').query_db(query,data)
         return cls(results[0])
+
+# DELETE : user
+    @classmethod
+    def delete_user(cls,data):
+        query = "DELETE FROM users WHERE id = %(id)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return results

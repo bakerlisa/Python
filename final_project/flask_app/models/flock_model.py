@@ -51,32 +51,32 @@ class Flock:
 #         results = connectToMySQL('book_club').query_db(query,data)
 #         return results
 
-# # =============================================  
-# # CHECK: group name is unique
-# # =============================================
-#     @classmethod
-#     def unique_grouping_name(cls,data):
-#         query = "SELECT * FROM flocks WHERE name = %(name)s;"
-#         results = connectToMySQL('book_club').query_db(query,data)
-#         return results
+# =============================================  
+# CHECK: group name is unique
+# =============================================
+    @classmethod
+    def unique_grouping_name(cls,data):
+        query = "SELECT * FROM flocks WHERE name = %(name)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return results
 
-# # =============================================  
-# # CREATE: new group
-# # =============================================
-#     @classmethod
-#     def save_group(cls,data):
-#         query = "INSERT INTO flocks (name, city, state, privacy_setting) VALUES (%(name)s, %(city)s, %(state)s, %(privacy_setting)s);"
-#         results = connectToMySQL('book_club').query_db(query,data)
-#         return results
+# =============================================  
+# CREATE: new flock
+# =============================================
+    @classmethod
+    def save_flock(cls,data):
+        query = "INSERT INTO flocks (name, city, state, privacy_setting) VALUES (%(name)s, %(city)s, %(state)s, %(privacy_setting)s);"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return results
 
-# # =============================================
-# # INSERT: creator as the admin
-# # =============================================
-#     @classmethod
-#     def make_creator_admin(cls,data):
-#         query = "INSERT INTO groups_users (group_id,user_id) VALUES (%(group_id)s , %(user_id)s)"
-#         results = connectToMySQL('book_club').query_db(query,data)
-#         return results
+# =============================================
+# INSERT: creator as the admin
+# =============================================
+    @classmethod
+    def make_creator_admin(cls,data):
+        query = "INSERT INTO flocks_users (flock_id,user_id) VALUES (%(group_id)s , %(user_id)s)"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return results
 
 # # =============================================
 # # INSERT: request to join group

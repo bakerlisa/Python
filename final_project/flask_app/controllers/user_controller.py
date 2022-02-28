@@ -4,6 +4,7 @@ from flask_app import app
 from flask import render_template,redirect,request,session,flash
 from flask_app.models.user_model import User
 from flask_app.models.address_model import Address
+from flask_app.models.message_model import Message
 # from flask_app.models.flock_model import Group
 
 from flask_bcrypt import Bcrypt
@@ -210,3 +211,11 @@ def user_login():
             session["counter"] = 10
             return redirect("/dashboard") 
 
+# DELETE: user
+@app.route('/delete_user/<int:id>')
+def delete_user(id):
+    data = { "id": id }
+    Address.delete_user_address(data)
+    Message.delete_user_messages(data)
+    User.delete_user(data)
+    return redirect('/logout')

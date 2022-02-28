@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login/Registraion</title>
-    <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
-</head>
+{% include 'header.html' %}
 <body class="page-home">
     <main>
         <div class="container flex">
-            {% if 'id' in session %}    
-                <div class="settings"><a href="/dashboard">Dashboard</a> | Messages | <a href="/user_settings">user settings</a> | <a href="/group_dashboard">Group Dashboard</a> | <a href="/messages">Messages</a> | <a href="/join_group">Join Group</a> | <a href="/logout">Logout</a></div>
-            {% endif %}
+            
+            {% include 'navigation.html' %}
+
             <h1>Dashboard</h1>
             <h2>Welcome {{ user_info.first_name}}</h2>
             <div class="error-messages">
@@ -55,5 +46,4 @@
             <h3><a href="/create_flock"> Create a flock </a></h3>
         </div>
     </main>
-</body>
-</html>
+    {% include 'footer.html' %}

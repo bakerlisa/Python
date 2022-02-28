@@ -1,23 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Settings</title>
-    <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
-</head>
+{% from "_macros.html" import states %}
+
+{% include 'header.html' %}
 <body>
     <body class="page-home">
         <main>
             <div class="container ">
-                <h1>User Settings</h1>
-                <p> {{ user_info.first_name }} {{ user_info.last_name }}</p>
+                {% include 'navigation.html' %}
 
-                <p>info: {{ user_info[0] }}</p>
-                <p>address: {{ user_info[0].address.city }}</p>
-                
+                <h1>User Settings:  <span> {{ user_info[0].first_name }} {{ user_info[0].last_name }}</span></h1>
+
                 <div class="user-image"><img src="/static/img/{{ user_info[0].profile_image }}" class="profile_image"/></div>
 
                 <h3>Update User Info:</h3>
@@ -31,14 +22,13 @@
                     {% endwith %}
                 </div>
                 <form action="update_user_settings" method="post">
-                    <input type="text" name="first_name" id="" placeholder="First Name" value="{{ user_info.first_name }}">
+                    <input type="text" name="first_name" id="" placeholder="First Name" value="{{ user_info[0].first_name }}">
 
-                    <input type="text" name="last_name" id="" placeholder="Last Name" value="{{ user_info.last_name }}">
+                    <input type="text" name="last_name" id="" placeholder="Last Name" value="{{ user_info[0].last_name }}">
 
-                    <input type="phone" name="phone" id="" placeholder="phone" value="{{ session['form'].phone }}">
-
+                    <input type="phone" name="phone" id="" placeholder="phone" value="{{  user_info[0].phone }}">
                     
-                    <input type="text" name="email" id="" placeholder="email@format.com" value="{{ user_info.email}}">
+                    <input type="text" name="email" id="" placeholder="email@format.com" value="{{  user_info[0].email }}">
 
                     <input type="hidden" name="id" value="{{ user_info[0].id }}">
                     <input type="submit" value="Update">
@@ -56,59 +46,9 @@
                 <form action="/update_address" method="post">
                     <input type="text" name="address" value="{{ user_info[0].address.address }}" placeholder="address">
                     <input type="text" name="city" value="{{  user_info[0].address.city }}" placeholder="city">
-                    <select name="state" value="{{ user_info[0].address.state }}" placeholder="state">
-                        <option value="" selected deactivated>Select State</option>
-                        <option value="alabama">Alabama</option>
-                        <option value="alaska">Alaska</option>
-                        <option value="arizona">Arizona</option>
-                        <option value="arkansas">Arkansas</option>
-                        <option value="california">California</option>
-                        <option value="colorado">Colorado</option>
-                        <option value="connecticut">Connecticut</option>
-                        <option value="delaware">Delaware</option>
-                        <option value="florida">Florida</option>
-                        <option value="georgia">Georgia</option>
-                        <option value="hawaii">Hawaii</option>
-                        <option value="idaho">Idaho</option>
-                        <option value="illinois">Illinois</option>
-                        <option value="indiana">Indiana</option>
-                        <option value="iowa">Iowa</option>
-                        <option value="kansas">Kansas</option>
-                        <option value="kentucky">Kentucky</option>
-                        <option value="louisiana">Louisiana</option>
-                        <option value="maine">Maine</option>
-                        <option value="maryland">Maryland</option>
-                        <option value="massachusetts">Massachusetts</option>
-                        <option value="michigan">Michigan</option>
-                        <option value="minnesota">Minnesota</option>
-                        <option value="mississippi">Mississippi</option>
-                        <option value="missouri">Missouri</option>
-                        <option value="montana">Montana</option>
-                        <option value="nebraska">Nebraska</option>
-                        <option value="nevada">Nevada</option>
-                        <option value="new Hampshire">New Hampshire</option>
-                        <option value="new Jersey">New Jersey</option>
-                        <option value="new Mexico">New Mexico</option>
-                        <option value="new York">New York</option>
-                        <option value="north Carolina">North Carolina</option>
-                        <option value="north Dakota">North Dakota</option>
-                        <option value="ohio">Ohio</option>
-                        <option value="oklahoma">Oklahoma</option>
-                        <option value="oregon">Oregon</option>
-                        <option value="pennsylvania">Pennsylvania</option>
-                        <option value="rhode_island">Rhode Island</option>
-                        <option value="south_carolina">South Carolina</option>
-                        <option value="south_dakota">South Dakota</option>
-                        <option value="tennessee">Tennessee</option>
-                        <option value="texas">Texas</option>
-                        <option value="utah">Utah</option>
-                        <option value="vermont">Vermont</option>
-                        <option value="virginia">Virginia</option>
-                        <option value="washington">Washington</option>
-                        <option value="west_virginia"> West Virginia</option>
-                        <option value="Wwsconsin">Wisconsin</option>
-                        <option value="wyoming">Wyoming</option>
-                    </select>
+                    
+                    {{ states() }}
+
                     <input type="numbers" name="zip" value="{{ user_info[0].address.zip }}" placeholder="city">
                     <input type="hidden" name="user_id" value="{{ user_info[0].id }}">
                     <input type="submit" value="Update Address">
@@ -133,6 +73,7 @@
                     <input type="submit" value="Update Password">
                 </form>
 
+                <a href="/delete_user/{{ user_info[0].id }}" class="delete">Delete Account</a>
                 <h3>Flocks:</h3>
                 <p>Flocks you're in: {{ user_info.group_id }}</p>
                 <!-- 
@@ -155,9 +96,8 @@
                     2. send out banner messages
                     3. send out group messages
                     4. update location
-                    5. give admin control to users
-                 -->
+                    5. give admin control to users -->
             </div>
         </main>
-</body>
-</html>
+
+        {% include 'footer.html' %}

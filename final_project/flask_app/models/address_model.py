@@ -60,3 +60,10 @@ class Address:
         query = "UPDATE address SET address = %(address)s, state = %(state)s, city = %(city)s, zip = %(zip)s WHERE user_id = %(user_id)s"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
+
+#DELETE : address
+    @classmethod
+    def delete_user_address(cls,data):
+        query = "DELETE FROM address WHERE user_id = %(id)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return results
