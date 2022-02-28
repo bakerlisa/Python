@@ -3,7 +3,8 @@ from flask_app.config.mysqlconnection import connectToMySQL
 import re
 from flask import flash 
 
-from flask_app.models import group_model
+from flask_app.models import flock_model
+from flask_app.models import address_model
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+[a-zA-Z]+$')
 
@@ -12,6 +13,7 @@ class User:
         self.id = data['id']
         self.first_name = data['first_name']
         self.last_name = data['last_name']
+        self.phone = data['phone']
         self.email = data['email']
         self.phone = data['phone']
         self.password = data['password']
@@ -26,6 +28,9 @@ class User:
             is_valid = False
         if len(user['last_name']) < 2:
             flash("Last name must be at least 3 characters.","error")
+            is_valid = False
+        if len(user['phone']) < 10:
+            flash("Phone number mush be 10 characters long","error")
             is_valid = False
         if not EMAIL_REGEX.match(user['email']):
             flash("Last name must be at least 3 characters.","error")
@@ -43,6 +48,24 @@ class User:
             flash("Passwords must match","error")
             is_valid = False
         return is_valid
+
+    def validate_update_user(user):
+        is_valid = True # we assume this is true
+        if len(user['first_name']) < 2:
+            flash("Frist name must be at least 3 characters.","user")
+            is_valid = False
+        if len(user['last_name']) < 2:
+            flash("Last name must be at least 3 characters.","user")
+            is_valid = False
+        if not EMAIL_REGEX.match(user['email']):
+            flash("Last name must be at least 3 characters.","user")
+            is_valid = False
+        if len(user['phone']) < 10:
+            flash("Phone number mush be 10 characters long","user")
+            is_valid = False
+        return is_valid
+
+    
 
 # ==========================================
 # GET: all users
@@ -63,7 +86,7 @@ class User:
 # ========================================
     @classmethod
     def user_by_id(data):
-        query =  "SELECT * FROM flocks LEFT JOIN groups_users ON flocks.id = groups_users.group_id LEFT JOIN users ON users.id = groups_users.user_id WHERE flocks.id = %(id)s;"
+        query =  "SELECT * FROM flocks LEFT JOIN groups_users ON flocks.id = groups_users.flock_id LEFT JOIN users ON users.id = groups_users.user_id WHERE flocks.id = %(id)s;"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
 
@@ -72,29 +95,40 @@ class User:
 # ========================================
     @classmethod
     def get_user_info(cls,data):
-        query = "SELECT * FROM users LEFT JOIN groups_users ON users.id = groups_users.user_id  LEFT JOIN flocks ON groups_users.group_id = flocks.id WHERE users.id = %(id)s;"
+        query = "SELECT * FROM users  LEFT JOIN flocks_users  ON users.id = flocks_users.user_id  LEFT JOIN flocks ON flocks_users.flock_id = flocks.id  LEFT JOIN address ON address.user_id = users.id WHERE users.id = %(id)s;"
         results = connectToMySQL('book_club').query_db(query,data)
 
-        all_user_info = []
+        users_information = []
 
         for row in results:
             one_user = cls(row)
 
-            group_data = {
+            flock_data = {
                 "id" :  row['flocks.id'],
-                "name" :  row['name'],
+                "title" :  row['title'],
                 "city" :  row['city'],
                 "state" :  row['state'],
                 "privacy_setting" :  row['privacy_setting'],
                 "created_at" :  row['flocks.created_at'],
                 "updated_at" :  row['flocks.updated_at']
             }
+            one_user.flock = flock_model.Flock(flock_data)
 
-            one_user.group = group_model.Group(group_data)
+            address_data = {
+                "id": row['address.id'],
+                "address": row['address'],
+                "city": row['address.city'],
+                "state": row['address.state'],
+                "zip": row['zip'],
+                "created_at": row['address.created_at'],
+                "updated_at": row['address.updated_at']
+            }
+            one_user.address = address_model.Address(address_data)
 
-            all_user_info.append(one_user)
-        return cls(results[0])
-
+            users_information.append(one_user)
+            print(" &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& ")
+            print(row)
+        return users_information
 
 # ========================================
 # CREATE: new user
@@ -111,6 +145,15 @@ class User:
     @classmethod
     def increment_messge_cout(cls,data):
         query = "UPDATE users SET message_count = message_count + 1 WHERE id = %(id)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return results
+
+# ========================================  
+# UPDATE: user info
+# ========================================  
+    @classmethod
+    def update_user_info(cls,data):
+        query = "UPDATE users SET first_name = %(first_name)s, last_name = %(last_name)s,email = %(email)s,phone = %(phone)s  WHERE id = %(id)s;"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
 

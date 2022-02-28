@@ -40,6 +40,7 @@
                 <form action="/new_user" method="POST">
                     <input type="text" name="first_name" id="" placeholder="First Name" value="{{ session['form'].first_name }}">
                     <input type="text" name="last_name" id="" placeholder="Last Name" value="{{ session['form'].last_name }}">
+                    <input type="phone" name="phone" id="" placeholder="phone" value="{{ session['form'].phone }}">
                     <input type="text" name="email" id="" placeholder="email@format.com" value="{{ session['form'].email }}">
                     <input type="password" name="password" id="" placeholder="Password" value="{{ session['form'].password }}">
                     <input type="password" name="confirm_password" id="" placeholder="Confirm Password" value="{{ session['form'].confirm_password }}">

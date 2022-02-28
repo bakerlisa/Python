@@ -12,8 +12,7 @@
     <main>
         <div class="container flex">
             {% if 'id' in session %}    
-                <div class="settings"><a href="/wall">Dashboard</a> | Messages | <a href="/user_settings">user settings</a> |<a href="/group_dashboard">Group Dashboard</a> | <a href="/messages">Messages</a> <a href="/join_group">Join Group</a> 
-                 <a href="/logout">Logout</a></div>
+                <div class="settings"><a href="/dashboard">Dashboard</a> | Messages | <a href="/user_settings">user settings</a> | <a href="/group_dashboard">Group Dashboard</a> | <a href="/messages">Messages</a> | <a href="/join_group">Join Group</a> | <a href="/logout">Logout</a></div>
             {% endif %}
             <h1>Dashboard</h1>
             <h2>Welcome {{ user_info.first_name}}</h2>
@@ -25,6 +24,15 @@
                         {% endfor -%}
                     {% endif %}
                 {% endwith %}
+            </div>
+            <div class="info-messages">
+                    {% with errors = get_flashed_messages(category_filter=["info"]) %}
+                        {% if errors %}
+                            {%- for msg in errors %}
+                                <p class="info">{{ msg }}</p>
+                            {% endfor -%}
+                        {% endif %}
+                    {% endwith %}
             </div>
 
             <h3>Join a Flock</h3>

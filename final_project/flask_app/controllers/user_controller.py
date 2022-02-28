@@ -1,8 +1,8 @@
 from flask_app import app
 from flask import render_template,redirect,request,session,flash
 from flask_app.models.user_model import User
-from flask_app.models.message_model import Message
-from flask_app.models.group_model import Group
+from flask_app.models.address_model import Address
+# from flask_app.models.flock_model import Group
 
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
@@ -27,7 +27,7 @@ def index():
         return redirect("/lock")
     else:
         if 'form' not in session: 
-            session["form"] = data = {"first_name": "", "last_name": "", "email": "","gender":"", "password": "", "confirm_password": ""}
+            session["form"] = data = {"first_name": "", "last_name": "", "phone": "","email": "","gender":"", "password": "", "confirm_password": ""}
         return render_template('index.html')
 
 # ==========================================
@@ -42,6 +42,7 @@ def new_user():
         data = {
             "first_name" : request.form['first_name'],
             "last_name" : request.form['last_name'],
+            "phone" : request.form['phone'],
             "email" : request.form['email'],
             "password" : request.form['password'],
             "confirm_password" : request.form['confirm_password']
@@ -68,9 +69,9 @@ def render_dashboard():
         if 'id' in session:
             data = { "id": session['id'] }
             user_info = User.get_user_info(data)
-            all_groups = Group.select_all_groups()
+            # all_groups = Flock.select_all_groups()
             # all_messages = Message.get_all_for_message(data)
-            return render_template('dashboard.html',user_info=user_info,all_groups=all_groups)
+            return render_template('dashboard.html',user_info=user_info)
         else:
             flash("Please Loin","info")
             return redirect('/')
@@ -82,7 +83,7 @@ def render_dashboard():
 def user_settings():
     data = { "id": session['id'] }
     user_info = User.get_user_info(data)
-    return render_template('user-settings.html')
+    return render_template('user-settings.html',user_info=user_info)
 
 # ========================================
 # ROUTE: create a flock
@@ -90,6 +91,59 @@ def user_settings():
 @app.route('/create_flock')
 def create_flock():
     return render_template('create_flock.html')
+
+# ========================================
+# ROUTE: lock
+# ========================================
+@app.route('/lock')
+def lock():
+    # session["counter"] = 10
+    # return render_template('index.html')
+    return render_template('lock.html')
+
+# UPDATE: user settings
+@app.route('/update_user_settings',methods=["POST"])
+def update_user_settings():
+    data = {
+        "id": request.form["id"],
+        "first_name": request.form["first_name"],
+        "last_name": request.form["last_name"],
+        "phone": request.form["phone"],
+        "email": request.form["email"]
+    }
+    if not User.validate_update_user(request.form):
+        return redirect ('/user_settings')
+    else:
+        flash('Settings have been updated',"info")
+        User.update_user_info(data)
+        return redirect('/dashboard')
+
+# UPDATE: address
+
+@app.route('/update_address',methods=["POST"])
+def update_address():
+    data = {
+        "address": request.form["address"],
+        "city": request.form["city"],
+        "state": request.form["state"],
+        "zip": request.form["zip"],
+        "user_id": request.form["user_id"]
+    }
+    
+    dataTwo = {
+        "user_id": request.form["user_id"]
+    }
+    user_has_address = Address.has_address(dataTwo)
+
+    if not Address.validate_update_address(request.form): 
+        return redirect ('/user_settings')
+    elif user_has_address == "0":
+        flash("Address has been addded to your account","info")
+        Address.add_address(data)
+    else:
+        flash("User info has been updated!","info")
+        Address.update_address(data)
+    return redirect ('/dashboard')
 
 # ========================================
 # LOGOUT: clear all cookies
@@ -131,8 +185,3 @@ def user_login():
             session["counter"] = 10
             return redirect("/dashboard") 
 
-@app.route('/lock')
-def lock():
-    # session["counter"] = 10
-    # return render_template('index.html')
-    return render_template('lock.html')
