@@ -1,3 +1,5 @@
+from ast import MatchSequence
+from nis import match
 from flask_app import app
 from flask import render_template,redirect,request,session,flash
 from flask_app.models.user_model import User
@@ -111,6 +113,7 @@ def update_user_settings():
         "phone": request.form["phone"],
         "email": request.form["email"]
     }
+
     if not User.validate_update_user(request.form):
         return redirect ('/user_settings')
     else:
@@ -118,8 +121,9 @@ def update_user_settings():
         User.update_user_info(data)
         return redirect('/dashboard')
 
+# ========================================
 # UPDATE: address
-
+# ========================================
 @app.route('/update_address',methods=["POST"])
 def update_address():
     data = {
@@ -144,6 +148,27 @@ def update_address():
         flash("User info has been updated!","info")
         Address.update_address(data)
     return redirect ('/dashboard')
+
+# ========================================
+# UPDATE: password
+# ========================================
+@app.route('/update_password', methods=["POST"])
+def update_password():
+    data = {
+        "password": request.form['password'],
+        "id": request.form['id']
+    }
+    password_in_db = User.get_by_password(data)
+
+    if not User.validate_password(request.form):
+        return redirect('/user_settings')
+    elif not bcrypt.check_password_hash(password_in_db.password, request.form['old_password']):
+        flash("Old password doesn't match what we have in the system","password")
+        return redirect('/user_settings')
+    else:
+        flash("Password has been updated!","info")
+        return redirect('/dashboard')
+    
 
 # ========================================
 # LOGOUT: clear all cookies

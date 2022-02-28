@@ -40,7 +40,7 @@
                     
                     <input type="text" name="email" id="" placeholder="email@format.com" value="{{ user_info.email}}">
 
-                    <input type="hidden" name="id" value="{{ user_info.id}}">
+                    <input type="hidden" name="id" value="{{ user_info[0].id }}">
                     <input type="submit" value="Update">
                 </form>
                 <h3>Update Address</h3>
@@ -110,17 +110,26 @@
                         <option value="wyoming">Wyoming</option>
                     </select>
                     <input type="numbers" name="zip" value="{{ user_info[0].address.zip }}" placeholder="city">
-                    <input type="hidden" name="user_id" value="{{ user_info.id }}">
+                    <input type="hidden" name="user_id" value="{{ user_info[0].id }}">
                     <input type="submit" value="Update Address">
                 </form>
                 <h3>Update Password</h3>
-
-                <form action="/update_password">
+                <div class="error-messages">
+                    {% with errors = get_flashed_messages(category_filter=["password"]) %}
+                        {% if errors %}
+                            {%- for msg in errors %}
+                                <p class="error">{{ msg }}</p>
+                            {% endfor -%}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <form action="/update_password" method="post">
                     <input type="password" name="old_password" id="" placeholder="Old Password" value="">
                     
                     <input type="password" name="password" id="" placeholder="New Password" value="">
-                    <input type="password" name="new_password" id="" placeholder="Confirm New Password" value="">
-                    
+                    <input type="password" name="confirm_password" id="" placeholder="Confirm New Password" value="">
+
+                    <input type="hidden" name="id" value="{{ user_info[0].id }}">
                     <input type="submit" value="Update Password">
                 </form>
 

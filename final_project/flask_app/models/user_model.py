@@ -65,6 +65,24 @@ class User:
             is_valid = False
         return is_valid
 
+    def validate_password(password):
+        is_valid = True # we assume this is true
+        if len(password['old_password']) < 8:
+            flash("Old Password must be 8 characters long","password")
+            is_valid = False
+        if len(password['password']) < 8:
+            flash("New password must be at least 8 characters long","password")
+            is_valid = False
+        if re.search('[0-9]',password['password']) is None:
+            flash("New password must have a number","password")
+            is_valid = False
+        if re.search('[A-Z]',password['password']) is None:
+            flash("New password must have a captial letter","password")
+            is_valid = False
+        if not password['password'] == password['confirm_password']:
+            flash("Passwords must match")
+            is_valid = False
+        return is_valid
     
 
 # ==========================================
@@ -126,8 +144,6 @@ class User:
             one_user.address = address_model.Address(address_data)
 
             users_information.append(one_user)
-            print(" &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& ")
-            print(row)
         return users_information
 
 # ========================================
@@ -157,6 +173,15 @@ class User:
         results = connectToMySQL('book_club').query_db(query,data)
         return results
 
+# ========================================  
+# UPDATE: password
+# ========================================  
+    @classmethod
+    def update_current_assword(cls,data):
+        query = "UPDATE users SET password = %(password)s  WHERE id = %(id)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return results
+
 # ========================================
 # VALIDATION: by uer email
 # ========================================
@@ -168,3 +193,12 @@ class User:
             return "0"
         else:        
             return cls(results[0])
+
+# ========================================
+# VALIDATION: by user password
+# ========================================
+    @classmethod
+    def get_by_password(cls,data):
+        query = "SELECT * FROM users WHERE id = %(id)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return cls(results[0])
