@@ -1,25 +1,23 @@
 function binarySearch(arr,val){
-    var arrHalf = Math.floor(arr.length  / 2);
-    if(arrHalf == 1){
-        if(arr[0] === val || arr[1] === val){
-            console.log(val)
-        }else{
-            console.log( "-1")
-        }
-    }else if(arr[arrHalf] == val){
-        console.log(val)
-    }else if(arr[arrHalf] > val){
-        var newArr = arr.slice(0,arr[arrHalf]);
-        binarySearch(newArr,val)
-    }else if(arr[arrHalf] < val){
-        var newArr =  arr.slice(arr[arrHalf],(arr.length));
-        binarySearch(newArr,val)
+    let middle = Math.floor((arr.length -1) / 2);
+
+
+    if (arr.length == 0) {
+        return "false"
+    } 
+ 
+    if(arr[middle] == val){
+        return "true"
+    }else if(val < arr[middle]){
+        console.log(arr.slice(0, middle))
+        return binarySearch(arr.slice(0, middle), val)
     }else{
-        console.log( "-1")
-    }   
+        console.log(arr.slice(middle + 1, arr.length))
+        return binarySearch(arr.slice(middle + 1, arr.length), val)
+    }
 }
 
-console.log(binarySearch([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],19))
+console.log(binarySearch([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],-9))
 // binarySearch([1, 2],2)
 // binarySearch([1, 2],4)
 // binarySearch([1,2,2],2)
@@ -28,3 +26,25 @@ console.log(binarySearch([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],19
 // binarySearch([1,1,1,1,1],1)
 
 // binarySearch([1, 2, 3, 3, 4, 4, 5, 6, 7, 8, 8, 9, 10,11],2)
+
+
+
+
+// ANSWER
+// function recursiveBinarySearch(arr, val) {
+//     let middle = Math.floor((arr.length - 1) / 2);
+//     if (arr.length == 0) {
+//         return false
+//     }
+//     if (arr[middle] == val) {
+//         return true
+//     } else if (val < arr[middle]) {
+//         console.log("chekcing middle " + middle)
+//         console.log("checking left")
+//         return recursiveBinarySearch(arr.slice(0, middle), val)
+//     } else {
+//         console.log("chekcing middle " + middle)
+//         console.log("checking right")
+//         return recursiveBinarySearch(arr.slice(middle + 1, arr.length), val)
+//     }
+// }
