@@ -9,8 +9,6 @@
 
                 <h1>User Settings:  <span> {{ user_info[0].first_name }} {{ user_info[0].last_name }}</span></h1>
 
-                <div class="user-image"><img src="/static/img/{{ user_info[0].profile_image }}" class="profile_image"/></div>
-
                 <h3>Update User Info:</h3>
                 <div class="error-messages">
                     {% with errors = get_flashed_messages(category_filter=["user"]) %}
@@ -74,8 +72,18 @@
                 </form>
 
                 <a href="/delete_user/{{ user_info[0].id }}" class="delete">Delete Account</a>
-                <h3>Flocks:</h3>
-                <p>Flocks you're in: {{ user_info.group_id }}</p>
+                <h2><span>Flocks: </span>{{ user_info[0].flock.title }} </h2>
+                {% if user_info[0].flock.title is  none %}
+                    <a href="/join_flock">Join a Flock</a>
+                {% else %}
+                    <p><strong>Member Since:</strong> {{ user_info[0].flock.created_at.strftime('%B %m, %Y') }}</p>
+                    <p><strong>Membership Status:</strong> {{ user_info[0].status.status }}</p>
+                    <form action="/leave_flock" method="post">
+                        <input type="hidden" name="user_id" value="{{ user_info[0].id }}">
+                        <input type="hidden" name="flock_id" value="{{ user_info[0].flock.id }}">
+                        <input type="submit" value="Leave Group">
+                    </form>
+                {% endif %}
                 <!-- 
                 1. see what groups your in
                     - join another groupßå
@@ -89,14 +97,7 @@
                     - allergies
                     - kids
                 -->
-                <h2>Admin Settings:</h2>
-                <!-- 
-                    ADMIN:
-                    1. edit grou detials
-                    2. send out banner messages
-                    3. send out group messages
-                    4. update location
-                    5. give admin control to users -->
+                <a href="/create_flock">Create a Flock</a>
             </div>
         </main>
 

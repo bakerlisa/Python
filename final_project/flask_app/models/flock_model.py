@@ -25,31 +25,31 @@ class Flock:
             is_valid = False
         return is_valid
 
-# # =============================================  
-# # SELECT: all groups with open privacy setting
-# # =============================================
-#     @classmethod
-#     def select_all_groups(cls):
-#         query = "SELECT * FROM flocks WHERE privacy_setting = 'open';"
-#         results = connectToMySQL('book_club').query_db(query)
+# =============================================  
+# SELECT: all groups with open privacy setting
+# =============================================
+    @classmethod
+    def select_all_groups(cls):
+        query = "SELECT * FROM flocks WHERE privacy_setting = 'open';"
+        results = connectToMySQL('book_club').query_db(query)
 
-#         groups = []
+        groups = []
 
-#         for group in results:
-#             groups.append( cls(group) )
-#         return groups
+        for group in results:
+            groups.append( cls(group) )
+        return groups
 
-# # =============================================
-# # SELECT 
-# # =============================================
-#     @classmethod
-#     def get_admin_id(cls,data):
-#         query = "SELECT * FROM flocks LEFT JOIN groups_users ON flocks.id = groups_users.group_id LEFT JOIN users ON users.id = groups_users.USER_id WHERE flocks.id = %(flock_id)s;"
-#         results = connectToMySQL('book_club').query_db(query,data)
-#         return results
+# =============================================
+# SELECT 
+# =============================================
+    @classmethod
+    def get_admin_id(cls,data):
+        query = "SELECT * FROM flocks LEFT JOIN groups_users ON flocks.id = groups_users.group_id LEFT JOIN users ON users.id = groups_users.USER_id WHERE flocks.id = %(flock_id)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return results
 
 # =============================================  
-# CHECK: group name is unique
+# SELECT: check if group name is unique
 # =============================================
     @classmethod
     def unique_flock_name(cls,data):
@@ -71,16 +71,15 @@ class Flock:
 # =============================================
     @classmethod
     def make_creator_admin(cls,data):
-        query = "INSERT INTO flocks_users (flock_id,user_id) VALUES (%(flock_id)s , %(user_id)s)"
+        query = "INSERT INTO flocks_users (flock_id,user_id,status) VALUES (%(flock_id)s , %(user_id)s,'admin')"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
 
-# # =============================================
-# # INSERT: request to join group
-# # =============================================
-#     @classmethod
-#     def submit_request(cls, data):
-#         queryThree = "INSERT INTO messages (message,from_id) VALUE (%(message)s, %(from_id)s) WHERE user_id = %(user_id)s;"
-#         results = connectToMySQL('book_club').query_db(query,data)
-#         flash("Request has been sent!","request")
-#         return results
+# =============================================
+# DELETE: from group
+# =============================================
+    @classmethod
+    def remove_from_flock(cls,data):
+        query = "DELETE FROM flocks_users WHERE  flock_id = %(flock_id)s AND user_id = %(user_id)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return results

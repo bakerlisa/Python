@@ -29,18 +29,16 @@
             <h3>Join a Flock</h3>
             <form action="/submit_join_request" method="POST">
                 <!-- if they're not in a group yet -->
-                <select name="group_id" id="">
+                <select name="flock_id" id="">
                     <option value="">Join a Flock</option>
                     {% for group in all_groups %}
-                        <option value="{{ group.id }}">{{ group.name }}</option>
+                        <option value="{{ group.id }}">{{ group.title }}</option>
                     {% endfor %}
                 </select>
                 <textarea name="mesage" id="" cols="30" rows="10">
-                    {{user_info.first_name}} {{user_info.last_name}} would like to join your group!
+                    {{user_info[0].first_name}} {{user_info[0].last_name}} would like to join your group !
                 </textarea>
-                <input type="hidden" name="user_id" value="{{ user_info.id }}">
-
-
+                <input type="hidden" name="user_id" value="{{ user_info[0].id }}">
                 <input type="submit" value="Join!">
             </form>
             <h3><a href="/create_flock"> Create a flock </a></h3>

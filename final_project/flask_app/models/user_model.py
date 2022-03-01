@@ -5,6 +5,7 @@ from flask import flash
 
 from flask_app.models import flock_model
 from flask_app.models import address_model
+from flask_app.models import flock_user_model
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+[a-zA-Z]+$')
 
@@ -142,6 +143,16 @@ class User:
                 "updated_at": row['address.updated_at']
             }
             one_user.address = address_model.Address(address_data)
+
+            one_status = {
+                "id": row['id'],
+                "user_id": row['user_id'],
+                "flock_id": row['flock_id'],
+                "status": row['status'],
+                "created_at": row['created_at'],
+                "updated_at": row['updated_at']
+            }
+            one_user.status = flock_user_model.Flock_User(one_status)
 
             users_information.append(one_user)
         return users_information

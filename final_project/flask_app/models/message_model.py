@@ -32,6 +32,25 @@ class Message:
         results = connectToMySQL('book_club').query_db(query,data)
         return results
 
+# =============================================
+# INSERT: request to join group
+# =============================================
+    @classmethod
+    def save_message(cls, data):
+        queryThree = "INSERT INTO messages (message) VALUE (%(message)s)"
+        results = connectToMySQL('book_club').query_db(query,data)
+        flash("Request has been sent!","request")
+        return results
+
+# ==========================================
+# INSERT: save who it's forrm and who it's for
+# ==========================================
+    @classmethod
+    def save_to_from_info(cls,data):
+        query = "INSERT INTO users_messages (user_id,from_id,message_id) VALUES (%(user_id)s , %(from_id)s , %(message_id)s);"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return results
+
 # # ==========================================
 # # GET: all messages for a user
 # # ==========================================
@@ -41,23 +60,6 @@ class Message:
 #         results = connectToMySQL('book_club').query_db(query,data)
 #         return results
 
-# # ==========================================
-# # INSERT: save message
-# # ==========================================
-#     @classmethod
-#     def save_message(cls,data):
-#         query = "INSERT INTO messages (message) VALUES (%(message)s);"
-#         results = connectToMySQL('book_club').query_db(query,data)
-#         return results
-
-# # ==========================================
-# # INSERT: save who it's forrm and who it's for
-# # ==========================================
-#     @classmethod
-#     def save_to_from_info(cls,data):
-#         query = "INSERT INTO users_messages (user_id,from_id,message_id) VALUES (%(user_id)s , %(from_id)s , %(message_id)s);"
-#         results = connectToMySQL('book_club').query_db(query,data)
-#         return results
 
 # # ==========================================
 # # DELETE: message

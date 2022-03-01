@@ -5,6 +5,7 @@ from flask import render_template,redirect,request,session,flash
 from flask_app.models.user_model import User
 from flask_app.models.address_model import Address
 from flask_app.models.message_model import Message
+from flask_app.models.flock_model import Flock
 # from flask_app.models.flock_model import Group
 
 from flask_bcrypt import Bcrypt
@@ -33,10 +34,45 @@ def index():
             session["form"] = data = {"first_name": "", "last_name": "", "phone": "","email": "","gender":"", "password": "", "confirm_password": ""}
         return render_template('index.html')
 
-# ==========================================
-# ADD: new user
-# ==========================================
+# ========================================
+# ROUTE: to dashboard if logged in : go to home (/)
+# ========================================
+@app.route('/dashboard')
+def render_dashboard():
+    if session["counter"] == 1:
+        return redirect("/lock")
+    else:
+        if 'id' in session:
+            data = { "id": session['id'] }
+            user_info = User.get_user_info(data)
+            all_groups = Flock.select_all_groups()
+            # all_messages = Message.get_all_for_message(data)
+            return render_template('dashboard.html',user_info=user_info,all_groups=all_groups)
+        else:
+            flash("Please Loin","info")
+            return redirect('/')
 
+# ========================================
+# ROUTE: user settings page
+# ========================================
+@app.route('/user_settings')
+def user_settings():
+    data = { "id": session['id'] }
+    user_info = User.get_user_info(data)
+    return render_template('user-settings.html',user_info=user_info)
+
+# ========================================
+# ROUTE: lock
+# ========================================
+@app.route('/lock')
+def lock():
+    # session["counter"] = 10
+    # return render_template('index.html')
+    return render_template('lock.html')
+
+# ==========================================
+# INSERT: add new user
+# ==========================================
 @app.route('/new_user', methods=["POST"])
 def new_user():
     if session["counter"] == 1:
@@ -62,42 +98,8 @@ def new_user():
             return redirect('/dashboard')
 
 # ========================================
-# ROUTE: to dashboard if logged in : go to home (/)
-# ========================================
-@app.route('/dashboard')
-def render_dashboard():
-    if session["counter"] == 1:
-        return redirect("/lock")
-    else:
-        if 'id' in session:
-            data = { "id": session['id'] }
-            user_info = User.get_user_info(data)
-            # all_groups = Flock.select_all_groups()
-            # all_messages = Message.get_all_for_message(data)
-            return render_template('dashboard.html',user_info=user_info)
-        else:
-            flash("Please Loin","info")
-            return redirect('/')
-
-# ========================================
-# ROUTE: user settings page
-# ========================================
-@app.route('/user_settings')
-def user_settings():
-    data = { "id": session['id'] }
-    user_info = User.get_user_info(data)
-    return render_template('user-settings.html',user_info=user_info)
-
-# ========================================
-# ROUTE: lock
-# ========================================
-@app.route('/lock')
-def lock():
-    # session["counter"] = 10
-    # return render_template('index.html')
-    return render_template('lock.html')
-
 # UPDATE: user settings
+# ========================================
 @app.route('/update_user_settings',methods=["POST"])
 def update_user_settings():
     data = {
@@ -162,18 +164,6 @@ def update_password():
     else:
         flash("Password has been updated!","info")
         return redirect('/dashboard')
-    
-
-# ========================================
-# LOGOUT: clear all cookies
-# ========================================
-@app.route('/logout')
-def logout():
-    if session["counter"] == 1:
-        return redirect("/lock")
-    else:
-        session.clear()
-        return redirect('/')
 
 # ========================================
 # VALIDATION: Login
@@ -204,7 +194,20 @@ def user_login():
             session["counter"] = 10
             return redirect("/dashboard") 
 
+# ========================================
+# LOGOUT: clear all cookies
+# ========================================
+@app.route('/logout')
+def logout():
+    if session["counter"] == 1:
+        return redirect("/lock")
+    else:
+        session.clear()
+        return redirect('/')
+        
+# ========================================
 # DELETE: user
+# ========================================
 @app.route('/delete_user/<int:id>')
 def delete_user(id):
     data = { "id": id }
