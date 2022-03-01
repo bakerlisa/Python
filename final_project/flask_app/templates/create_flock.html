@@ -5,7 +5,7 @@
     {% include 'navigation.html' %}
     <h1>Create a Flock</h1>
     <div class="error-messages">
-        {% with errors = get_flashed_messages(category_filter=["groups"]) %}
+        {% with errors = get_flashed_messages(category_filter=["flocks"]) %}
             {% if errors %}
                 {%- for msg in errors %}
                     <p class="error">{{ msg }}</p>
@@ -13,24 +13,17 @@
             {% endif %}
         {% endwith %}
     </div>
-    <form action="create_flock" method="POST">
-        <input type="text" name="name" id="" placeholder="Flock Name">
-        <input type="text" name="city" id="" placeholder="City">
+    <form action="/create_new_flock" method="POST">
+        <input type="text" name="title" placeholder="Flock Name">
+        <input type="text" name="city" placeholder="City">
         {{ states() }}
         <span>
             <label for="Open to Everyone or a private group?"></label>
-            <input type="radio" id="" name="privacy_setting" value="open" checked>
+            <input type="radio" name="privacy_setting" value="open" checked>
             <label for="html">Open</label><br>
-            <input type="radio" id="" name="privacy_setting" value="private">
+            <input type="radio" name="privacy_setting" value="private">
             <label for="css">Private</label><br>
         </span>
         <input type="submit" value="Submit">
     </form>
-    <!-- 
-        1. name
-        2. location
-        3. makes you admin in the back end
-        4. invite friends
-            -maybe through text message?
-    -->
     {% include 'footer.html' %}

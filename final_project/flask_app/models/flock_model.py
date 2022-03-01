@@ -14,7 +14,7 @@ class Flock:
 
     def validate_flock(flock):
         is_valid = True # we assume this is true
-        if len(flock['name']) < 2:
+        if len(flock['title']) < 2:
             flash("Please name your Group. Must be atleast 3 characters.","flocks")
             is_valid = False
         if len(flock['city']) < 2:
@@ -22,9 +22,6 @@ class Flock:
             is_valid = False
         if len(flock['state']) < 2:
             flash("Please select a state","flocks")
-            is_valid = False
-        if len(flock['privacy_setting']) < 2:
-            flash("Please set your privacy settings","flocks")
             is_valid = False
         return is_valid
 
@@ -55,8 +52,8 @@ class Flock:
 # CHECK: group name is unique
 # =============================================
     @classmethod
-    def unique_grouping_name(cls,data):
-        query = "SELECT * FROM flocks WHERE name = %(name)s;"
+    def unique_flock_name(cls,data):
+        query = "SELECT * FROM flocks WHERE title = %(title)s;"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
 
@@ -65,7 +62,7 @@ class Flock:
 # =============================================
     @classmethod
     def save_flock(cls,data):
-        query = "INSERT INTO flocks (name, city, state, privacy_setting) VALUES (%(name)s, %(city)s, %(state)s, %(privacy_setting)s);"
+        query = "INSERT INTO flocks (title, city, state, privacy_setting) VALUES (%(title)s, %(city)s, %(state)s, %(privacy_setting)s);"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
 
@@ -74,7 +71,7 @@ class Flock:
 # =============================================
     @classmethod
     def make_creator_admin(cls,data):
-        query = "INSERT INTO flocks_users (flock_id,user_id) VALUES (%(group_id)s , %(user_id)s)"
+        query = "INSERT INTO flocks_users (flock_id,user_id) VALUES (%(flock_id)s , %(user_id)s)"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
 

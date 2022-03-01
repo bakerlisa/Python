@@ -89,13 +89,6 @@ def user_settings():
     return render_template('user-settings.html',user_info=user_info)
 
 # ========================================
-# ROUTE: create a flock
-# ========================================
-@app.route('/create_flock')
-def create_flock():
-    return render_template('create_flock.html')
-
-# ========================================
 # ROUTE: lock
 # ========================================
 @app.route('/lock')
