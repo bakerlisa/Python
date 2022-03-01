@@ -39,7 +39,7 @@ class Message:
 # =============================================
     @classmethod
     def save_message(cls, data):
-        query = "INSERT INTO messages (message) VALUE (%(message)s);"
+        query = "INSERT INTO messages (message,message_type) VALUE (%(message)s,'join_request');"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
 
