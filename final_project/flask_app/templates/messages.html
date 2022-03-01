@@ -2,6 +2,21 @@
 <body>
     {% include 'navigation.html' %}
     <h1>Messages</h1>
-    
 
+    {% if get_all_messages|length == 0 %}
+        <p>You have no messages!</p>
+    {% else %}
+        {% for message in get_all_messages %}
+            <p>{{ message.message }}</p>
+            <p>user_id: {{ message.info["created_at"] }}</p>
+            <p>Message Type: {{ message.info.message_type  }}</p>
+
+            {% if not message.message_type == join_request %}
+                <a href="/accept_user">Accept</a>
+                <a href="/decline_user">Decline</a>
+            {% endif %}
+            <a href="/delete_message">Delete Message</a>
+            <a href="/reply_message">Reply to Message</a>
+        {% endfor %}
+    {% endif %}
 {% include 'footer.html' %}

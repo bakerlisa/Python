@@ -1,7 +1,7 @@
 from flask_app import app
 from flask import render_template,redirect,request,session,flash
 from flask_app.models.flock_model import Flock
-# from flask_app.models.user_model import User
+from flask_app.models.user_model import User
 
 
 # =============================================  
@@ -19,10 +19,9 @@ def join_flock():
     data = {
         "id": session['id']
     }
-    # all_groups = Group.select_all_groups()
-    # user_info = User.get_user_info(data)
-    # all_groups = all_groups,user_info=user_info
-    return render_template("join_flock.html")
+    user_info = User.get_user_info(data)
+    all_flocks = Flock.select_all_flocks()
+    return render_template("join_flock.html",user_info=user_info,all_flocks=all_flocks)
 
 # =============================================  
 # ROUTE: create a flock

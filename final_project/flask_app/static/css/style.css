@@ -52,6 +52,9 @@ PAGE
 /* WALL */
 .nav-bar{width: 100%;}
 
+/* JOIN FLOCK */
+.join-flock textarea{display: none; }
+
 /* LOCK */
 .page-lock{text-align: center;}
 .page-lock h1{width: 100%; padding-bottom: 25px;}

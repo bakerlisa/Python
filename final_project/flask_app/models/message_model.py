@@ -4,13 +4,14 @@ import re
 from flask import flash 
 
 from flask_app.models import user_model
+from flask_app.models import user_message
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+[a-zA-Z]+$')
 
 class Message:
     def __init__(self,data):
         self.id = data['id']
-        self.content = data['content']
+        self.message = data['message']
         self.from_id = data['from_id']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
@@ -24,6 +25,31 @@ class Message:
             flash("Must choose a Group","message")
             is_valid = False
         return is_valid
+
+# SELECT: get all messages
+    @classmethod
+    def get_messages(cls,data):
+        query = "SELECT * FROM users_messages LEFT JOIN messages ON messages.id = users_messages.user_id WHERE user_id = %(id)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
+
+        users_messages = []
+
+        for row in results:
+            one_user = cls(row)
+
+            one_message_info = {
+                "user_id" : row['user_id'],
+                "message_id" : row['message_id'],
+                "from_id" : row['from_id'],
+                "created_at" : row['created_at'],
+                "updated_at" : row['updated_at']
+            }
+            one_user.info = user_message.User_Message(one_message_info)
+
+            users_messages.append(one_user)
+            print(" &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& ")
+            print(row)
+        return users_messages
 
 # =============================================
 # DELETE : user's messages
@@ -39,7 +65,7 @@ class Message:
 # =============================================
     @classmethod
     def save_message(cls, data):
-        query = "INSERT INTO messages (message,message_type) VALUE (%(message)s,'join_request');"
+        query = "INSERT INTO messages (message,message_type) VALUE (%(message)s,%(message_type)s);"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
 

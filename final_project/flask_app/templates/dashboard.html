@@ -6,7 +6,7 @@
             {% include 'navigation.html' %}
 
             <h1>Dashboard</h1>
-            <h2>Welcome {{ user_info.first_name}}</h2>
+            <h2>Welcome {{ user_info[0].first_name}}</h2>
             <div class="error-messages">
                 {% with errors = get_flashed_messages(category_filter=["request"]) %}
                     {% if errors %}
@@ -36,7 +36,7 @@
             </div>
 
             <h3>Join a Flock</h3>
-            <form action="/submit_join_request" method="POST">
+            <form action="/submit_join_request" method="POST" class="join-flock">
                 <!-- if they're not in a group yet -->
                 <select name="flock_id" id="">
                     <option value="">Join a Flock</option>

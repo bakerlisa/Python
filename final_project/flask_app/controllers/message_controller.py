@@ -14,7 +14,11 @@ from flask_app.models.flock_model import Flock
 # ==========================================
 @app.route('/messages')
 def show_all_messages():
-    return render_template('/messages.html')
+    data = {
+        "id": session['id']
+    }
+    get_all_messages = Message.get_messages(data)
+    return render_template('/messages.html',get_all_messages = get_all_messages)
 
 # ============================================= 
 # Join: Group
@@ -28,21 +32,26 @@ def submit_join_request():
     else:
         # save the message
         data = {
-            "message" : request.form["message"]
+            "message" : request.form["message"],
+            "message_type" : "join_request",
         }
         new_message_id = Message.save_message(data)
 
         # flock_id: request.form["flock_id"].split(",")[1]
         # user_id : request.form["flock_id"].split(",")[0]
+        user_id = request.form["flock_id"].split(",")[0]
+
+        print(" &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& ")
+        print(new_message_id)
 
         dataThree = {
-            "user_id" : request.form["flock_id"].split(",")[0],
+            "user_id" : user_id,
             "from_id" : session['id'],
             "message_id" : new_message_id
         }
 
         Message.save_to_from_info(dataThree)
-    return redirect('/group_dashboard')
+        return redirect('/group_dashboard')
 
 # ============================================= 
 # Route: after succesfful flock join
