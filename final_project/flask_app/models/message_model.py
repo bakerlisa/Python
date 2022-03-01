@@ -4,7 +4,7 @@ import re
 from flask import flash 
 
 from flask_app.models import user_model
-from flask_app.models import user_message
+from flask_app.models import user_message_model
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+[a-zA-Z]+$')
 
@@ -44,7 +44,7 @@ class Message:
                 "created_at" : row['created_at'],
                 "updated_at" : row['updated_at']
             }
-            one_user.info = user_message.User_Message(one_message_info)
+            one_user.info = user_message_model.User_Message(one_message_info)
 
             users_messages.append(one_user)
             print(" &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& ")

@@ -1,0 +1,23 @@
+{% include 'header.html' %}
+<body class="page-home">
+    {% include 'navigation.html' %}
+    <main>
+        <div class="container flex">
+            <h1>Group Settings:</h1>
+            <p>Set new admin for Group !!NAME!!</p>
+            <form action="/set_new_admin">
+
+                <input type="submit" value="Set New Admin">
+            </form>
+            {{ get_all_members }}
+            <select name="" id="">
+            {% for member in get_all_members %}
+                <option value="{{ member.id}}">{{ member.first_name}}</option>
+            {% endfor %}
+        </select>
+            1. can only be 1 admin
+            2. remove current user from admin
+            3. 
+        </div>
+    </main>
+{% include 'footer.html' %}

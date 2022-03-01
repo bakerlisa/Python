@@ -39,16 +39,17 @@ def submit_join_request():
 
         # flock_id: request.form["flock_id"].split(",")[1]
         # user_id : request.form["flock_id"].split(",")[0]
-        user_id = request.form["flock_id"].split(",")[0]
-
-        print(" &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& ")
-        print(new_message_id)
+        user_id = int(request.form["flock_id"].split(",")[0])
 
         dataThree = {
             "user_id" : user_id,
             "from_id" : session['id'],
             "message_id" : new_message_id
         }
+
+        print(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ")
+        print(type(user_id))
+        print(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ")
 
         Message.save_to_from_info(dataThree)
         return redirect('/group_dashboard')

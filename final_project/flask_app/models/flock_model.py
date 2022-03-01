@@ -3,6 +3,7 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash 
 
 from flask_app.models import flock_user_model
+from flask_app.models import user_model
 
 class Flock:
     def __init__(self,data):
@@ -53,14 +54,45 @@ class Flock:
             users_information.append(one_user)
         return users_information
 
-# # =============================================
-# # SELECT 
-# # =============================================
-#     @classmethod
-#     def get_admin_id(cls,data):
-#         query = "SELECT user_id FROM flocks_users WHERE flock_id = %(flock_id)s AND status = 'admin';"
-#         results = connectToMySQL('book_club').query_db(query,data)
-#         return results
+# =============================================
+# SELECT 
+# =============================================
+    @classmethod
+    def get_all_members(cls,data):
+        query = "SELECT * FROM users LEFT JOIN flocks_users ON 	users.id = flocks_users.user_id LEFT JOIN flocks ON flocks.id = flocks_users.user_id WHERE flocks_users.flock_id = %(id)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
+
+        users_information = []
+
+        for row in results:
+            one_user = cls(row)
+
+            one_status = {
+                "id": row['flocks_users.id'],
+                "user_id": row['user_id'],
+                "flock_id": row['flock_id'],
+                "status": row['status'],
+                "created_at": row['flocks_users.created_at'],
+                "updated_at": row['flocks_users.updated_at']
+            }
+            one_user.status = flock_user_model.Flock_User(one_status)
+
+            one_member = {
+                "id" : row['id'],
+                "first_name" : row['first_name'],
+                "last_name" : row['last_name'],
+                "phone" : row['phone'],
+                "email" : row['email'],
+                "phone" : row['phone'],
+                "password" : row['password'],
+                "profile_image" : row['profile_image'],
+                "created_at" : row['created_at'],
+                "updated_at" : row['updated_at']
+            }
+            one_user.member = user_model.User(one_member)
+
+            users_information.append(one_user)
+        return users_information
 
 # =============================================  
 # SELECT: check if group name is unique
