@@ -4,20 +4,30 @@
     <main>
         <div class="container flex">
             <h1>Group Settings:</h1>
+            <p><strong>Flock leader:</strong> {{ get_all_members.first_name }} {{ get_all_members.last_name }}</p>
+            <p><strong>Group started:</strong> {{ get_all_members.created_at }}</p>
             <p>Set new admin for Group !!NAME!!</p>
             <form action="/set_new_admin">
+                {{ get_all_members }}
+
+                <select name="" id="">
+                    {% for member in get_all_members %}
+                        <option value="{{ member.id}}">{{ member.first_name}}</option>
+                    {% endfor %}
+                </select>
 
                 <input type="submit" value="Set New Admin">
             </form>
-            {{ get_all_members }}
-            <select name="" id="">
-            {% for member in get_all_members %}
-                <option value="{{ member.id}}">{{ member.first_name}}</option>
-            {% endfor %}
-        </select>
-            1. can only be 1 admin
-            2. remove current user from admin
-            3. 
+            <a href="/delete_group"> Delete Group </a>
+            <h3>Set Tempoaray Admin Privilidges</h3>
+            <form action="/temporary_priviliges" method="POST">
+                <input type="number" name="month_amount" id="" placeholder="Month Amount" min="1" max="12">
+
+                <input type="submit" value="submit">
+            </form>
+
+            1. List out temp admins
+
         </div>
     </main>
 {% include 'footer.html' %}

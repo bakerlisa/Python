@@ -7,9 +7,9 @@ from flask_app.models.user_model import User
 # =============================================  
 # ROUTE:  group dashboard
 # =============================================  
-@app.route('/group_dashboard')
+@app.route('/flock_dashboard')
 def flock_dashboard():
-    return render_template('group_dashboard.html')
+    return render_template('flock_dashboard.html')
 
 # =============================================  
 # ROUTE: join a flock
@@ -20,7 +20,7 @@ def join_flock():
         "id": session['id']
     }
     user_info = User.get_user_info(data)
-    all_flocks = Flock.select_all_flocks()
+    all_flocks = Flock.select_all_flocks(data)
     return render_template("join_flock.html",user_info=user_info,all_flocks=all_flocks)
 
 # =============================================  

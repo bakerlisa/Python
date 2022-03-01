@@ -33,7 +33,7 @@ def submit_join_request():
         # save the message
         data = {
             "message" : request.form["message"],
-            "message_type" : "join_request",
+            "message_type" : "join_request"
         }
         new_message_id = Message.save_message(data)
 
@@ -41,18 +41,17 @@ def submit_join_request():
         # user_id : request.form["flock_id"].split(",")[0]
         user_id = int(request.form["flock_id"].split(",")[0])
 
-        dataThree = {
+        dataTwo = {
             "user_id" : user_id,
-            "from_id" : session['id'],
-            "message_id" : new_message_id
+            "message_id" : new_message_id,
+            "from_id" : session['id']
         }
 
-        print(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ")
-        print(type(user_id))
-        print(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ")
+        Message.save_to_from_info(dataTwo)
 
-        Message.save_to_from_info(dataThree)
-        return redirect('/group_dashboard')
+        # set a val so that the club doesn't show in the drop down
+
+        return redirect('/flock_dashboard')
 
 # ============================================= 
 # Route: after succesfful flock join

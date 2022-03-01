@@ -32,9 +32,10 @@ class Flock:
 # SELECT: all groups with open privacy setting
 # =============================================
     @classmethod
-    def select_all_flocks(cls):
-        query = "SELECT * FROM flocks LEFT JOIN flocks_users ON flocks_users.flock_id = flocks.id WHERE privacy_setting = 'open';"
-        results = connectToMySQL('book_club').query_db(query)
+    def select_all_flocks(cls,data):
+        # make sure we're only getting admins, we're only getting the ones we didn't create, and we're making sure they're privacy setting is open
+        query = "SELECT * FROM flocks LEFT JOIN flocks_users ON flocks_users.flock_id = flocks.id WHERE flocks.privacy_setting = 'open' AND flocks_users.status = 'admin' AND flocks_users.user_id != %(id)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
 
         users_information = []
 
@@ -92,6 +93,8 @@ class Flock:
             one_user.member = user_model.User(one_member)
 
             users_information.append(one_user)
+            print(" &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& ")
+            print(row)
         return users_information
 
 # =============================================  

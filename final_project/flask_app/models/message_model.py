@@ -65,7 +65,7 @@ class Message:
 # =============================================
     @classmethod
     def save_message(cls, data):
-        query = "INSERT INTO messages (message,message_type) VALUE (%(message)s,%(message_type)s);"
+        query = "INSERT INTO messages (message,message_type,from_id) VALUE (%(message)s,%(message_type)s,%(from_id)s);"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
 
@@ -74,7 +74,7 @@ class Message:
 # ==========================================
     @classmethod
     def save_to_from_info(cls,data):
-        query = "INSERT INTO users_messages (user_id,from_id,message_id) VALUES (%(user_id)s , %(from_id)s , %(message_id)s);"
+        query = "INSERT INTO users_messages (user_id,message_id,from_id) VALUES (%(user_id)s, %(message_id)s,%(from_id)s);"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
 
