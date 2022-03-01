@@ -2,6 +2,8 @@ from flask_app.config.mysqlconnection import connectToMySQL
 
 from flask import flash 
 
+from flask_app.models import flock_user_model
+
 class Flock:
     def __init__(self,data):
         self.id = data['id']
@@ -29,24 +31,36 @@ class Flock:
 # SELECT: all groups with open privacy setting
 # =============================================
     @classmethod
-    def select_all_groups(cls):
-        query = "SELECT * FROM flocks WHERE privacy_setting = 'open';"
+    def select_all_flocks(cls):
+        query = "SELECT * FROM flocks LEFT JOIN flocks_users ON flocks_users.flock_id = flocks.id WHERE privacy_setting = 'open';"
         results = connectToMySQL('book_club').query_db(query)
 
-        groups = []
+        users_information = []
 
-        for group in results:
-            groups.append( cls(group) )
-        return groups
+        for row in results:
+            one_user = cls(row)
 
-# =============================================
-# SELECT 
-# =============================================
-    @classmethod
-    def get_admin_id(cls,data):
-        query = "SELECT * FROM flocks LEFT JOIN groups_users ON flocks.id = groups_users.group_id LEFT JOIN users ON users.id = groups_users.USER_id WHERE flocks.id = %(flock_id)s;"
-        results = connectToMySQL('book_club').query_db(query,data)
-        return results
+            one_status = {
+                "id": row['flocks_users.id'],
+                "user_id": row['user_id'],
+                "flock_id": row['flock_id'],
+                "status": row['status'],
+                "created_at": row['flocks_users.created_at'],
+                "updated_at": row['flocks_users.updated_at']
+            }
+            one_user.status = flock_user_model.Flock_User(one_status)
+
+            users_information.append(one_user)
+        return users_information
+
+# # =============================================
+# # SELECT 
+# # =============================================
+#     @classmethod
+#     def get_admin_id(cls,data):
+#         query = "SELECT user_id FROM flocks_users WHERE flock_id = %(flock_id)s AND status = 'admin';"
+#         results = connectToMySQL('book_club').query_db(query,data)
+#         return results
 
 # =============================================  
 # SELECT: check if group name is unique

@@ -9,39 +9,39 @@ from flask_app.models.flock_model import Flock
 # # === 1. Remeber to import file on server.py 
 # # === Note: Controllers pull in classes
 
-# # ==========================================
-# # ROUTE: messages
-# # ==========================================
-# @app.route('/message')
-# def save_message():
-
-#     return redirect('/dashboard')
+# ==========================================
+# ROUTE: messages
+# ==========================================
+@app.route('/messages')
+def show_all_messages():
+    return render_template('/messages.html')
 
 # ============================================= 
 # Join: Group
 # ============================================= 
 @app.route('/submit_join_request',methods=["POST"])
-def join_flock():
-    # save the message
-    data = {
-        "mesage" : request.form["mesage"]
-    }
-    new_message_id = Message.save_message(data)
+def submit_join_request():
+    
+    if not request.form["flock_id"]:
+        flash("Please pick a flock to join!","message")
+        return redirect('/dashboard')
+    else:
+        # save the message
+        data = {
+            "message" : request.form["message"]
+        }
+        new_message_id = Message.save_message(data)
 
-    # figure out who's the admin for the site, give them the message
-    dataTwo = {
-        "flock_id" : request.form["flock_id"]
-    }
-    get_admin_for_group = Flock.get_admin_id(dataTwo)
+        # flock_id: request.form["flock_id"].split(",")[1]
+        # user_id : request.form["flock_id"].split(",")[0]
 
-    #save all the info in the users_messages_table
-    dataThree = {
-        "user_id" : get_admin_for_group,
-        "from_id" : session['id'],
-        "message_id" : new_message_id
-    }
+        dataThree = {
+            "user_id" : request.form["flock_id"].split(",")[0],
+            "from_id" : session['id'],
+            "message_id" : new_message_id
+        }
 
-    Message.save_to_from_info(dataThree)
+        Message.save_to_from_info(dataThree)
     return redirect('/group_dashboard')
 
 # ============================================= 

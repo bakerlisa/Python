@@ -22,7 +22,7 @@ def join_flock():
     # all_groups = Group.select_all_groups()
     # user_info = User.get_user_info(data)
     # all_groups = all_groups,user_info=user_info
-    return render_template("join_group.html")
+    return render_template("join_flock.html")
 
 # =============================================  
 # ROUTE: create a flock

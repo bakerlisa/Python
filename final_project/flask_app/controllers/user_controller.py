@@ -45,9 +45,9 @@ def render_dashboard():
         if 'id' in session:
             data = { "id": session['id'] }
             user_info = User.get_user_info(data)
-            all_groups = Flock.select_all_groups()
+            all_flocks = Flock.select_all_flocks()
             # all_messages = Message.get_all_for_message(data)
-            return render_template('dashboard.html',user_info=user_info,all_groups=all_groups)
+            return render_template('dashboard.html',user_info=user_info,all_flocks=all_flocks)
         else:
             flash("Please Loin","info")
             return redirect('/')

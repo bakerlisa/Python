@@ -17,15 +17,17 @@ class Message:
 
     def validate_message(message):
         is_valid = True # we assume this is true
-        if len(message['content']) < 10:
+        if len(message['message']) < 10:
             flash("Message must be longer than 10 characters","message")
             is_valid = False
-        if message['user_id'] == "0":
-            flash("Must choose a recipient","message")
+        if message["flock_id"] == "0":
+            flash("Must choose a Group","message")
             is_valid = False
         return is_valid
 
+# =============================================
 # DELETE : user's messages
+# =============================================
     @classmethod
     def delete_user_messages(cls,data):
         query = "DELETE FROM users_messages WHERE user_id = %(id)s;"
@@ -37,9 +39,8 @@ class Message:
 # =============================================
     @classmethod
     def save_message(cls, data):
-        queryThree = "INSERT INTO messages (message) VALUE (%(message)s)"
+        query = "INSERT INTO messages (message) VALUE (%(message)s);"
         results = connectToMySQL('book_club').query_db(query,data)
-        flash("Request has been sent!","request")
         return results
 
 # ==========================================

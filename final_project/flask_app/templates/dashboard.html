@@ -24,6 +24,15 @@
                             {% endfor -%}
                         {% endif %}
                     {% endwith %}
+                    <div class="error-messages">
+                        {% with errors = get_flashed_messages(category_filter=["message"]) %}
+                            {% if errors %}
+                                {%- for msg in errors %}
+                                    <p class="error">{{ msg }}</p>
+                                {% endfor -%}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
             </div>
 
             <h3>Join a Flock</h3>
@@ -31,13 +40,11 @@
                 <!-- if they're not in a group yet -->
                 <select name="flock_id" id="">
                     <option value="">Join a Flock</option>
-                    {% for group in all_groups %}
-                        <option value="{{ group.id }}">{{ group.title }}</option>
+                    {% for flock in all_flocks %}
+                        <option value="{{ flock.id }},{{ flock.status.user_id}}">{{ flock.title }}</option>
                     {% endfor %}
                 </select>
-                <textarea name="mesage" id="" cols="30" rows="10">
-                    {{user_info[0].first_name}} {{user_info[0].last_name}} would like to join your group !
-                </textarea>
+                <textarea name="message" id="" cols="30" rows="10">{{user_info[0].first_name}} {{user_info[0].last_name}} would like to join your group!</textarea>
                 <input type="hidden" name="user_id" value="{{ user_info[0].id }}">
                 <input type="submit" value="Join!">
             </form>
