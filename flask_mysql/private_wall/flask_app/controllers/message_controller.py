@@ -2,9 +2,6 @@ from flask_app import app
 from flask import render_template,redirect,request,session,flash
 from flask_app.models.message_model import Message
 from flask_app.models.user_model import User
-# from flask_bcrypt import Bcrypt
-# bcrypt = Bcrypt(app)
-
 # === 1. Remeber to import file on server.py 
 # === Note: Controllers pull in classes
 
