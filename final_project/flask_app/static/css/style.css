@@ -63,6 +63,7 @@ PAGE
 .page-home{background-image: url('../img/owl-banner.png');background-position: top center; background-size: cover;}
 .page-home .title-wrp{position: absolute;bottom:25px; left: 0;}
 .page-home .container h1, .page-home .container .title-wrp  h3{color:rgba(0,0,0,.7); position: relative;}
+    .page-home .container h1 span.first{display: block; font-size: 27px; font-weight: 900; position: relative; top: 25px;}
 .page-home .container .title-wrp  h3{text-shadow:0px 2px 20px rgba(255,255,255,.5);}
 .page-home .container{height: 100vh; justify-content: flex-end; align-items: center; height: 100vh;}
 .page-home .container h3{font-size: 25px; color:var(--lt_brown); position: relative; margin-bottom: 10px; text-shadow:2px 2px 5px rgba(0,0,0,.2);}

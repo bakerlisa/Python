@@ -6,6 +6,7 @@ from flask_app import app
 from flask_app.controllers import user_controller
 from flask_app.controllers import flock_controller
 from flask_app.controllers import message_controller
+from flask_app.controllers import book_controller
 
 @app.route('/<path:path>')
 def catch_all(path):
