@@ -1,2 +1,2 @@
 # Friendships
-# Project to practice logins, passwords, and validation 
+Project to practice logins, passwords, and validation 
