@@ -16,7 +16,7 @@ def index():
 @app.route('/friendship')
 def friendships():
     all_friends = Friend.get_all_friendships()
-    return render_template('index.html',all_friends=all_friends, users = users)
+    return render_template('index.html')
 
 # =================================
 # GET: all friennds
