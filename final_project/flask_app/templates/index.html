@@ -1,42 +1,35 @@
 {% include 'header.html' %}
-{% if 'id' in session %}   
-    <body class="page-dashboard">
-{% else %}  
-    <body class="page-home">
-{% endif %}
+<body class="page-home">
     <main>
         <div class="container flex">
-            {% if 'id' in session %}    
-                <div class="settings"><a href="/dashboard">Dashboard</a></div>
-            {% endif %}
-
             <div class="title-wrp">
                 <h1>Night<span>Owls</span> </h1>
                 <h3 class="subtitle">Where readers flock to talk shop!</h3>
             </div>
 
             <aside>
-                <div class="info-messages">
-                    {% with errors = get_flashed_messages(category_filter=["info"]) %}
-                        {% if errors %}
+                {% with errors = get_flashed_messages(category_filter=["info"]) %}
+                    {% if errors %}
+                        <div class="info-messages">
                             {%- for msg in errors %}
                                 <p class="error">{{ msg }}</p>
                             {% endfor -%}
-                        {% endif %}
-                    {% endwith %}
-                </div>
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
                 <div class="login">
                     <h3>Become a NightOwl</h3>
-                    <div class="error-messages">
-                        {% with errors = get_flashed_messages(category_filter=["error"]) %}
-                            {% if errors %}
+                    {% with errors = get_flashed_messages(category_filter=["error"]) %}
+                        {% if errors %}
+                            <div class="error-messages">
                                 {%- for msg in errors %}
                                     <p class="error">{{ msg }}</p>
                                 {% endfor -%}
-                            {% endif %}
-                        {% endwith %}
-                    </div>
-
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+                    
                     <form action="/new_user" method="POST">
                         <input type="text" name="first_name" id="" placeholder="First Name" value="{{ session['form'].first_name }}">
                         <input type="text" name="last_name" id="" placeholder="Last Name" value="{{ session['form'].last_name }}">
@@ -50,16 +43,15 @@
                 </div>
                 <div class="registartion">
                     <h3>Welcome Back!</h3>
-                    <div class="error-messages">
-                        {% with errors = get_flashed_messages(category_filter=["login"]) %}
-                            {% if errors %}
+                    {% with errors = get_flashed_messages(category_filter=["login"]) %}
+                        {% if errors %}
+                            <div class="error-messages">
                                 {%- for msg in errors %}
                                     <p class="error">{{ msg }}</p>
                                 {% endfor -%}
-                            {% endif %}
-                        {% endwith %}
-                    </div>
-
+                            </div>
+                        {% endif %}
+                    {% endwith %}
                     <form action="/user_login" method="POST">
                         <input type="text" name="email" id="" placeholder="email">
                         <input type="password" name="password" id="" placeholder="password">

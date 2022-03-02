@@ -4,6 +4,7 @@
 :root{
     --white:#fff;
     --gray:#E4DDE9;
+        --md_gray:#584F53;
     --black:#180e0b;
     --green:#63622E;
     --salmon:#B2817F;
@@ -11,9 +12,10 @@
     --brown:#513D38;
         --md_brown:#9f857c;
         --lt_brown:#cfb9b4;
+    --yellow:#C29447;
 
     --red:#96272B;
-        --dk_red:#2B0D12;
+        --dk_red:#441F12;
     --dk-blue:#001524;
     --blue:#616E7E;
         --white_blue:#c2d5ed;
@@ -35,13 +37,13 @@ p,li,a,ul,button{font-size: 14px;}
 h1{font-size: 100px; color:var(--black); width: 100%; display: block;}
     h1 span{font-weight: 300;}
 h2{font-size: 45px;}
-h3{font-size: 35px; display: block;width: 100%; visibility: color:var(--black);}
+h3{font-size: 35px; display: block;width: 100%; visibility: color:var(--black); }
 h4{font-size: 30px;}
 h5{font-size: 20px;}
 
 /* messages */
-.error-messages{padding:10px 0;}
-.error{color:var(--red);}
+.error-messages{padding: 25px; background-color:var(--red); margin-top: 25px;}
+.error{color:var(--white); padding-bottom: 5px;}
 .info{color:var(--blue);}
 
 /* row */
@@ -69,7 +71,7 @@ PAGE
     .page-home aside{width: 400px;}
         /* form */
         .page-home form input:not(.submit){background-color:transparent; border: none; border-bottom:solid 1px var(--white); outline: none; color:var(--white);}
-        .page-home form input:not(.submit):focus{border-bottom-color:var(--peach); }
+        .page-home form input:not(.submit):focus{border-bottom-color:var(--peach); color:var(--peach);}
         .page-home ::placeholder { color:var(--white);
         }
     /* message */

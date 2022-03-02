@@ -1,5 +1,5 @@
 {% include 'header.html' %}
-<body class="page-home">
+<body class="page-dashboard">
     <main>
         <div class="container flex">
             
@@ -7,34 +7,36 @@
 
             <h1>Dashboard</h1>
             <h2>Welcome {{ user_info[0].first_name}}</h2>
-            <div class="error-messages">
-                {% with errors = get_flashed_messages(category_filter=["request"]) %}
-                    {% if errors %}
+            {% with errors = get_flashed_messages(category_filter=["request"]) %}
+                {% if errors %}
+                    <div class="error-messages">
                         {%- for msg in errors %}
                             <p class="error">{{ msg }}</p>
                         {% endfor -%}
-                    {% endif %}
-                {% endwith %}
-            </div>
-            <div class="info-messages">
-                    {% with errors = get_flashed_messages(category_filter=["info"]) %}
-                        {% if errors %}
-                            {%- for msg in errors %}
-                                <p class="info">{{ msg }}</p>
-                            {% endfor -%}
-                        {% endif %}
-                    {% endwith %}
-                    <div class="error-messages">
-                        {% with errors = get_flashed_messages(category_filter=["message"]) %}
-                            {% if errors %}
-                                {%- for msg in errors %}
-                                    <p class="error">{{ msg }}</p>
-                                {% endfor -%}
-                            {% endif %}
-                        {% endwith %}
                     </div>
-            </div>
+                {% endif %}
+            {% endwith %}
+            
+            {% with errors = get_flashed_messages(category_filter=["info"]) %}
+                {% if errors %}
+                    <div class="info-messages">
+                        {%- for msg in errors %}
+                            <p class="info">{{ msg }}</p>
+                        {% endfor -%}
+                    </div>
+                {% endif %}
+            {% endwith %}
 
+            {% with errors = get_flashed_messages(category_filter=["message"]) %}
+                {% if errors %}
+                    <div class="error-messages"></div>
+                        {%- for msg in errors %}
+                            <p class="error">{{ msg }}</p>
+                        {% endfor -%}
+                    </div>
+                {% endif %}
+            {% endwith %}
+                    
             <h3>Join a Flock</h3>
             <form action="/submit_join_request" method="POST" class="join-flock">
                 <!-- if they're not in a group yet -->
