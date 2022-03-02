@@ -105,7 +105,6 @@ class Flock:
         results = connectToMySQL('book_club').query_db(query,data)
         return results
 
-
 # =============================================  
 # CREATE: new flock
 # =============================================

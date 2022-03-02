@@ -1,0 +1,45 @@
+{% include 'header.html' %}
+
+<body class="page-search">
+    <main>
+        <div class="container flex">
+            {% include 'navigation.html' %}
+            <h1>Add Book to Database: </h1>
+            <p>To add a book you will need all the information below</p>
+            <p><a href="https://www.goodreads.com/" target="_blank">GoodReads</a> is a great location to get all your book info</p>
+            <p class="side-note">We would use their API but they discontiuned use for it :(</p>
+            <p><strong>ISBN:</strong> Sometimes there's more than one. In that care please pick the 1st harcover isbn. Book may need to be verifted is a close match is found.</p>
+
+            <h3>See if a title exsists:</h3>
+            <input type="text" name="search" id="" placeholder="Search by: isbn, title, author">
+            <input type="submit" value="search">
+
+            <h3>Add a new title:</h3>
+            {% with errors = get_flashed_messages(category_filter=["books"]) %}
+                {% if errors %}
+                    <div class="error-messages">
+                        {%- for msg in errors %}
+                            <p class="error">{{ msg }}</p>
+                        {% endfor -%}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            <label for="info">* Are required Fields</label>
+            <form action="/add_new_book" method="POST">
+                <input type="text" name="title" id="" placeholder="*Title" value="{{ session['books'].title }}">
+                <input type="text" name="first_name" placeholder="*Author First Name" value="{{ session['books'].first_name }}">
+                <input type="text" name="last_name" placeholder="*Author Last Name" value="{{ session['books'].last_name }}">
+                <input type="text" name="series_name" placeholder="Series Name" value="{{ session['books'].series_name }}">
+                <input type="number" name="num_series" placeholder="Number in Series" min="0" value="{{ session['books'].num_series }}">
+                <input type="number" name="page_num" placeholder="page numbers" min="0" value="{{ session['books'].page_num }}">
+                <input type="text" name="isbn" placeholder="*ISBN" value="{{ session['books'].isbn }}">
+                <input type="text" name="gener" placeholder="Gener:  if 1 < comma seperated list" value="{{ session['books'].gener }}">
+                <textarea name="description" id="" cols="30" rows="10">{{ session['books'].description }}</textarea>
+                <input type="text" name="img" placeholder="*Image URL" value="{{ session['books'].img }}">
+                <input type="submit" value="Add Book">
+            </form>
+        </div>
+    </main>
+
+{% include 'footer.html' %}
