@@ -7,9 +7,13 @@ from flask_app.models.user_model import User
 # =============================================  
 # ROUTE:  group dashboard
 # =============================================  
-@app.route('/flock_dashboard')
+@app.route('/flock_dashboard/')
 def flock_dashboard():
-    return render_template('flock_dashboard.html')
+    data = {
+        "id": session['id']
+    }
+    flock_info = User.get_all_flock_info(data)
+    return render_template('flock_dashboard.html',flock_info=flock_info)
 
 # =============================================  
 # ROUTE: join a flock

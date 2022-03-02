@@ -1,9 +1,15 @@
 {% include 'header.html' %}
 <body>
     {% include 'navigation.html' %}
+
+    
+
     <h1>Flock Dashboard</h1>
-    1. Flock Name
-    2. Admin for flock
+    {% for info in flock_info %}
+        <h3>{{ info.flock.title }}</h3>
+        <p>Admin For Account: {{ info.flur.status }} </p>
+    {% endfor %}
+
     3. list of flock members
     4. book for the month
     5. next meeting location

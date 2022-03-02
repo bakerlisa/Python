@@ -3,48 +3,75 @@
 
 :root{
     --white:#fff;
-    --black:#000;
-    --yellow:#DF974B;
-    --orange:#CBAD9E;
+    --gray:#E4DDE9;
+    --black:#180e0b;
+    --green:#63622E;
+    --salmon:#B2817F;
+    --peach:#F2C7A5;
+    --brown:#513D38;
+        --md_brown:#9f857c;
+        --lt_brown:#cfb9b4;
+
     --red:#96272B;
-        --dk-red:#2B0D12;
-    --teal:#15616D;
+        --dk_red:#2B0D12;
     --dk-blue:#001524;
-    --blue:#224F70;
-    --purple:#624552;
+    --blue:#616E7E;
+        --white_blue:#c2d5ed;
 
 }
 
 .red{color:var(--red);}
 
+p,li,a,ul,button{font-size: 14px;}
+
 *{padding: 0;margin: 0; box-sizing: border-box; font-family: 'Lato', sans-serif;}
-.container{max-width: 1000px; margin: 0 auto; }
+.container{max-width: 1000px; margin: 0 auto; position: relative;}
 .flex{display: flex;align-items: flex-start;justify-content: center;flex-wrap: wrap;}
 
-.col-2{width: 50%; padding-top: 25px; padding-bottom: 50px;}
-    .col-2:nth-of-type(2){padding-right:50px}
-    .col-2:nth-of-type(3){padding-left:50px}
-    .col-2 h2,.col-2 h1{padding-bottom: 25px;}
+.col-2{width: 50%;}
+.col-3{width: 33.33%;}
+.col-4{width: 25%;}
 
-h1{font-size: 70px; color:var(--black); width: 100%; display: block;}
+h1{font-size: 100px; color:var(--black); width: 100%; display: block;}
     h1 span{font-weight: 300;}
 h2{font-size: 45px;}
-h3{display: block;width: 100%; visibility: color:var(--black);}
+h3{font-size: 35px; display: block;width: 100%; visibility: color:var(--black);}
+h4{font-size: 30px;}
+h5{font-size: 20px;}
 
 /* messages */
 .error-messages{padding:10px 0;}
 .error{color:var(--red);}
 .info{color:var(--blue);}
 
+/* row */
+.row.flex.title p{font-weight: 900;}
+
+
 /* form */
 form input{width: 100%;display: block; margin-bottom: 5px;padding: 10px;}
+    form .submit{text-transform: uppercase; letter-spacing: 2px;  border: none; background-color:var(--brown); color:var(--white); margin:10px 0 25px 0;}
+    form .submit:focus{opacity: .8; outline: none;}
 
 /* ======================================== 
 PAGE 
 ======================================== */
 
 /* HOME */
-.page-home h1,.page-home h3{text-align: center;}
+.page-home{background-image: url('../img/owl-banner.png');background-position: top center; background-size: cover;}
+.page-home .title-wrp{position: absolute;bottom:25px; left: 0;}
+.page-home .container h1, .page-home .container .title-wrp  h3{color:rgba(0,0,0,.7); position: relative;}
+.page-home .container .title-wrp  h3{text-shadow:0px 2px 20px rgba(255,255,255,.5);}
+.page-home .container{height: 100vh; justify-content: flex-end; align-items: center; height: 100vh;}
+.page-home .container h3{font-size: 25px; color:var(--lt_brown); position: relative; margin-bottom: 10px; text-shadow:2px 2px 5px rgba(0,0,0,.2);}
+    .page-home .container h3:not(.subtitle):before{content:''; position: absolute; bottom:-12px; left: 0; background-color:var(--md_brown);  height: 4px;width: 50px;}
+    /* aside */
+    .page-home aside{width: 400px;}
+        /* form */
+        .page-home form input:not(.submit){background-color:transparent; border: none; border-bottom:solid 1px var(--white); outline: none; color:var(--white);}
+        .page-home form input:not(.submit):focus{border-bottom-color:var(--peach); }
+        .page-home ::placeholder { color:var(--white);
+        }
     /* message */
     .page-home .info-messages{width: 100%;}
     .page-home .info-messages .error{background-color:var(--blue); color:var(--white); padding: 10px; text-align: center; margin:15px 0}

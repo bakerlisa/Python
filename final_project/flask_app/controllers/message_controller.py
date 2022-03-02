@@ -14,11 +14,17 @@ from flask_app.models.flock_model import Flock
 # ==========================================
 @app.route('/messages')
 def show_all_messages():
-    data = {
-        "id": session['id']
-    }
+    data = { "id": session['id'] }
+
     get_all_messages = Message.get_messages(data)
     return render_template('/messages.html',get_all_messages = get_all_messages)
+
+# ============================================= 
+# Route: after succesfful flock join
+# ============================================= 
+@app.route('/submit_request')
+def request_submitted():
+    return render_template('submission.html')
 
 # ============================================= 
 # Join: Group
@@ -31,31 +37,35 @@ def submit_join_request():
         return redirect('/dashboard')
     else:
         # save the message
+        flock_id = request.form["flock_id"].split(",")[0]
         data = {
             "message" : request.form["message"],
-            "message_type" : "join_request"
+            "message_type" : "join_request",
+            "from_id" : session['id'],
+            "flock_id": flock_id
         }
         new_message_id = Message.save_message(data)
 
-        # flock_id: request.form["flock_id"].split(",")[1]
-        # user_id : request.form["flock_id"].split(",")[0]
-        user_id = int(request.form["flock_id"].split(",")[0])
+        user_id = int(request.form["flock_id"].split(",")[1])
 
         dataTwo = {
             "user_id" : user_id,
-            "message_id" : new_message_id,
-            "from_id" : session['id']
+            "message_id" : new_message_id
         }
 
         Message.save_to_from_info(dataTwo)
 
-        # set a val so that the club doesn't show in the drop down
-
         return redirect('/flock_dashboard')
 
 # ============================================= 
-# Route: after succesfful flock join
+# DELETE: message
 # ============================================= 
-@app.route('/submit_request')
-def request_submitted():
-    return render_template('submission.html')
+@app.route('/delete_message/<int:mess_id>/<int:user_id>')
+def delete_message(mess_id,user_id):
+    data = {
+        "id": mess_id,
+        "user_id": user_id
+    }
+    Message.delete_message(data)
+    Message.delete_user_message(data)
+    return redirect('/messages')

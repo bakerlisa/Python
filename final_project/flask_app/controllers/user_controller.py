@@ -7,6 +7,7 @@ from flask_app.models.user_model import User
 from flask_app.models.address_model import Address
 from flask_app.models.message_model import Message
 from flask_app.models.flock_model import Flock
+from flask_app.models.flock_user_model import Flock_User
 
 
 from flask_bcrypt import Bcrypt
@@ -46,7 +47,7 @@ def render_dashboard():
         if 'id' in session:
             data = { "id": session['id'] }
             user_info = User.get_user_info(data)
-            all_flocks = Flock.select_all_flocks()
+            all_flocks = Flock.select_all_flocks(data)
             # all_messages = Message.get_all_for_message(data)
             return render_template('dashboard.html',user_info=user_info,all_flocks=all_flocks)
         else:
@@ -61,6 +62,7 @@ def user_settings():
     data = { "id": session['id'] }
     user_info = User.get_user_info(data)
     return render_template('user-settings.html',user_info=user_info)
+
 
 # ========================================
 # ROUTE: lock
@@ -97,6 +99,46 @@ def new_user():
             new_user_id = User.create_new_user(data)
             session['id'] = new_user_id
             return redirect('/dashboard')
+
+# ========================================
+# INSERT: user to group
+# ========================================
+@app.route('/accept_user',methods=["POST"])
+def accept_user():
+    mess_id = request.form['mess_id']
+    from_id = request.form['from_id']
+    welcome_message = "Welcome to the " +  request.form['flock_title'] + "!"
+
+    data = {
+        "user_id" : from_id,
+        "flock_id": request.form['flock_id']
+    }
+    Flock_User.add_user_to_flock(data)
+    dataMessage = {
+        "message" : welcome_message,
+        "message_type" : "welcome",
+        "from_id" : session['id'],
+        "flock_id": request.form['flock_id']
+    }
+    welcome_id = Message.save_message(dataMessage)
+
+    dataTwo = {
+        "user_id" : request.form['from_id'],
+        "message_id" : welcome_id
+    }
+
+    Message.save_to_from_info(dataTwo)
+
+    #delet the old mesaage info
+    dataThree = {
+        "id" : request.form['mess_id'],
+        "user_id" : session['id']
+    }
+    
+    Message.delete_message(dataThree)
+    Message.delete_user_message(dataThree)
+
+    return redirect("/messages")
 
 # ========================================
 # UPDATE: user settings

@@ -2,21 +2,42 @@
 <body>
     {% include 'navigation.html' %}
     <h1>Messages</h1>
-
+    <div class="row flex title">
+        <p class="message col-2">Message</p>
+        <p class="date col-4">Sent on</p>
+        <p class="action col-4">Action</p>
+    </div>
     {% if get_all_messages|length == 0 %}
         <p>You have no messages!</p>
     {% else %}
-        {% for message in get_all_messages %}
-            <p>{{ message.message }}</p>
-            <p>user_id: {{ message.info["created_at"] }}</p>
-            <p>Message Type: {{ message.info.message_type  }}</p>
 
-            {% if not message.message_type == join_request %}
-                <a href="/accept_user">Accept</a>
-                <a href="/decline_user">Decline</a>
-            {% endif %}
-            <a href="/delete_message">Delete Message</a>
-            <a href="/reply_message">Reply to Message</a>
+    
+        {% for message in get_all_messages %}
+            <div class="row flex">
+                <div class="col-2">
+                    <p>{{ message.message }}</p>
+                    {% if message.message_type == 'join_request' %}
+                        <h5>Request(s) to join the {{message.flock.title}}:  </h5>
+                        <form action="accept_user" method="POST">
+                            <input type="hidden" name="from_id" value="{{ message.info.from_id }}">
+                            <input type="hidden" name="user_id" value="{{ message.info.user_id }}">
+                            <input type="hidden" name="mess_id" value="{{ message.id }}">
+                            <input type="hidden" name="flock_id" value="{{ message.flock.id  }}">
+                            <input type="hidden" name="flock_title" value="{{ message.flock.title }}">
+                            <input type="submit" value="accept">
+                        </form>
+                        <!-- <a href="/accept_user/">Accept</a> -->
+                        <a href="/delete_message/{{message.id}}/{{ message.info.user_id  }}">Decline</a>
+                    {% endif %}
+                </div>
+
+                <div class="col-4"><p>{{ message.info["created_at"].strftime('%B %d, %Y') }}</p></div>
+
+                <div class="col-4">
+                    <a href="/delete_message/{{message.id}}/{{ message.info.user_id  }}">Delete Message</a>
+                    <a href="/reply_message/{{ message.info.from_id }}/{{ message.info.user_id  }}">Reply to Message</a>
+                </div>
+            </div>
         {% endfor %}
     {% endif %}
 {% include 'footer.html' %}

@@ -5,6 +5,7 @@ from flask import flash
 
 from flask_app.models import user_model
 from flask_app.models import user_message_model
+from flask_app.models import flock_model
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+[a-zA-Z]+$')
 
@@ -12,7 +13,9 @@ class Message:
     def __init__(self,data):
         self.id = data['id']
         self.message = data['message']
+        self.message_type = data['message_type']
         self.from_id = data['from_id']
+        self.flock_id = data['flock_id']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
@@ -29,7 +32,7 @@ class Message:
 # SELECT: get all messages
     @classmethod
     def get_messages(cls,data):
-        query = "SELECT * FROM users_messages LEFT JOIN messages ON messages.id = users_messages.user_id WHERE user_id = %(id)s;"
+        query = " SELECT * FROM messages LEFT JOIN users_messages ON users_messages.message_id = messages.id LEFT JOIN flocks ON flocks.id = messages.flock_id WHERE users_messages.user_id = %(id)s;"
         results = connectToMySQL('book_club').query_db(query,data)
 
         users_messages = []
@@ -41,14 +44,25 @@ class Message:
                 "user_id" : row['user_id'],
                 "message_id" : row['message_id'],
                 "from_id" : row['from_id'],
+                "flock_id" : row['flock_id'],
                 "created_at" : row['created_at'],
                 "updated_at" : row['updated_at']
             }
             one_user.info = user_message_model.User_Message(one_message_info)
 
+            one_flock_info = {
+                "id": row['flocks.id'],
+                "title": row['title'],
+                "city": row['city'],
+                "state": row['state'],
+                "privacy_setting": row['privacy_setting'],
+                "created_at": row['flocks.created_at'],
+                "updated_at": row['flocks.updated_at']
+            }
+
+            one_user.flock = flock_model.Flock(one_flock_info)
+
             users_messages.append(one_user)
-            print(" &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& ")
-            print(row)
         return users_messages
 
 # =============================================
@@ -65,7 +79,7 @@ class Message:
 # =============================================
     @classmethod
     def save_message(cls, data):
-        query = "INSERT INTO messages (message,message_type,from_id) VALUE (%(message)s,%(message_type)s,%(from_id)s);"
+        query = "INSERT INTO messages (message,message_type,from_id,flock_id) VALUE (%(message)s,%(message_type)s,%(from_id)s,%(flock_id)s);"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
 
@@ -74,26 +88,21 @@ class Message:
 # ==========================================
     @classmethod
     def save_to_from_info(cls,data):
-        query = "INSERT INTO users_messages (user_id,message_id,from_id) VALUES (%(user_id)s, %(message_id)s,%(from_id)s);"
+        query = "INSERT INTO users_messages (user_id,message_id) VALUES (%(user_id)s, %(message_id)s);"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
 
-# # ==========================================
-# # GET: all messages for a user
-# # ==========================================
-#     @classmethod
-#     def get_all_for_message(cls,data):
-#         query = "SELECT messages.id,messages.content,messages.from_id,messages.user_id,users2.id,users2.first_name AS from_first, users2.last_name AS from_last FROM messages LEFT JOIN users ON messages.user_id = users.id  LEFT JOIN users AS users2  ON users2.id = messages.from_id WHERE messages.user_id = %(id)s;"
-#         results = connectToMySQL('book_club').query_db(query,data)
-#         return results
-
-
-# # ==========================================
-# # DELETE: message
-# # ==========================================
-#     @classmethod
-#     def delete_message(cls,data):
-#         query = "DELETE FROM messages WHERE id = %(id)s;"
-#         results = connectToMySQL('book_club').query_db(query,data)
-#         return results
+# =============================================
+# DELETE: message
+# =============================================
+    @classmethod
+    def delete_message(cls,data):
+        query = "DELETE FROM messages WHERE id = %(id)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return results
     
+    @classmethod
+    def delete_user_message(cls,data):
+        query = "DELETE FROM users_messages WHERE user_id = %(user_id)s AND message_id = %(id)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return results

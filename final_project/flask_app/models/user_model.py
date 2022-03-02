@@ -155,6 +155,8 @@ class User:
             one_user.status = flock_user_model.Flock_User(one_status)
 
             users_information.append(one_user)
+            print(" &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& ")
+            print(row)
         return users_information
 
 # ========================================
@@ -214,9 +216,51 @@ class User:
         results = connectToMySQL('book_club').query_db(query,data)
         return cls(results[0])
 
+# ========================================
 # DELETE : user
+# ========================================
     @classmethod
     def delete_user(cls,data):
         query = "DELETE FROM users WHERE id = %(id)s;"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
+
+
+
+
+
+
+# SELECT : all data from a single flock
+    @classmethod
+    def get_all_flock_info(cls,data):
+        query = "SELECT * FROM users LEFT JOIN flocks_users ON flocks_users.user_id = users.id LEFT JOIN flocks ON flocks.id = flocks_users.flock_id WHERE users.id = %(id)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
+
+        all_flock_info = []
+
+        for row in results:
+            one_user = cls(row)
+
+            one_flock_user = {
+                "id" : row['id'],
+                "user_id" : row['user_id'],
+                "flock_id" : row['flock_id'],
+                "status" : row['status'],
+                "created_at" : row['created_at'],
+                "updated_at" : row['updated_at']
+            }
+            one_user.flur = flock_user_model.Flock_User(one_flock_user)
+
+            one_flock = {
+                "id" : row['id'],
+                "title" : row['title'],
+                "city" : row['city'],
+                "state" : row['state'],
+                "privacy_setting" : row['privacy_setting'],
+                "created_at" : row['created_at'],
+                "updated_at" : row['updated_at']
+            }
+            one_user.flock = flock_model.Flock(one_flock)
+
+            all_flock_info.append(one_user)
+        return all_flock_info
