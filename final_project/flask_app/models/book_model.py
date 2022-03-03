@@ -49,6 +49,6 @@ class Book:
 # =============================================   
     @classmethod
     def add_new_book(cls,data):
-        query = "INSERT INTO books (title,isbn,img,page_num) VALUES (%(title)s, %(isbn)s, %(img)s, %(page_num)s);"
+        query = "INSERT INTO books (title,isbn,img,page_num,link) VALUES (%(title)s, %(isbn)s, %(img)s, %(page_num)s,%(link)s);"
         results = connectToMySQL('book_club').query_db(query,data)
         return results

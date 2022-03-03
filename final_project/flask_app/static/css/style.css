@@ -56,6 +56,7 @@ form input{width: 100%;display: block; margin-bottom: 5px;padding: 10px;}
     form .submit:focus{opacity: .8; outline: none;}
 
 .navigation{ padding: 20px; justify-content: space-between; position: absolute; z-index: 1000; top: 0;left: 0; width: 100%;}
+.navigation ul{display: flex;align-items: end;}
 .navigation .site-name{font-weight: 900; font-size: 35px;}
 .navigation .site-name span{font-weight: 300;}
 .navigation .site-name{font-weight: 900; font-size: 35px;}
