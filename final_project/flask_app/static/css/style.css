@@ -59,6 +59,7 @@ form input{width: 100%;display: block; margin-bottom: 5px;padding: 10px;}
 .navigation .site-name{font-weight: 900; font-size: 35px;}
 .navigation .site-name span{font-weight: 300;}
 
+
 /* ======================================== 
 PAGE 
 ======================================== */
@@ -101,7 +102,8 @@ PAGE
     .page-dashboard  .to-do h3{width: 200px; padding: 0 25px; text-align: center; margin: 0;}
     .page-dashboard  .to-do h3 a{text-decoration: none; color:var(--blood_orange);}
     .page-dashboard  .to-do h3 a:hover{color:var(--black);}
-
+    /* navigation */
+    .page-dashboard .navigation a{color:var(--white); padding: 0 10px;}
 
 /* WALL */
 .nav-bar{width: 100%;}
