@@ -10,8 +10,11 @@ class Book_Genre:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
+# ============================================= 
+# INSERT: a new book genre
+# ============================================= 
     @classmethod
-    def add_new_book_genre(cls,data):
+    def add_key_pair(cls,data):
         query = "INSERT INTO books_genres (book_id,genre_id) VALUES (%(book_id)s,%(genre_id)s);"
         results = connectToMySQL('book_club').query_db(query,data)
         return results

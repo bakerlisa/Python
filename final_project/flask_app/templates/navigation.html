@@ -1,3 +1,13 @@
 {% if 'id' in session %}
-    <div class="settings"><a href="/dashboard">Dashboard</a> | <a href="/user_settings">user settings</a> | <a href="/flock_dashboard">Group Dashboard</a> | <a href="/messages">Messages</a> | <a href="/join_flock">Join Group</a> | <a href="/books">Books</a> | <a href="/add_book">Add Book</a> | <a href="/logout">Logout</a></div>
+    <div class="navigation flex">
+        <p class="site-name">Night<span>Owl</span></p> 
+        <div>
+            <a href="/dashboard">Dashboard</a> | 
+            <a href="/user_settings"><i class="fa-solid fa-gear"></i></a> | 
+            <a href="/flock_dashboard"><i class="fa-solid fa-feather"></i></a> | 
+            <a href="/messages"><i class="fa-solid fa-envelope"></i></a> | 
+            <a href="/books"><i class="fa-solid fa-book"></i></a> |
+             <a href="/add_book"><i class="fa-solid fa-plus"></i><i class="fa-solid fa-book"></i></a> | 
+             <a href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a></div>
+    </div>
 {% endif %}

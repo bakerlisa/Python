@@ -3,7 +3,7 @@
 
 :root{
     --white:#fff;
-    --gray:#E4DDE9;
+    --gray:#dddddd;
         --md_gray:#584F53;
     --black:#180e0b;
     --green:#63622E;
@@ -13,6 +13,7 @@
         --md_brown:#9f857c;
         --lt_brown:#cfb9b4;
     --yellow:#C29447;
+    --blood_orange:#BF2804;
 
     --red:#96272B;
         --dk_red:#441F12;
@@ -34,7 +35,7 @@ p,li,a,ul,button{font-size: 14px;}
 .col-3{width: 33.33%;}
 .col-4{width: 25%;}
 
-h1{font-size: 100px; color:var(--black); width: 100%; display: block;}
+h1{font-size: 75px; color:var(--black); width: 100%; display: block;}
     h1 span{font-weight: 300;}
 h2{font-size: 45px;}
 h3{font-size: 35px; display: block;width: 100%; visibility: color:var(--black); }
@@ -49,21 +50,24 @@ h5{font-size: 20px;}
 /* row */
 .row.flex.title p{font-weight: 900;}
 
-
 /* form */
 form input{width: 100%;display: block; margin-bottom: 5px;padding: 10px;}
     form .submit{text-transform: uppercase; letter-spacing: 2px;  border: none; background-color:var(--brown); color:var(--white); margin:10px 0 25px 0;}
     form .submit:focus{opacity: .8; outline: none;}
 
+.navigation{ padding: 20px; justify-content: space-between; position: absolute; z-index: 1000; top: 0;left: 0; width: 100%;}
+.navigation .site-name{font-weight: 900; font-size: 35px;}
+.navigation .site-name span{font-weight: 300;}
+
 /* ======================================== 
 PAGE 
 ======================================== */
-
 /* HOME */
 .page-home{background-image: url('../img/owl-banner.png');background-position: top center; background-size: cover;}
 .page-home .title-wrp{position: absolute;bottom:25px; left: 0;}
-.page-home .container h1, .page-home .container .title-wrp  h3{color:rgba(0,0,0,.7); position: relative;}
-    .page-home .container h1 span.first{display: block; font-size: 27px; font-weight: 900; position: relative; top: 25px;}
+    .page-home  h1{font-style: 100px;}
+    .page-home .container h1, .page-home .container .title-wrp  h3{color:rgba(0,0,0,.7); position: relative;}
+        .page-home .container h1 span.first{display: block; font-size: 27px; font-weight: 900; position: relative; top: 25px;}
 .page-home .container .title-wrp  h3{text-shadow:0px 2px 20px rgba(255,255,255,.5);}
 .page-home .container{height: 100vh; justify-content: flex-end; align-items: center; height: 100vh;}
 .page-home .container h3{font-size: 25px; color:var(--lt_brown); position: relative; margin-bottom: 10px; text-shadow:2px 2px 5px rgba(0,0,0,.2);}
@@ -78,6 +82,26 @@ PAGE
     /* message */
     .page-home .info-messages{width: 100%;}
     .page-home .info-messages .error{background-color:var(--blue); color:var(--white); padding: 10px; text-align: center; margin:15px 0}
+
+/* DASHBOARD */
+.page-dashboard{background-color:var(--gray);}
+.page-dashboard .navigation .site-name{color:var(--white);}
+.page-dashboard .image-dec{height: 100vh; width: 50%;position: absolute; top: 0;left: 0; background-image: url('/static/img/owl-eyes.png'); background-size: cover; background-position: left center;}
+.page-dashboard .container{width: 100%; display: flex; align-items: flex-end; justify-content: flex-end; max-width: 100%;   height: 100vh;}
+.page-dashboard .container main{width: 50%; padding: 50px;}
+.page-dashboard h2{font-weight: 300; font-size: 25px;position: relative; top: 12px;}
+.page-dashboard h3{text-transform: uppercase; font-size: 25px; margin-top: 25px;}
+    /* to-do */
+    .page-dashboard  .to-do{display: flex;}
+    .page-dashboard  .to-do form{width: calc(100% - 200px); display: flex; flex-wrap: wrap;}
+    .page-dashboard  .to-do  input,.page-dashboard  .to-do  select{padding: 10px; margin: 0;}
+        .page-dashboard  .to-do  select{width: calc(100% - 150px); }
+        .page-dashboard  .to-do  input{width: 150px; background-color:var(--brown); color:var(--white); border:none}
+            .page-dashboard  .to-do  input:hover{cursor: pointer; opacity: .85;}
+    .page-dashboard  .to-do h3{width: 200px; padding: 0 25px; text-align: center; margin: 0;}
+    .page-dashboard  .to-do h3 a{text-decoration: none; color:var(--blood_orange);}
+    .page-dashboard  .to-do h3 a:hover{color:var(--black);}
+
 
 /* WALL */
 .nav-bar{width: 100%;}

@@ -1,56 +1,59 @@
 {% include 'header.html' %}
 <body class="page-dashboard">
+    {% include 'navigation.html' %}
     <main>
+        <div class="image-dec"></div>
         <div class="container flex">
-            
-            {% include 'navigation.html' %}
+            <main>
+                <h2>Welcome {{ user_info[0].first_name}}</h2>
+                <h1>User Dashboard</h1>
+                {% with errors = get_flashed_messages(category_filter=["request"]) %}
+                    {% if errors %}
+                        <div class="error-messages">
+                            {%- for msg in errors %}
+                                <p class="error">{{ msg }}</p>
+                            {% endfor -%}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                
+                {% with errors = get_flashed_messages(category_filter=["info"]) %}
+                    {% if errors %}
+                        <div class="info-messages">
+                            {%- for msg in errors %}
+                                <p class="info">{{ msg }}</p>
+                            {% endfor -%}
+                        </div>
+                    {% endif %}
+                {% endwith %}
 
-            <h1>Dashboard</h1>
-            <h2>Welcome {{ user_info[0].first_name}}</h2>
-            {% with errors = get_flashed_messages(category_filter=["request"]) %}
-                {% if errors %}
-                    <div class="error-messages">
-                        {%- for msg in errors %}
-                            <p class="error">{{ msg }}</p>
-                        {% endfor -%}
-                    </div>
-                {% endif %}
-            {% endwith %}
-            
-            {% with errors = get_flashed_messages(category_filter=["info"]) %}
-                {% if errors %}
-                    <div class="info-messages">
-                        {%- for msg in errors %}
-                            <p class="info">{{ msg }}</p>
-                        {% endfor -%}
-                    </div>
-                {% endif %}
-            {% endwith %}
-
-            {% with errors = get_flashed_messages(category_filter=["message"]) %}
-                {% if errors %}
-                    <div class="error-messages"></div>
-                        {%- for msg in errors %}
-                            <p class="error">{{ msg }}</p>
-                        {% endfor -%}
-                    </div>
-                {% endif %}
-            {% endwith %}
-                    
-            <h3>Join a Flock</h3>
-            <form action="/submit_join_request" method="POST" class="join-flock">
-                <!-- if they're not in a group yet -->
-                <select name="flock_id" id="">
-                    <option value="">Join a Flock</option>
-                    {% for flock in all_flocks %}
-                        <option value="{{ flock.id }},{{ flock.status.user_id}}">{{ flock.title }}</option>
-                    {% endfor %}
-                </select>
-                <textarea name="message" id="" cols="30" rows="10">{{user_info[0].first_name}} {{user_info[0].last_name}} would like to join your group!</textarea>
-                <input type="hidden" name="user_id" value="{{ user_info[0].id }}">
-                <input type="submit" value="Join!">
-            </form>
-            <h3><a href="/create_flock"> Create a flock </a></h3>
+                {% with errors = get_flashed_messages(category_filter=["message"]) %}
+                    {% if errors %}
+                        <div class="error-messages">
+                            {%- for msg in errors %}
+                                <p class="error">{{ msg }}</p>
+                            {% endfor -%}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                        
+                <h3>To Do:</h3>
+                <div class="to-do">
+                    <form action="/submit_join_request" method="POST" class="join-flock">
+                        <!-- if they're not in a group yet -->
+                        <select name="flock_id" id="">
+                            <option value="">Join a Flock</option>
+                            {% for flock in all_flocks %}
+                                <option value="{{ flock.id }},{{ flock.status.user_id}}">{{ flock.title }}</option>
+                            {% endfor %}
+                        </select>
+                        <textarea name="message" id="" cols="30" rows="10">{{user_info[0].first_name}} {{user_info[0].last_name}} would like to join your group!</textarea>
+                        <input type="hidden" name="user_id" value="{{ user_info[0].id }}">
+                        <input type="submit" value="Join!">
+                    </form>
+                    <h3><a href="/create_flock"> Create a Flock! </a></h3>
+                </div>
+            </main>
         </div>
     </main>
     {% include 'footer.html' %}

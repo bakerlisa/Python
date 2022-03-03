@@ -13,7 +13,13 @@ class Genre:
 # SELECT : check to see if genre exsists
 # ==========================================
     @classmethod
-    def category_exsist(cls,data):
+    def genre_exsist(cls,data):
+        query = "SELECT id FROM genre WHERE genre = %(genre)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return results
+
+    @classmethod
+    def genre_get_exsisting_id(cls,data):
         query = "SELECT id FROM genre WHERE genre = %(genre)s;"
         results = connectToMySQL('book_club').query_db(query,data)
         return results

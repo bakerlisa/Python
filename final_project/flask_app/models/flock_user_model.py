@@ -13,7 +13,7 @@ class Flock_User:
         self.updated_at = data['updated_at']
 
 # ========================================
-#INSERT : new user into flock
+# INSERT : new user into flock
 # ========================================
     @classmethod
     def add_user_to_flock(cls,data):

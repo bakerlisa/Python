@@ -10,17 +10,31 @@ class Series:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
+# ============================================= 
+# SELECT : is series unique
+# ============================================= 
     @classmethod
     def is_series_unique(cls,data):
         query = "SELECT * FROM book_series WHERE series_name = %(series_name)s;"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
 
+# ============================================= 
+# SELECT : get exsisting series id
+# ============================================= 
     @classmethod
-    def add_new_series(cls,data):
-        query = "INSERT INTO book_series (series_name,book_id) VALUES(%(series_name)s,%(book_id)s);"
+    def get_series_id(cls,data):
+        query = "SELECT id FROM book_series WHERE series_name = %(series_name)s;"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
-
+        
+# ============================================= 
+# INSERT : add new series 
+# ============================================= 
+    @classmethod
+    def add_new_series(cls,data):
+        query = "INSERT INTO book_series (series_name) VALUES(%(series_name)s);"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return results
 
 

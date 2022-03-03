@@ -25,6 +25,8 @@ class Book_Series:
 # =============================================  
     @classmethod
     def add_book_to_series(cls,data):
-        query = "INSERT INTO book_series_number (book_id,series_id,num)"
+        query = "INSERT INTO book_series_number (book_id,series_id,num) VALUES (%(book_id)s,%(series_id)s,%(num)s);"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
+
+    

@@ -63,7 +63,6 @@ def user_settings():
     user_info = User.get_user_info(data)
     return render_template('user-settings.html',user_info=user_info)
 
-
 # ========================================
 # ROUTE: lock
 # ========================================
