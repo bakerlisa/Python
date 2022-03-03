@@ -37,6 +37,7 @@
                 <input type="text" name="genre" placeholder="Gener:  if 1 < comma seperated list" value="{{ session['books'].genre }}">
                 <textarea name="description" cols="30" rows="10">{{ session['books'].description }}</textarea>
                 <input type="text" name="img" placeholder="*Image URL" value="{{ session['books'].img }}">
+                <input type="url" name="link" placeholder="Link for more information" value="{{ session['books'].link }}">
                 <input type="submit" value="Add Book">
             </form>
         </div>

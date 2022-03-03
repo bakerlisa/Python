@@ -1,0 +1,13 @@
+======= GOALS: ======
+Book club app with the goals to 
+    - keep track of memebers
+    - keep track and look up books that your group has read
+    - easy place to visaulize location for the club meetings
+
+1. user login and settings
+2. added groups and the abilty to find all the groups and "apply"
+3. Where you could be accepted or not, or leave
+4. book info
+    -going to use an api, but ut was discontiued and for practic sake I built out the database to store all the book data 
+    -and validations for the book data
+5. 

@@ -1,20 +1,28 @@
 {% include 'header.html' %}
-<body>
+
+<body class="page-dashboard group">
     {% include 'navigation.html' %}
+    <main>
+        <div class="image-dec"></div>
+            <div class="container flex">
+                <main>
+                    <h1><span>Flock(s) </span>  Dashboard</h1>
+                    {% for info in flock_info %}
+                        <div class="nav"><a href="/past_reads" class="past">Past Books</a> | <a href="/flock_members" class="members">Flock Members</a></div>
+                        <h3>{{ info.flock.title }}</h3>
+                        <p>Location:</p>
+                        <p>Admin For Account: {{ info.flur.status }} </p>
+                    {% endfor %}
+
+                </main>
 
     
 
-    <h1>Flock Dashboard</h1>
-    {% for info in flock_info %}
-        <h3>{{ info.flock.title }}</h3>
-        <p>Admin For Account: {{ info.flur.status }} </p>
-    {% endfor %}
-
-    3. list of flock members
+    <!-- 3. list of flock members
     4. book for the month
     5. next meeting location
     6. link to past books
     7. link to message?? Admin
-    8. volunteer to be the next months host ?? Auto update?
+    8. volunteer to be the next months host ?? Auto update? -->
 
     {% include 'footer.html' %}

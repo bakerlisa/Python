@@ -1,12 +1,13 @@
 {% include 'header.html' %}
+
 <body class="page-dashboard">
     {% include 'navigation.html' %}
+    
     <main>
         <div class="image-dec"></div>
         <div class="container flex">
             <main>
-                <h2>Welcome {{ user_info[0].first_name}}</h2>
-                <h1>User Dashboard</h1>
+                <h1><span>Welcome {{ user_info[0].first_name}}</span> User Dashboard</h1>
                 {% with errors = get_flashed_messages(category_filter=["request"]) %}
                     {% if errors %}
                         <div class="error-messages">

@@ -25,7 +25,7 @@ def books():
 def add_book():
     if 'books' not in session: 
         # Added it so data will presist if error is thrown (because...this is a heavily validated part of the website)
-        session["books"] = data = {"title": "", "first_name": "", "last_name": "", "series_name": "", "num_series": "",  "page_num": "", "isbn": "", "genre": "", "description": "", "img": ""}
+        session["books"] = data = {"title": "", "first_name": "", "last_name": "", "series_name": "", "num_series": "",  "page_num": "", "isbn": "", "genre": "", "description": "", "img": "", "link": ""}
     return render_template('add_book.html')
 
 # ============================================= 
@@ -47,10 +47,12 @@ def add_new_book():
         "series_name": request.form['series_name'],
         "num_series": request.form['num_series'],
         "page_num": request.form['page_num'],
+        "link": request.form['link'],
         "isbn": request.form['isbn'],
         "genre": request.form['genre'],
         "description": request.form['description'],
-        "img": request.form['img']
+        "img": request.form['img'],
+        "link": request.form['link']
     }
     # 1. check uniquness
     unique_author = Author.is_author_unique(data)

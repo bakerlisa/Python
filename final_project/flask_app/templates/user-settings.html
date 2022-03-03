@@ -2,79 +2,113 @@
 
 {% include 'header.html' %}
 <body>
-    <body class="page-home">
+    <body class="page-user-settings">
+        {% include 'navigation.html' %}
         <main>
             <div class="container ">
-                {% include 'navigation.html' %}
 
-                <h1>User Settings:  <span> {{ user_info[0].first_name }} {{ user_info[0].last_name }}</span></h1>
+                <h1><span> User Settings:</span>  {{ user_info[0].first_name }} {{ user_info[0].last_name }}</h1>
 
-                <h3>Update User Info:</h3>
-                <div class="error-messages">
-                    {% with errors = get_flashed_messages(category_filter=["user"]) %}
-                        {% if errors %}
-                            {%- for msg in errors %}
-                                <p class="error">{{ msg }}</p>
-                            {% endfor -%}
-                        {% endif %}
-                    {% endwith %}
+                <div class="info-content">
+                    <h3 onclick="toggle_hidden(event)">Update User Info:</h3>
+                    <div class="hide-content">
+                        {% with errors = get_flashed_messages(category_filter=["user"]) %}
+                            {% if errors %}
+                                <div class="error-messages">
+                                    {%- for msg in errors %}
+                                        <p class="error">{{ msg }}</p>
+                                    {% endfor -%}
+                                </div>
+                            {% endif %}
+                        {% endwith %}
+
+                        <form action="update_user_settings" method="post">
+                            <label for="first_name">First Name:</label>
+                            <input type="text" name="first_name" placeholder="First Name" value="{{ user_info[0].first_name }}">
+
+                            <label for="last_name">Last Name:</label>
+                            <input type="text" name="last_name" placeholder="Last Name" value="{{ user_info[0].last_name }}">
+
+                            <label for="phone">Phone:</label>
+                            <input type="phone" name="phone" placeholder="phone" value="{{  user_info[0].phone }}">
+                            
+                            <label for="email">Email:</label>
+                            <input type="text" name="email" placeholder="email@format.com" value="{{  user_info[0].email }}">
+
+                            <input type="hidden" name="id" value="{{ user_info[0].id }}">
+                            <input type="submit" value="Update" class="update">
+                        </form>
+                    </div>
                 </div>
-                <form action="update_user_settings" method="post">
-                    <input type="text" name="first_name" id="" placeholder="First Name" value="{{ user_info[0].first_name }}">
+                
+                <div class="info-content">
+                    <h3 onclick="toggle_hidden(event)">Update Address</h3>
+                    <div class="hide-content">
+                        {% with errors = get_flashed_messages(category_filter=["address"]) %}
+                            {% if errors %}
+                                <div class="error-messages">
+                                    {%- for msg in errors %}
+                                        <p class="error">{{ msg }}</p>
+                                    {% endfor -%}
+                                </div>
+                            {% endif %}
+                        {% endwith %}
+                        
+                        <form action="/update_address" method="post">
+                            <label for="address">Address:</label>
+                            <input type="text" name="address" value="{{ user_info[0].address.address }}" placeholder="address">
 
-                    <input type="text" name="last_name" id="" placeholder="Last Name" value="{{ user_info[0].last_name }}">
+                            <div class="address-wrp">
+                                <span class="cty-wrp">
+                                    <label for="city">City:</label>
+                                    <input type="text" name="city" value="{{  user_info[0].address.city }}" placeholder="city">
+                                </span>
+                                
+                                <span class="st-wrp">
+                                    {{ states() }}
+                                </span>
 
-                    <input type="phone" name="phone" id="" placeholder="phone" value="{{  user_info[0].phone }}">
-                    
-                    <input type="text" name="email" id="" placeholder="email@format.com" value="{{  user_info[0].email }}">
-
-                    <input type="hidden" name="id" value="{{ user_info[0].id }}">
-                    <input type="submit" value="Update">
-                </form>
-                <h3>Update Address</h3>
-                <div class="error-messages">
-                    {% with errors = get_flashed_messages(category_filter=["address"]) %}
-                        {% if errors %}
-                            {%- for msg in errors %}
-                                <p class="error">{{ msg }}</p>
-                            {% endfor -%}
-                        {% endif %}
-                    {% endwith %}
+                                <span class="num-wrp">
+                                    <label for="zip">Zip:</label>
+                                    <input type="numbers" name="zip" value="{{ user_info[0].address.zip }}" placeholder="city">
+                                </span>
+                            </div>
+                            <input type="hidden" name="user_id" value="{{ user_info[0].id }}">
+                            <input type="submit" value="Update Address" class="update">
+                        </form>
+                    </div>
                 </div>
-                <form action="/update_address" method="post">
-                    <input type="text" name="address" value="{{ user_info[0].address.address }}" placeholder="address">
-                    <input type="text" name="city" value="{{  user_info[0].address.city }}" placeholder="city">
-                    
-                    {{ states() }}
+                <div class="info-content">
+                    <h3 onclick="toggle_hidden(event)">Update Password</h3>
+                    <div class="hide-content">
+                        {% with errors = get_flashed_messages(category_filter=["password"]) %}
+                            {% if errors %}
+                                <div class="error-messages">
+                                    {%- for msg in errors %}
+                                        <p class="error">{{ msg }}</p>
+                                    {% endfor -%}
+                                </div>
+                            {% endif %}
+                        {% endwith %}
+                        <form action="/update_password" method="post">
+                            <label for="old_password">Password:</label>
+                            <input type="password" name="old_password" placeholder="Old Password" value="">
+                            
+                            <label for="password">New Password:</label>
+                            <input type="password" name="password" placeholder="New Password" value="">
+                            <label for="confirm_password">Confirm New Password:</label>
+                            <input type="password" name="confirm_password" placeholder="Confirm New Password" value="">
 
-                    <input type="numbers" name="zip" value="{{ user_info[0].address.zip }}" placeholder="city">
-                    <input type="hidden" name="user_id" value="{{ user_info[0].id }}">
-                    <input type="submit" value="Update Address">
-                </form>
-                <h3>Update Password</h3>
-                <div class="error-messages">
-                    {% with errors = get_flashed_messages(category_filter=["password"]) %}
-                        {% if errors %}
-                            {%- for msg in errors %}
-                                <p class="error">{{ msg }}</p>
-                            {% endfor -%}
-                        {% endif %}
-                    {% endwith %}
-                </div>
-                <form action="/update_password" method="post">
-                    <input type="password" name="old_password" id="" placeholder="Old Password" value="">
-                    
-                    <input type="password" name="password" id="" placeholder="New Password" value="">
-                    <input type="password" name="confirm_password" id="" placeholder="Confirm New Password" value="">
-
-                    <input type="hidden" name="id" value="{{ user_info[0].id }}">
-                    <input type="submit" value="Update Password">
-                </form>
+                            <input type="hidden" name="id" value="{{ user_info[0].id }}">
+                            <input type="submit" value="Update Password" class="update">
+                        </form>
+                    </div>   
+                </div>   
 
                 <a href="/delete_user/{{ user_info[0].id }}" class="delete">Delete Account</a>
                 <h2>Flocks: </h2>
                 {% if user_info[0].flock.title is  none %}
-                    <a href="/join_flock">Join a Flock</a>
+                    <div class="links"><a href="/join_flock">Join a Flock</a> | <a href="/create_flock">Create a Flock</a></div>
                 {% else %}
                     {% for user in user_info %}
                         <h3>{{ user.flock.title }} </h3>
@@ -92,21 +126,22 @@
                         </form>
                         {% endfor %}
                 {% endif %}
-                <!-- 
-                1. see what groups your in
-                    - join another groupßå
-                    - create a group
-                    - leave a group
-                2. delete account
-                4. change
-                    name,address,password,phone,email,image 
-                5. custom requests or resposes
-                    - pets
-                    - allergies
-                    - kids
-                -->
-                <a href="/create_flock">Create a Flock</a>
+                
+                
             </div>
         </main>
+    {% include 'footer.html' %}
 
-        {% include 'footer.html' %}
+
+<!-- 
+    1. see what groups your in
+        - join another groupßå
+        - create a group
+        - leave a group
+    2. delete account
+    3. change
+        name,address,password,phone,email,image 
+    4. custom requests or resposes
+        - pets
+        - allergies
+        - kids -->

@@ -2,21 +2,22 @@
     <div class="navigation flex">
         <p class="site-name">Night<span>Owl</span></p> 
         <ul>
-            <li><a href="/dashboard"><i class="fa-solid fa-user"></i></a> |</li> 
-            <li><a href="/user_settings"><i class="fa-solid fa-gear"></i></a> | </li>
+            <li>
+                <a href="/dashboard"><i class="fa-solid fa-user"></i></a> 
+                <!-- <a href="/flock_dashboard" class="sub-nav"><i class="fa-solid fa-users"></i></a> -->
+            | </li> 
             <li>
                 <a href="/flock_dashboard"><i class="fa-solid fa-feather"></i>
-                    <span class="sub-nav"><a href="/join_flock"><i class="fa-solid fa-plus"></i><i class="fa-solid fa-feather"></i></a></span>
+                <a href="/join_flock" class="sub-nav"><i class="fa-solid fa-plus"></i><i class="fa-solid fa-feather"></i></a>
+                </a> |
+            </li>
+            <li>
+                <a href="/books"><i class="fa-solid fa-book"></i>
+                    <a  class="sub-nav" href="/add_book"><i class="fa-solid fa-plus"></i><i class="fa-solid fa-book"></i></a>
                 </a> |
             </li>
             <li><a href="/messages"><i class="fa-solid fa-envelope"></i></a> | </li>
-            <li>
-                <a href="/books"><i class="fa-solid fa-book"></i>
-                    <span class="sub-nav">
-                        <a href="/add_book"><i class="fa-solid fa-plus"></i><i class="fa-solid fa-book"></i></a>
-                    </span>
-                </a> |
-            </li>
+            <li><a href="/user_settings"><i class="fa-solid fa-gear"></i></a> | </li>
             <li><a href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a></li>
         </ul>
     </div>

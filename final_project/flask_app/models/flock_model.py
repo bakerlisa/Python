@@ -18,7 +18,7 @@ class Flock:
     def validate_flock(flock):
         is_valid = True # we assume this is true
         if len(flock['title']) < 2:
-            flash("Please name your Group. Must be atleast 3 characters.","flocks")
+            flash("Please name your flock, it must be atleast 3 characters.","flocks")
             is_valid = False
         if len(flock['city']) < 2:
             flash("Please select a city","flocks")
@@ -95,6 +95,48 @@ class Flock:
 
             users_information.append(one_user)
         return users_information
+    
+# =============================================  
+# SELECT: all flock info with a certain user id
+# =============================================
+    @classmethod
+    def get_all_flocks_info(cls,data):
+        query =  "SELECT * FROM flocks LEFT JOIN flocks_users ON flocks_users.flock_id = flocks.id LEFT JOIN users ON users.id = flocks_users.user_id WHERE users.id = %(id)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
+        
+        flock_information = []
+
+        for row in results:
+            one_flock = cls(row)
+
+            one_flock_user = {
+                "id": row['flocks_users.id'],
+                "user_id": row['user_id'],
+                "flock_id": row['flock_id'],
+                "status": row['status'],
+                "created_at": row['flocks_users.created_at'],
+                "updated_at": row['flocks_users.updated_at']
+            }
+            one_flock.status = flock_user_model.Flock_User(one_flock_user)
+
+            one_user = {
+                "id" : row['id'],
+                "first_name" : row['first_name'],
+                "last_name" : row['last_name'],
+                "phone" : row['phone'],
+                "email" : row['email'],
+                "phone" : row['phone'],
+                "password" : row['password'],
+                "profile_image" : row['profile_image'],
+                "created_at" : row['created_at'],
+                "updated_at" : row['updated_at']
+            }
+            one_flock.member = user_model.User(one_user)
+
+            flock_information.append(one_flock)
+            print(" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ")
+            print(one_flock)
+        return flock_information
 
 # =============================================  
 # SELECT: check if group name is unique
