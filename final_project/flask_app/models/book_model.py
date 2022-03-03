@@ -8,6 +8,7 @@ class Book:
         self.title = data['title']
         self.isbn = data['isbn']
         self.page_num = data['page_num']
+        self.link = data['link']
         self.series_num = data['series_num']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
