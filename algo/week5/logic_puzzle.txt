@@ -1,0 +1,206 @@
+
+
+The Zebra Puzzle:
+
+The puzzle consists of five different-colored houses in a row, each lived in by a resident of a different nationality.
+ Each resident owns a different pet, prefers a different drink, and smokes a different brand of cigarettes than the others.
+
+You’re given 15 other facts:
+
+There are five houses.
+The Englishman lives in the red house.
+The Spaniard owns the dog.
+Coffee is drunk in the green house.
+The Ukrainian drinks tea.
+The green house is immediately to the right of the ivory house (to your right as you stand facing the row of five houses).
+The Old Gold smoker owns snails.
+Kools are smoked in the yellow house.
+Milk is drunk in the middle house.
+The Norwegian lives in the first house.
+The man who smokes Chesterfields lives in the house next to the man with the fox.
+Kools are smoked in a house next to the house where the horse is kept.
+The Lucky Strike smoker drinks orange juice.
+The Japanese smokes Parliaments.
+The Norwegian lives next to the blue house.
+To solve the puzzle, tell me:
+
+1) Which man likes to drink water
+
+2) Which man owns a zebra
+
+
+
+
+
+The Lucky Strike smoker drinks orange juice.
+
+
+he man who smokes Chesterfields lives in the house next to the man with the fox.
+    The Spaniard owns the dog.
+
+
+The Old Gold smoker owns snails.
+
+The Japanese smokes Parliaments.
+
+
+
+The Ukrainian drinks tea.
+
+yellow(Norigean){Kools} = 
+blue{Chesterfields}<horse> -
+ivory[milk]<fox> = 
+green(Spaniard)[coffee]<dog> - 
+red(English){Old Gold}<snails>
+                
+
+
+
+
+------- What I did -------:
+HOUSE:
+1. filted out the one to ones
+2. organized the data on how many clues they had
+
+-The Norwegian lives in the first house.
+    -Kools are smoked in the yellow house. (last color left so it belongs to Norigean)
+        -Kools are smoked in a house next to the house where the horse is kept (blue house has the horse)
+    -The Norwegian lives next to the blue house.
+
+-The Englishman lives in the red house.
+-The green house is immediately to the right of the ivory house (to your right as you stand facing the row of five houses).
+
+DRINK:
+Coffee is drunk in the green house.
+Milk is drunk in the middle house. (either ivory or red)
+
+
+
+Thoughts:
+he man who smokes Chesterfields lives in the house next to the man with the fox. (can't be first or last)
+
+Senerio:
+*he man who smokes Chesterfields lives in the house next to the man with the fox.
+    *The Lucky Strike smoker drinks orange juice.
+        *The Old Gold smoker owns snails.
+            *The Japanese smokes Parliaments.
+1. Blue not chesterfield
+
+Snerio:
+yellow(Norigean){Kools} = 
+blue{Lucky Strike}[orange juice.]<horse> -
+ivory{Chesterfields}[milk] = 
+green(Japanese){Parliaments}[coffee]<fox> - 
+red(English){Old Gold}<snails>
+1. red is in the middle 
+    -we need to elimate that last few (2) which will tell us zebra and water and right now it'll all be guesses
+
+yellow(Norigean){Kools} = 
+blue<horse> -
+ivory{Old Gold}[milk]<snails> = 
+green[coffee]{Chesterfields} - 
+red(English)<fox>
+1. last two items
+
+yellow(Norigean){Kools}<fox> = 
+blue{Chesterfields}<horse> -
+ivory{Old Gold}[milk]<snails> = 
+green(Japanese){Parliaments}[coffee] - 
+red(English){Lucky Strike}[orange juice]
+
+yellow(Norigean){Kools} = 
+blue<horse> -
+ivory[milk]<fox> = 
+green{Chesterfields}[coffee] - 
+red(English){Lucky Strike}[orange juice]
+
+yellow(Norigean){Kools} = 
+blue{Lucky Strike}[orange juice]<horse> -
+ivory{Old Gold}[milk]<snails> = 
+green(Japanese){Parliaments}[coffee]<fox> - 
+red(English){Chesterfields}
+
+OR 
+
+yellow(Norigean){Kools}<fox> = 
+blue{Chesterfields}<horse> -
+ivory(Japanese){Parliaments}[milk] = 
+green{Old Gold}[coffee]<snails> - 
+red(English){Lucky Strike}[orange juice]
+
+yellow(Norigean){Kools} = 
+blue{Lucky Strike}[orange juice]<horse> -
+ivory(Japanese){Parliaments}[milk]<fox> = 
+green(Spaniard){Chesterfields}[coffee]<dog> - 
+red(English){Old Gold}<snails>
+
+
+=======2
+yellow(Norigean){Kools} = 
+blue(Japanese){Chesterfields}<horse> -
+red(English)[milk]<fox>
+ivory{Lucky Strike}[orange juice] = 
+green{Old Gold}[coffee]<snails>
+
+yellow(Norigean){Kools} = 
+blue(Ukrainian){Lucky Strike}[orange juice ]<horse> -
+red(English){Old Gold smoker}[milk]<snails>
+ivory(Spaniard){Chesterfields}<dog> = 
+green(Japanese){Parliaments}[coffee]<fox>
+
+yellow(Norigean){Kools} = 
+blue{Lucky Strike}[orange juice]<horse> -
+red(English){Chesterfields}[milk]
+ivory(Japanese){Parliaments}<fox> = 
+green{Old Gold}[coffee]<snails>
+
+yellow(Norigean){Kools} = 
+blue(Japanese){Parliaments}<horse> -
+red(English){Chesterfields}[milk]
+ivory{Lucky Strike}[orange juice]<fox> = 
+green{Old Gold}[coffee]<snails>
+
+yellow(Norigean){Kools} = 
+blue{Lucky Strike}[orange juice]<horse> -
+red(English){Old Gold}[milk]<snails>
+ivory(Spaniard){Chesterfields}<dog> = 
+green(Japanese){Parliaments}[coffee]<fox>
+
+
+yellow(Norigean){Kools} = 
+blue<horse> -
+ivory{Chesterfields}[milk] = 
+green[coffee]<fox> - 
+red(English){Lucky Strike}[orange juice]
+
+------ GUESSING -----
+1. red placement could be midle or end
+
+
+
+
+
+1) Which man likes to drink water - Norigean
+
+2) Which man owns a zebra - Japanees
+
+
+
+
+
+======= DO KNOW ======= :
+yellow(Norigean){Kools} = 
+blue<horse> -
+ivory[milk] = 
+green[coffee] - 
+red(English)
+
+OR 
+
+yellow(Norigean){Kools} = 
+blue<horse> -
+red(English)[milk]
+ivory = 
+green[coffee]
+
+Chester firld can't go to the right
