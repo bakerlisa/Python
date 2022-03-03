@@ -17,19 +17,16 @@ class Author:
     def is_author_unique(cls,data):
         query = "SELECT * FROM authors WHERE first_name = %(first_name)s AND last_name = %(last_name)s;"
         results = connectToMySQL('book_club').query_db(query,data)
-        if not results:
-            return "0"
-        else:
-            return results
+        return results
 
 # =============================================  
 # SELECT: get author ID
 # =============================================  
     classmethod
     def get_author_id(cls,data):
-        query = "SELECT id FROM authors WHERE first_name = %(first_name)s AND last_name = %(last_name)s;"
+        query = "SELECT * FROM authors WHERE first_name = %(first_name)s AND last_name = %(last_name)s;"
         results = connectToMySQL('book_club').query_db(query,data)
-        return results
+        return cls(results[0])
 
 # =============================================  
 # INSERT: new author

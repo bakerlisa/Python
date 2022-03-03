@@ -10,19 +10,19 @@ class Genre:
         self.updated_at = data['updated_at']
 
 # ==========================================
-# SELECT : check to see if gener exsists
+# SELECT : check to see if genre exsists
 # ==========================================
     @classmethod
     def category_exsist(cls,data):
-        query = "SELECT * FROM book_genre WHERE genre = %(genre)s;"
+        query = "SELECT id FROM genre WHERE genre = %(genre)s;"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
     
 # ==========================================
-# INSERT: new gener
+# INSERT: new genre
 # ==========================================
     @classmethod
     def add_new_genre(cls,data):
-        query = "INSERT INTO book_genre (genre,book_id) VALUES (%(genre)s,%(book_id)s);"
+        query = "INSERT INTO genre (genre) VALUES (%(genre)s);"
         results = connectToMySQL('book_club').query_db(query,data)
         return results

@@ -23,8 +23,8 @@ class Book:
         if len(book['last_name']) < 3:
             flash("Author last name must be at least 3 characters.","books")
             is_valid = False
-        if len(book['isbn']) < 13 or len(book['isbn']) > 13:
-            flash("ISBN must be 13 characters long","books")
+        if len(book['isbn']) < 10:
+            flash(f"ISBN must be 13 characters long. Your's is {len(book['isbn'])}","books")
             is_valid = False
         if len(book['img']) < 3:
             flash("Please add an image URL","books")

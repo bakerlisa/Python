@@ -33,8 +33,8 @@
                 <input type="text" name="series_name" placeholder="Series Name" value="{{ session['books'].series_name }}">
                 <input type="number" name="num_series" placeholder="Number in Series" min="0" value="{{ session['books'].num_series }}">
                 <input type="number" name="page_num" placeholder="page numbers" min="0" value="{{ session['books'].page_num }}">
-                <input type="text" name="isbn" placeholder="*ISBN" value="{{ session['books'].isbn }}">
-                <input type="text" name="gener" placeholder="Gener:  if 1 < comma seperated list" value="{{ session['books'].gener }}">
+                <input type="number" name="isbn" placeholder="*ISBN" value="{{ session['books'].isbn }}">
+                <input type="text" name="genre" placeholder="Gener:  if 1 < comma seperated list" value="{{ session['books'].genre }}">
                 <textarea name="description" id="" cols="30" rows="10">{{ session['books'].description }}</textarea>
                 <input type="text" name="img" placeholder="*Image URL" value="{{ session['books'].img }}">
                 <input type="submit" value="Add Book">
