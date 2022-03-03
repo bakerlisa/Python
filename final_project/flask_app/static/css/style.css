@@ -96,14 +96,17 @@ PAGE
     .page-dashboard  .to-do{display: flex;}
     .page-dashboard  .to-do form{width: calc(100% - 200px); display: flex; flex-wrap: wrap;}
     .page-dashboard  .to-do  input,.page-dashboard  .to-do  select{padding: 10px; margin: 0;}
-        .page-dashboard  .to-do  select{width: calc(100% - 150px); }
-        .page-dashboard  .to-do  input{width: 150px; background-color:var(--brown); color:var(--white); border:none}
+        .page-dashboard  .to-do  select{width: calc(100% - 125px); border:solid 1px var(--brown);}
+            .page-dashboard  .to-do  select:focus{outline: none !important; box-shadow: 0 0 3pt 2pt var(--burnt_orange);}
+        .page-dashboard  .to-do  input{width: 125px; background-color:var(--brown); color:var(--white); border:none}
             .page-dashboard  .to-do  input:hover{cursor: pointer; opacity: .85;}
     .page-dashboard  .to-do h3{width: 200px; padding: 0 25px; text-align: center; margin: 0;}
     .page-dashboard  .to-do h3 a{text-decoration: none; color:var(--blood_orange);}
     .page-dashboard  .to-do h3 a:hover{color:var(--black);}
     /* navigation */
-    .page-dashboard .navigation a{color:var(--white); padding: 0 10px;}
+    .page-dashboard .navigation{color:var(--lt_brown); font-size: 20px;}
+    .page-dashboard .navigation a{color:var(--lt_brown); padding: 0 25px; text-decoration: none; transition: all .25s ease-in;}
+    .page-dashboard .navigation a:hover{color:var(--blood_orange); transition: all .25s ease-in;}
 
 /* WALL */
 .nav-bar{width: 100%;}
