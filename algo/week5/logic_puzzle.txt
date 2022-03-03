@@ -176,15 +176,8 @@ red(English){Lucky Strike}[orange juice]
 ------ GUESSING -----
 1. red placement could be midle or end
 
-
-
-
-
-1) Which man likes to drink water - Norigean
-
-2) Which man owns a zebra - Japanees
-
-
+1) Which man likes to drink water
+2) Which man owns a zebra
 
 
 
@@ -204,3 +197,21 @@ ivory =
 green[coffee]
 
 Chester firld can't go to the right
+
+
+
+
+
+
+
+
+ANSWER:
+
+1) Which man likes to drink water - Norigean
+2) Which man owns a zebra - Japanees
+
+1 Yellow    Norwegian   fox        water                  kools
+2 Blue        Ukrainian    horse      tea                     Chesterfield 
+3 Red         English        snail       Milk                   Old Gold
+4 Ivory        Spaniard	Dog      Orange juice      Lucky Strike
+5 Green       Japanese    Zebra      coffee               Paliament
