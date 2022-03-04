@@ -14,6 +14,7 @@ class Message:
         self.id = data['id']
         self.message = data['message']
         self.message_type = data['message_type']
+        self.subject = data['subject']
         self.from_id = data['from_id']
         self.flock_id = data['flock_id']
         self.created_at = data['created_at']
@@ -26,6 +27,16 @@ class Message:
             is_valid = False
         if message["flock_id"] == "0":
             flash("Must choose a Group","message")
+            is_valid = False
+        return is_valid
+
+    def validate_send_message(message):
+        is_valid = True # we assume this is true
+        if len(message['subject']) < 3:
+            flash("Please add a subject that is atleast 3 characters.","personal")
+            is_valid = False
+        if len(message['message']) < 3:
+            flash("If you have no message why are you sending one?","personal")
             is_valid = False
         return is_valid
 
@@ -90,6 +101,15 @@ class Message:
     @classmethod
     def save_to_from_info(cls,data):
         query = "INSERT INTO users_messages (user_id,message_id) VALUES (%(user_id)s, %(message_id)s);"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return results
+
+# ==========================================
+# Saving a personal message
+# ==========================================
+    @classmethod
+    def save_new_message(cls,data):
+        query = "INSERT INTO messages (from_id,subject,message_type,message) VALUES (%(user_id)s,%(subject)s,%(message_type)s,%(message)s);"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
 

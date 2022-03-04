@@ -39,14 +39,15 @@ def create_flock():
 # ============================================= 
 @app.route('/new_flock_made')
 def new_flock_made():
+    flash("Congrats, you've made a new flock! Happy reading","info")
     return render_template('flock_dashboard.html')
 
 # ROUTE: flock settings
-@app.route('/flock_settings/<int:id>')
-def flock_settings(id):
-    data = { "id" : id }
-    get_all_members = Flock.get_all_members(data)
-    return render_template('flock_settings.html',get_all_members=get_all_members)
+@app.route('/flock_settings/<int:flock_id>')
+def flock_settings(flock_id):
+    data = { "id" : flock_id }
+    all_members = Flock.get_all_members(data)
+    return render_template('flock_settings.html',all_members = all_members)
 
 # =============================================  
 # CREATE: a group

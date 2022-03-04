@@ -106,25 +106,30 @@
                 </div>   
 
                 <a href="/delete_user/{{ user_info[0].id }}" class="delete">Delete Account</a>
-                <h2>Flocks: </h2>
+                <h2>Flocks You're Affiliated With: </h2>
+
                 {% if user_info[0].flock.title is  none %}
                     <div class="links"><a href="/join_flock">Join a Flock</a> | <a href="/create_flock">Create a Flock</a></div>
                 {% else %}
+                <div class="flex">
                     {% for user in user_info %}
-                        <h3>{{ user.flock.title }} </h3>
-                        <p><strong>Member Since:</strong> {{ user.flock.created_at.strftime('%B %d, %Y') }}</p>
-                        <p><strong>Membership Status:</strong> {{ user.status.status }}
-                            {% if user.status.status == 'admin' %} 
-                                <a href="/flock_settings/{{ user.flock.id }}">Edit Group Settings</a>
-                            {% endif %}
-                        </p>
-                        
-                        <form action="/leave_flock" method="post">
-                            <input type="hidden" name="user_id" value="{{ user.id }}">
-                            <input type="hidden" name="flock_id" value="{{ user.flock.id }}">
-                            <input type="submit" value="Leave Group">
-                        </form>
+                        <div class="group-info">
+                            <h3>{{ user.flock.title }} </h3>
+                            <p><strong>Member Since:</strong> {{ user.flock.created_at.strftime('%B %d, %Y') }}</p>
+                            <p><strong>Membership Status:</strong> {{ user.info.status }}
+                                {% if user.info.status == 'admin' %} 
+                                    <a class="edit" href="/flock_settings/{{ user.flock.id }}">Edit Group Settings</a>
+                                {% endif %}
+                            </p>
+                            
+                            <form action="/leave_flock" method="post">
+                                <input type="hidden" name="user_id" value="{{ user.id }}">
+                                <input type="hidden" name="flock_id" value="{{ user.flock.id }}">
+                                <input type="submit" value="Leave Group" class="submit">
+                            </form>
+                        </div>
                         {% endfor %}
+                    </div>
                 {% endif %}
                 
                 

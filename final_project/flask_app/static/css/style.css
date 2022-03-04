@@ -26,7 +26,7 @@
 
 .red{color:var(--red);}
 
-p,li,a,ul,button{font-size: 14px;}
+p,li,a,ul,button{font-size: 15px; }
 
 img{max-width: 100%; display: block;}
 
@@ -216,6 +216,7 @@ PAGE
 /* USER SETTINGS */
 .page-user-settings{padding-bottom:50px}
 .page-user-settings main{padding-top: 100px;}
+.page-user-settings main h1{text-transform: capitalize;}
 .page-user-settings main h1 span{display: block; font-size: 25px; position: relative; top: 12px;}
 .page-user-settings main h2{padding-top: 50px;}
 .page-user-settings .info-content{padding:15px 25px 15px 200px;}
@@ -225,7 +226,7 @@ PAGE
 .page-user-settings .info-content h3:hover:before{max-width:75px; transition: all .2s ease-in;}
 .page-user-settings .hide-content{max-height:0; height: 100%; overflow: hidden; padding: 0 25px; transition: all .5s ease-in;}
 /* active */
-.info-content.active .hide-content{ max-height:400px; margin-top: 30px; transition: all .5s ease-in;}
+.info-content.active .hide-content{ max-height:500px; margin-top: 30px; transition: all .5s ease-in;}
 /* delete */
 .page-user-settings .delete{text-decoration: none; background: var(--blue); padding: 10px; display: block; max-width: 125px; text-align: center; color: var(--white); transform-origin:center; transform:scale(1); transform: center; transition:all .2s ease-in;}
 .page-user-settings .delete:hover{transform: scale(.9); transition:all .2s ease-in;
@@ -246,12 +247,20 @@ PAGE
     .page-user-settings .address-wrp .num-wrp input{width: 100%;}
     .page-user-settings .address-wrp .st-wrp{padding: 0 10px;}
     .page-user-settings .address-wrp select{padding: 10px;}
+        /* flocks */
+        .page-user-settings h2{padding-bottom: 25px;}
+        .page-user-settings h3{font-size: 25px; padding-bottom: 10px;}
+        .page-user-settings main .flex{gap: 25px; align-items: start; justify-content: start;}
+        .page-user-settings .group-info{width: calc(33.33% - 25px);}
+        .page-user-settings .submit{max-width:150px}
+        .page-user-settings .edit{color:var(--green);}
+        .page-user-settings .edit:hover{color:var(--black);}
     
     /* links */
     .page-user-settings .links{padding-top: 5px;}
     .page-user-settings .links a{text-transform: uppercase; font-size: 12px; letter-spacing: 2px; text-decoration: none; padding:0 10px; color:var(--blood_orange);}
-    .page-user-settings .links a:hover{color:var(--black);}
-    .page-user-settings .links a:nth-child(1){padding-left:0}
+        .page-user-settings .links a:hover{color:var(--black);}
+        .page-user-settings .links a:nth-child(1){padding-left:0}
     
     /* LOCK */
     .page-lock{text-align: center;}
@@ -263,6 +272,9 @@ PAGE
     .page-error h1{text-align: center;}
     .page-error h1 span{display: block; text-align-last: left; font-size: 35px; position: relative; top: 12px;}
     .page-error .container a.home{background: var(--blue); padding: 10px; display: block; margin: 0 0 0 auto; max-width: 100px; text-align: center;color:var(--white); text-decoration: none;}
+
+    /* FLOCKS SETTINGS */
+    .page-flock-settings{padding: 100px 0 50px;}
     
     /* MESSAGE */
     .page-message .container{padding-top: 100px; padding-bottom: 50px; position: relative; z-index: 100;}
@@ -283,16 +295,25 @@ PAGE
             .page-message .actions, .page-message .actions a:nth-child(1){padding-left: 0;}
 
 /* MESSAGE: Private */
-.page-send-message .container{padding: 100px 0 50px; position: relative;z-index: 100;}
+.page-send-message .container{padding: 100px 0 50px; position: relative;z-index: 100; position: relative; height: 100vh;}
+.page-send-message .container h1{text-transform: capitalize;}
     .page-send-message label{display: block; padding: 15px 0 10px;}
     .page-send-message input{width: 63%;}
     .page-send-message  textarea{width: 45%; margin-right: 50px;}
-    .page-send-message .submit{ max-width:200px; margin-top: 0; margin-left: auto !important; background-color: var(--white); color: var(--brown); position: relative; left: 25px; top: 150px;}
+    .page-send-message .submit{ max-width:200px; margin-top: 0; margin-left: auto !important; background-color: var(--white); color: var(--brown); position: absolute; right: -20px; bottom: 0;}
+.page-send-message .from{padding: 10px 0 25px;}
+    /* dec-right */
+    .dec-right{background-image: url('/static/img/white-owl.jpg'); position: absolute; bottom: 0;right: 0;height: 70%; width: 50%; 
+        background-size: cover; background-position: center;}
 
-/* dec-right */
-.dec-right{background-image: url('/static/img/white-owl.jpg'); position: absolute; bottom: 0;right: 0;height: 70%; width: 50%; 
-    background-size: cover; background-position: center;}
-
+/* Single Book */
+.page-single-book .container{padding: 100px 0 50px;}
+.page-single-book .img-wrp{width: 350px;}
+.page-single-book .cont-wrp{width: calc(100% - 350px); padding-left: 25px;}
+.page-single-book .cont-wrp p{line-height:30px;}
+.genre-wrp{justify-content: start;}
+.genre{padding: 5px 15px; background-color:var(--blue); color:var(--white); margin:5px; text-transform: capitalize;}
+    
 /* WALL */
 .nav-bar{width: 100%;}
 .nav a{ text-decoration: none; color:var(--black);}

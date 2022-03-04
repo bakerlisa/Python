@@ -9,6 +9,7 @@ class Flock_User:
         self.id = data['id']
         self.user_id = data['user_id']
         self.flock_id = data['flock_id']
+        self.status = data['status']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 

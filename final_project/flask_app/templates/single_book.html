@@ -1,10 +1,33 @@
 {% include 'header.html' %}
 
-<body class="page-search">
+<body class="page-single-book">
+    {% include 'navigation.html' %}
     <main>
         <div class="container flex">
-            {% include 'navigation.html' %}
-            <h1>Single Book: Book has been added!</h1>
+            <div class="img-wrp">
+                <img src="{{ book_info[0].img }}" alt="book cover for {{ book_info[0].title }} ">
+            </div>
+
+            <div class="cont-wrp">
+                <h1><span>Book Added: </span>{{ book_info[0].title }} </h1>
+                <p class="author"><strong>Author: </strong>{{ book_info[0].author.first_name }} {{ book_info[0].author.last_name }}</p>
+                <p>ISBN #: {{ book_info[0].isbn }}</p>
+                <p class="descriptipon">{{ book_info[0].description }}</p>
+                <p><strong>Genre(s)</strong></p>
+                <div class="genre-wrp flex">
+                    {% for genre in all_genres %}
+                        <p class="genre">{{ genre.genre }}</p>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </main>
 {% include 'footer.html' %}
+
+
+<!-- 
+    1. add the res of the books info
+    2. have the ability to add it to the reading group (if host)
+    3. Or recommend it to the reading group (just a user)
+    4. Developers would be able to edit this page
+-->

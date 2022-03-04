@@ -61,7 +61,8 @@ def render_dashboard():
 def user_settings():
     data = { "id": session['id'] }
     user_info = User.get_user_info(data)
-    return render_template('user-settings.html',user_info=user_info)
+    user_admin = Flock.get_user_admin(data)
+    return render_template('user-settings.html',user_info=user_info,user_admin=user_admin)
 
 # ========================================
 # ROUTE: lock

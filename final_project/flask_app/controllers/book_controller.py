@@ -35,7 +35,10 @@ def add_book():
 # ============================================= 
 @app.route('/single_book/<int:id>')
 def singel_book(id):
-    return render_template('single_book.html')
+    data = { "id": id }
+    book_info = Book.get_book_info(data)
+    all_genres = Book.get_all_genres(data)
+    return render_template('single_book.html',book_info = book_info,all_genres = all_genres)
 
 # ============================================= 
 # INSERT: new book to database

@@ -61,13 +61,13 @@ class Flock:
 # =============================================
     @classmethod
     def get_all_members(cls,data):
-        query = "SELECT * FROM users LEFT JOIN flocks_users ON 	users.id = flocks_users.user_id LEFT JOIN flocks ON flocks.id = flocks_users.user_id WHERE flocks_users.flock_id = %(id)s;"
+        query = "SELECT * FROM flocks LEFT JOIN flocks_users  ON flocks.id = flocks_users.user_id  LEFT JOIN  users ON 	users.id = flocks_users.user_id WHERE flocks_users.flock_id = %(id)s;"
         results = connectToMySQL('book_club').query_db(query,data)
 
-        users_information = []
+        flocks_information = []
 
         for row in results:
-            one_user = cls(row)
+            one_flock = cls(row)
 
             one_status = {
                 "id": row['flocks_users.id'],
@@ -77,24 +77,25 @@ class Flock:
                 "created_at": row['flocks_users.created_at'],
                 "updated_at": row['flocks_users.updated_at']
             }
-            one_user.status = flock_user_model.Flock_User(one_status)
+            one_flock.info = flock_user_model.Flock_User(one_status)
 
             one_member = {
-                "id" : row['id'],
+                "id" : row['users.id'],
                 "first_name" : row['first_name'],
                 "last_name" : row['last_name'],
                 "phone" : row['phone'],
                 "email" : row['email'],
-                "phone" : row['phone'],
                 "password" : row['password'],
                 "profile_image" : row['profile_image'],
-                "created_at" : row['created_at'],
-                "updated_at" : row['updated_at']
+                "created_at" : row['users.created_at'],
+                "updated_at" : row['users.updated_at']
             }
-            one_user.member = user_model.User(one_member)
+            one_flock.member = user_model.User(one_member)
 
-            users_information.append(one_user)
-        return users_information
+            print(" &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& ")
+            print(row)
+            flocks_information.append(one_flock)
+        return flocks_information
     
 # =============================================  
 # SELECT: all flock info with a certain user id
@@ -146,6 +147,17 @@ class Flock:
         query = "SELECT * FROM flocks WHERE title = %(title)s;"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
+
+
+# =============================================  
+# SELECT: where user is admin
+# =============================================
+    @classmethod
+    def get_user_admin(cls,data):
+        query =  "SELECT users.first_name,users.last_name,flocks.title,flocks_users.status,flocks_users.created_at AS start,flocks_users.flock_id,flocks_users.user_id FROM flocks_users LEFT JOIN flocks ON flocks.id = flocks_users.flock_id LEFT JOIN users ON users.id = flocks_users.user_id WHERE users.id = %(id)s AND flocks_users.status = 'admin'";
+        results = connectToMySQL('book_club').query_db(query,data)
+        return results
+        
 
 # =============================================  
 # CREATE: new flock

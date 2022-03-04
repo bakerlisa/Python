@@ -16,7 +16,6 @@ class User:
         self.last_name = data['last_name']
         self.phone = data['phone']
         self.email = data['email']
-        self.phone = data['phone']
         self.password = data['password']
         self.profile_image = data['profile_image']
         self.created_at = data['created_at']
@@ -100,6 +99,14 @@ class User:
             users.append( cls(user) )
         return users
 
+    @classmethod
+    def user_user_info(cls,data):
+        query =  "SELECT * FROM users WHERE id = %(id)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return cls(results[0])
+
+
+
 # ========================================
 # GET: admin user for goup
 # ========================================
@@ -114,7 +121,7 @@ class User:
 # ========================================
     @classmethod
     def get_user_info(cls,data):
-        query = "SELECT * FROM users  LEFT JOIN flocks_users  ON users.id = flocks_users.user_id  LEFT JOIN flocks ON flocks_users.flock_id = flocks.id  LEFT JOIN address ON address.user_id = users.id WHERE users.id = %(id)s;"
+        query = "SELECT *  FROM users  LEFT JOIN flocks_users  ON users.id = flocks_users.user_id  LEFT JOIN flocks ON flocks_users.flock_id = flocks.id  LEFT JOIN address ON address.user_id = users.id WHERE users.id = %(id)s;"
         results = connectToMySQL('book_club').query_db(query,data)
 
         users_information = []
@@ -145,14 +152,14 @@ class User:
             one_user.address = address_model.Address(address_data)
 
             one_status = {
-                "id": row['id'],
+                "id": row['flocks_users.id'],
                 "user_id": row['user_id'],
                 "flock_id": row['flock_id'],
                 "status": row['status'],
-                "created_at": row['created_at'],
-                "updated_at": row['updated_at']
+                "created_at": row['flocks_users.created_at'],
+                "updated_at": row['flocks_users.updated_at']
             }
-            one_user.status = flock_user_model.Flock_User(one_status)
+            one_user.info = flock_user_model.Flock_User(one_status)
 
             users_information.append(one_user)
         return users_information
@@ -193,6 +200,7 @@ class User:
 
             all_flock_info.append(one_user)
         return all_flock_info
+
 
 # ========================================
 # CREATE: new user

@@ -11,6 +11,7 @@ class Book:
         self.title = data['title']
         self.isbn = data['isbn']
         self.page_num = data['page_num']
+        self.description = data['description']
         self.link = data['link']
         self.img = data['img']
         self.created_at = data['created_at']
@@ -47,59 +48,47 @@ class Book:
         results = connectToMySQL('book_club').query_db(query,data)
         return results
 
+# =============================================  
+# SELECT: all genres
 # ============================================= 
-# SELECT : all books
-# ============================================= 
-    # @classmethod
-    # def get_all_books(cls):
-    #     query = "SELECT books.title,books.img,books.link,books.page_num,authors.first_name,authors.last_name,book_series_number.num,book_series.series_name FROM books LEFT JOIN books_authors ON books_authors.book_id = books.id LEFT JOIN authors ON authors.id = books_authors.author_id LEFT JOIN book_series_number ON book_series_number.book_id = books.id LEFT JOIN book_series ON book_series_number.series_id= book_series.id ORDER BY title ASC;"
-    #     results = connectToMySQL('book_club').query_db(query)
+    @classmethod
+    def get_all_genres(cls,data):
+        query = "SELECT genre.genre FROM books_genres LEFT JOIN genre ON genre.id = books_genres.genre_id WHERE books_genres.book_id = %(id)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return results
 
-    #     all_books = []
+# =============================================  
+# SELECT: Single book by ID
+# =============================================  
+    @classmethod
+    def get_book_info(cls,data):
+        query = "SELECT * FROM books LEFT JOIN books_authors ON  books_authors.book_id = books.id LEFT JOIN authors ON books_authors.author_id = authors.id WHERE books.id =  %(id)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
 
-    #     for row in results:
-    #         one_book = cls(row)
+        book_information = []
 
-    #         one_book_author = {
-    #             "book_id" : row['book_id'],
-    #             "author_id" : row['author_id'],
-    #             "created_at" : row['created_at'],
-    #             "updated_at" : row['updated_at']
-    #         }
-    #         one_book.book_author = book_author_model.Book_Author(one_book_author)
+        for row in results:
+            one_book = cls(row)
+
+            one_book_author = {
+                "book_id" : row['book_id'],
+                "author_id" : row['author_id'],
+                "created_at" : row['created_at'],
+                "updated_at" : row['updated_at']
+            }
+            one_book.book_author = book_author_model.Book_Author(one_book_author)
             
-    #         one_author = {
-    #             "id": row['id'],
-    #             "first_name": row['first_name'],
-    #             "last_name": row['last_name'],
-    #             "created_at": row['created_at'],
-    #             "updated_at": row['updated_at']
-    #         }
-    #         one_book.author = author_model.Author(one_author)
-
-    #         one_book_series = {
-    #             "id": row['id'],
-    #             "book_id": row['book_id'],
-    #             "series_id": row['series_id'],
-    #             "num": row['num'],
-    #             "created_at": row['created_at'],
-    #             "updated_at": row['updated_at']
-    #         }
-    #         one_book.book_series = author_model.Author(one_book_series)
-
-    #         one_book_series = {
-    #             "id": row['id'],
-    #             "book_id": row['book_id'],
-    #             "series_id": row['series_id'],
-    #             "num": row['num'],
-    #             "created_at": row['created_at'],
-    #             "updated_at": row['updated_at']
-    #         }
-    #         one_book.book_series = author_model.Author(one_book_series)
-
-
-    #         all_books.append(one_book)
-    #     return all_books
+            one_author = {
+                "id": row['authors.id'],
+                "first_name": row['first_name'],
+                "last_name": row['last_name'],
+                "created_at": row['authors.created_at'],
+                "updated_at": row['authors.updated_at']
+            }
+            one_book.author = author_model.Author(one_author)
+            
+            book_information.append(one_book)
+        return book_information
 
 
     @classmethod
@@ -107,7 +96,7 @@ class Book:
         query = "SELECT * FROM books LEFT JOIN books_authors ON books_authors.book_id = books.id LEFT JOIN authors ON authors.id = books_authors.author_id;"
         results = connectToMySQL('book_club').query_db(query)
 
-        all_books = []
+        all_new_book_information = []
 
         for row in results:
             one_book = cls(row)
@@ -129,16 +118,16 @@ class Book:
             }
             one_book.author = author_model.Author(one_author)
             
-            all_books.append(one_book)
+            all_new_book_information.append(one_book)
         
-        return all_books
-
+        return all_new_book_information
 
 # =============================================  
-# INSER: new book
+# INSERT: new book
 # =============================================   
     @classmethod
     def add_new_book(cls,data):
         query = "INSERT INTO books (title,isbn,img,page_num,link) VALUES (%(title)s, %(isbn)s, %(img)s, %(page_num)s,%(link)s);"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
+    
