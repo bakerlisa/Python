@@ -4,29 +4,54 @@
     {% include 'navigation.html' %}
     <main>
         <div class="container flex">
-            <h1>Search All books in NightOwl Database: </h1>
+            <h1><span>NightOwl</span> Library: </h1>
             <form action="/search_for" action="post">
                 <label for="search_by">Search by Category:</label>
-                <select name="search_by" id="">
-                    <option value="" deactivate selected>Search By...</option>
-                    <option value="genre">Author</option>
-                    <option value="genre">Genre</option>
-                    <option value="genre">Book Title</option>
-                    <option value="genre">Series Name</option>
-                </select>
-                <input type="text" name="search" id="" placeholder="Search...">
-                <input type="submit" value="Search">
-            </form>    
+                <span>
+                    <input type="text" name="search" id="" placeholder="Search..." class="search">
+                    <select name="search_by" id="">
+                        <option value="" deactivate selected>Search By...</option>
+                        <option value="genre">Author</option>
+                        <option value="genre">Genre</option>
+                        <option value="genre">Book Title</option>
+                        <option value="genre">Series Name</option>
+                    </select>
+                    <input type="submit" value="Search" class="submit">
+                </span>
+            </form> 
 
-            1. List them in alabetcail order as well
-            2. paginate
-            <!-- 3. Search function
-                -search by author
-                -genre
-                -series
-                -or title -->
+            <div class="books-wrapper">
+                {% for book in all_books %}
+                    <div class="indv-book">
+                        <div class="img-wrp"><img src="{{ book.img }}" alt="book cover for {{ book.title }}"></div>
+                        <div class="book-data">
+                            <p class="title">{{ book.title }}</p> 
+                            <p class="author">Author: {{ book.author.first_name }} {{ book.author.last_name }}</p>
+                            {% if book.link %}
+                                <a href="{{ book.link }}" class="link">Read More</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>  
+
+            <div class="pagination">
+                <i class="fa-solid fa-angle-left"></i>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span> 
+                <i class="fa-solid fa-angle-right"></i>
+            </div> 
 
         </div>
     </main>
 
+    <!-- 1. pull geners in and list below 
+    2.  make them clickable
+    3. Make authors clickable
+    4. Series
+    5. pull in series name and num in series
+    6. finish pagination
+    7. make it clickable  -->
 {% include 'footer.html' %}

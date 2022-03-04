@@ -1,5 +1,6 @@
 from flask_app import app
 from flask import render_template,redirect,request,session,flash
+
 from flask_app.models.book_model import Book
 from flask_app.models.author_model import Author
 from flask_app.models.book_author_model import Book_Author
@@ -16,7 +17,8 @@ from flask_app.models.book_genre_model import Book_Genre
 # ============================================= 
 @app.route('/books')
 def books():
-    return render_template('books.html')
+    all_books = Book.get_all_books()
+    return render_template('books.html', all_books = all_books)
 
 # ============================================= 
 # ROUTE: add a book
@@ -25,7 +27,7 @@ def books():
 def add_book():
     if 'books' not in session: 
         # Added it so data will presist if error is thrown (because...this is a heavily validated part of the website)
-        session["books"] = data = {"title": "", "first_name": "", "last_name": "", "series_name": "", "num_series": "",  "page_num": "", "isbn": "", "genre": "", "description": "", "img": "", "link": ""}
+        session["books"] = data = {"title": "", "first_name": "", "last_name": "", "series_name": "", "num_series": "",  "page_num": "", "isbn": "", "genre": "", "description": "Brief description about the book ", "img": "", "link": ""}
     return render_template('add_book.html')
 
 # ============================================= 
