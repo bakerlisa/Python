@@ -43,6 +43,7 @@ class Message:
             one_message_info = {
                 "user_id" : row['user_id'],
                 "message_id" : row['message_id'],
+                "subject" : row['subject'],
                 "from_id" : row['from_id'],
                 "flock_id" : row['flock_id'],
                 "created_at" : row['created_at'],

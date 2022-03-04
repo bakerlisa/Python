@@ -26,6 +26,34 @@ def show_all_messages():
 def request_submitted():
     return render_template('submission.html')
 
+# ROUTE : send message
+
+@app.route('/reply_message/<int:to_id>/<int:from_id>')
+def reply_message(to_id,from_id):
+    session["message"] = {"subject":"","message":"","to_id": "","from_id":session['id']}
+    data = {
+
+    }
+    return render_template('send_message.html')
+    
+
+# @app.route('send_user_message',methods=["POST"])
+# def send_user_message():
+#     data = {
+
+#     }
+
+#     if not Message.validate_message(request.form):
+#         session["message"] = data
+#         return redirect('/reply_message')
+#     else:
+#         return redirect('/reply_to_messages')
+
+# @app.route('/reply_to_messages')
+# def reply_to_messages():
+#     return redirect('/messages')
+
+
 # ============================================= 
 # Join: Group
 # ============================================= 

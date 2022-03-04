@@ -16,19 +16,25 @@
             {% for message in get_all_messages %}
                 <div class="row flex indv-message">
                     <div class="col-2">
+                        <h5>
                         {% if message.message_type == 'join_request' %}
-                            <h5>Request to join your flock: {{message.flock.title}}:  </h5>
-                            {% endif %}
+                            Request to join your flock: {{message.flock.title}}: 
+                        {% elif message.message_type == 'welcome'  %}
+                            Welcome!
+                        {% elif message.subject %}
+                            Personal Message: {{ message.subject }}
+                        {% endif %}
+                        </h5>
                         <p>{{ message.message }}</p>
                     </div>
 
                     <div class="col-4"><p>{{ message.info["created_at"].strftime('%B %d, %Y') }}</p></div>
 
-                    <div class="col-4">
+                    <div class="col-4 actions">
                         <a href="/delete_message/{{message.id}}/{{ message.info.user_id  }}"><i class="fa-solid fa-trash-can"></i></a> | 
-                        <a href="/reply_message/{{ message.info.from_id }}/{{ message.info.user_id  }}"><i class="fa-solid fa-pencil"></i></a> | 
+                        <a href="/reply_message/{{ message.info.from_id }}/{{ message.info.user_id  }}"><i class="fa-solid fa-pencil"></i></a> 
                         {% if message.message_type == 'join_request' %}
-                            <a href="/delete_message/{{message.id}}/{{ message.info.user_id  }}" class="button">Decline</a>
+                            | <a href="/delete_message/{{message.id}}/{{ message.info.user_id  }}" class="button">Decline</a>
                             <form action="accept_user" method="POST">
                                 <input type="hidden" name="from_id" value="{{ message.info.from_id }}">
                                 <input type="hidden" name="user_id" value="{{ message.info.user_id }}">

@@ -1,0 +1,16 @@
+{% include 'header.html' %}
+<body class="page-send-message">
+    {% include 'navigation.html' %}
+    <div class="container">
+        <h1><span>Sending a</span> Message To: </h1>
+        <form action="/send_user_message" method="POST">
+            <label for="subject" placeholder="Subject">Subject</label>
+            <input type="text" name="subject">
+
+            <label for="message">Message:</label>
+            <textarea name="message" cols="30" rows="10" placeholder="Message..."></textarea>
+            <input type="submit" value="Send Message" class="submit">
+        </form>
+    </div>
+    <div class="dec-right"></div>
+    {% include 'footer.html' %}

@@ -277,6 +277,21 @@ PAGE
         .page-message  .indv-message{padding-bottom: 25px; border-bottom:solid 1px var(--white); margin-bottom: 25px;padding-bottom: 25px;}
         .page-message  .indv-message h5{font-size: 16px; padding-bottom: 5px;}
         .row.flex.title p{font-weight: 900; text-transform: uppercase; font-size: 18px; letter-spacing: 1px;}
+        /* actions */
+        .page-message .actions, .page-message .actions a {color:var(--salmon); padding: 0 10px;}
+            .page-message .actions, .page-message .actions a:hover{color:var(--blood_orange);}
+            .page-message .actions, .page-message .actions a:nth-child(1){padding-left: 0;}
+
+/* MESSAGE: Private */
+.page-send-message .container{padding: 100px 0 50px; position: relative;z-index: 100;}
+    .page-send-message label{display: block; padding: 15px 0 10px;}
+    .page-send-message input{width: 63%;}
+    .page-send-message  textarea{width: 45%; margin-right: 50px;}
+    .page-send-message .submit{ max-width:200px; margin-top: 0; margin-left: auto !important; background-color: var(--white); color: var(--brown); position: relative; left: 25px; top: 150px;}
+
+/* dec-right */
+.dec-right{background-image: url('/static/img/white-owl.jpg'); position: absolute; bottom: 0;right: 0;height: 70%; width: 50%; 
+    background-size: cover; background-position: center;}
 
 /* WALL */
 .nav-bar{width: 100%;}
