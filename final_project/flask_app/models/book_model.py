@@ -4,6 +4,8 @@ from flask import flash
 
 from flask_app.models import book_author_model
 from flask_app.models import author_model
+from flask_app.models import series_model
+from flask_app.models import book_series_model
 
 class Book:
     def __init__(self,data):
@@ -62,7 +64,7 @@ class Book:
 # =============================================  
     @classmethod
     def get_book_info(cls,data):
-        query = "SELECT * FROM books LEFT JOIN books_authors ON  books_authors.book_id = books.id LEFT JOIN authors ON books_authors.author_id = authors.id WHERE books.id =  %(id)s;"
+        query = "SELECT * FROM books LEFT JOIN books_authors ON  books_authors.book_id = books.id LEFT JOIN authors ON books_authors.author_id = authors.id  LEFT JOIN book_series_number ON book_series_number.book_id = books.id LEFT JOIN book_series ON book_series.id = book_series_number.series_id WHERE books.id = %(id)s;"
         results = connectToMySQL('book_club').query_db(query,data)
 
         book_information = []
@@ -86,6 +88,25 @@ class Book:
                 "updated_at": row['authors.updated_at']
             }
             one_book.author = author_model.Author(one_author)
+
+            one_book_series = {
+                "id" : row['id'],
+                "book_id" : row['book_id'],
+                "series_id" : row['series_id'],
+                "num" : row['num'],
+                "created_at" : row['created_at'],
+                "updated_at" : row['updated_at']
+            }
+            one_book.book_series = book_series_model.Book_Series(one_book_series)
+
+            one_series = {
+                "id" : row['id'],
+                "series_name" : row['series_name'],
+                "book_id" : row['book_id'],
+                "created_at" : row['created_at'],
+                "updated_at" : row['updated_at']
+            }
+            one_book.series = series_model.Series(one_series)
             
             book_information.append(one_book)
         return book_information
@@ -93,7 +114,7 @@ class Book:
 
     @classmethod
     def get_all_books(cls):
-        query = "SELECT * FROM books LEFT JOIN books_authors ON books_authors.book_id = books.id LEFT JOIN authors ON authors.id = books_authors.author_id;"
+        query = "SELECT * FROM books LEFT JOIN books_authors ON books_authors.book_id = books.id LEFT JOIN authors ON authors.id = books_authors.author_id ORDER BY books.title ASC;"
         results = connectToMySQL('book_club').query_db(query)
 
         all_new_book_information = []
@@ -127,7 +148,7 @@ class Book:
 # =============================================   
     @classmethod
     def add_new_book(cls,data):
-        query = "INSERT INTO books (title,isbn,img,page_num,link) VALUES (%(title)s, %(isbn)s, %(img)s, %(page_num)s,%(link)s);"
+        query = "INSERT INTO books (title,isbn,img,page_num,link,description) VALUES (%(title)s, %(isbn)s, %(img)s, %(page_num)s,%(link)s,%(description)s);"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
     

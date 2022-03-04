@@ -27,6 +27,15 @@ class Series:
         query = "SELECT id FROM book_series WHERE series_name = %(series_name)s;"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
+
+# ============================================= 
+# SELECT : all series
+# ============================================= 
+    @classmethod
+    def get_all_series(cls):
+        query = "SELECT * FROM book_series ORDER BY series_name ASC;"
+        results = connectToMySQL('book_club').query_db(query)
+        return results
         
 # ============================================= 
 # INSERT : add new series 

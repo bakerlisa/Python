@@ -18,12 +18,24 @@ class Genre:
         results = connectToMySQL('book_club').query_db(query,data)
         return results
 
+# ==========================================
+# SELECT : genre by an id
+# ==========================================
     @classmethod
     def genre_get_exsisting_id(cls,data):
         query = "SELECT id FROM genre WHERE genre = %(genre)s;"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
-    
+
+# ==========================================
+# SELECT : all genres in db
+# ==========================================
+    @classmethod
+    def get_all_genres(cls):
+        query = "SELECT * FROM genre ORDER BY genre ASC;"
+        results = connectToMySQL('book_club').query_db(query)
+        return results
+
 # ==========================================
 # INSERT: new genre
 # ==========================================

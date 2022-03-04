@@ -8,13 +8,28 @@
             <form action="/search_for" action="post">
                 <label for="search_by">Search by Category:</label>
                 <span>
-                    <input type="text" name="search" id="" placeholder="Search..." class="search">
+                    <input type="text" name="book_title" placeholder="Search Book Title..." class="search">
+                    <input type="text" name="author" placeholder="Search Author..." class="search">
                     <select name="search_by" id="">
                         <option value="" deactivate selected>Search By...</option>
-                        <option value="genre">Author</option>
+                        <option value="author">Author</option>
                         <option value="genre">Genre</option>
-                        <option value="genre">Book Title</option>
-                        <option value="genre">Series Name</option>
+                        <option value="title">Book Title</option>
+                        <option value="series">Series Name</option>
+                        <option value="all">All</option>
+                    </select>
+
+                    <select name="genres" placeholder="Search by Genres">
+                        <option value="" deactivate selected>Search by Genres...</option>
+                        {% for book in all_genres %}
+                            <option value="{{ book.id }}">{{ book.genre }}</option>
+                        {% endfor %}
+                    </select>
+                    <select name="book_series">
+                        <option value="" deactivate selected>Search by Book Series...</option>
+                        {% for series in all_series %}
+                            <option value="{{ series.id }}">{{ series.series_name }}</option>
+                        {% endfor %}
                     </select>
                     <input type="submit" value="Search" class="submit">
                 </span>
