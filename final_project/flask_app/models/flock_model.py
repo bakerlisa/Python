@@ -28,8 +28,15 @@ class Flock:
             is_valid = False
         return is_valid
 
+    def validate_new_admin(admin):
+        is_valid = True # we assume this is true
+        if len(admin['new_admin_id']) < 2:
+            flash("Umm...why hit update if you didn't pick a new admin?","admin")
+            is_valid = False
+        return is_valid
+
 # =============================================  
-# SELECT: all groups with open privacy setting
+# SELECT: all groups with open privacy settings open
 # =============================================
     @classmethod
     def select_all_flocks(cls,data):
@@ -57,11 +64,11 @@ class Flock:
         return users_information
 
 # =============================================
-# SELECT : all members
+# SELECT : all flock info
 # =============================================
     @classmethod
-    def get_all_members(cls,data):
-        query = "SELECT * FROM flocks LEFT JOIN flocks_users  ON flocks.id = flocks_users.user_id  LEFT JOIN  users ON 	users.id = flocks_users.user_id WHERE flocks_users.flock_id = %(id)s;"
+    def get_all_flock_info(cls,data):
+        query = "SELECT * FROM flocks LEFT JOIN flocks_users  ON flocks.id = flocks_users.user_id  LEFT JOIN  users ON 	users.id = flocks_users.user_id WHERE flocks_users.flock_id = %(id)s AND status = 'admin';"
         results = connectToMySQL('book_club').query_db(query,data)
 
         flocks_information = []
@@ -92,16 +99,14 @@ class Flock:
             }
             one_flock.member = user_model.User(one_member)
 
-            print(" &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& ")
-            print(row)
             flocks_information.append(one_flock)
         return flocks_information
-    
+
 # =============================================  
 # SELECT: all flock info with a certain user id
 # =============================================
     @classmethod
-    def get_all_flocks_info(cls,data):
+    def get_admin_info(cls,data):
         
         query =  "SELECT * FROM flocks LEFT JOIN flocks_users ON flocks_users.flock_id = flocks.id LEFT JOIN users ON users.id = flocks_users.user_id WHERE flocks_users.user_id = %(id)s;"
         
@@ -148,16 +153,14 @@ class Flock:
         results = connectToMySQL('book_club').query_db(query,data)
         return results
 
-
 # =============================================  
-# SELECT: where user is admin
+# SELECT: whether user is admin
 # =============================================
     @classmethod
     def get_user_admin(cls,data):
         query =  "SELECT users.first_name,users.last_name,flocks.title,flocks_users.status,flocks_users.created_at AS start,flocks_users.flock_id,flocks_users.user_id FROM flocks_users LEFT JOIN flocks ON flocks.id = flocks_users.flock_id LEFT JOIN users ON users.id = flocks_users.user_id WHERE users.id = %(id)s AND flocks_users.status = 'admin'";
         results = connectToMySQL('book_club').query_db(query,data)
         return results
-        
 
 # =============================================  
 # CREATE: new flock
@@ -185,3 +188,18 @@ class Flock:
         query = "DELETE FROM flocks_users WHERE  flock_id = %(flock_id)s AND user_id = %(user_id)s;"
         results = connectToMySQL('book_club').query_db(query,data)
         return results
+
+# =============================================
+# UPDATE : change admin
+# =============================================
+    @classmethod
+    def remove_old_admin(cls,data):
+        query = "UPDATE FROM flocks_users SET status = 'user'  WHERE  user_id = %(old_admin_id)s AND flock_id = %(flock_id)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return results 
+
+    @classmethod
+    def make_new_admin(cls,data):
+        query = "UPDATE FROM flocks_users SET status = 'admin' WHERE  user_id = %(user_id)s AND flock_id = %(flock_id)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return results 

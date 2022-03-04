@@ -86,7 +86,7 @@ class User:
     
 
 # ==========================================
-# GET: all users
+# SELECT: all users
 # ==========================================
     @classmethod
     def get_all_users(cls,data):
@@ -105,10 +105,8 @@ class User:
         results = connectToMySQL('book_club').query_db(query,data)
         return cls(results[0])
 
-
-
 # ========================================
-# GET: admin user for goup
+# SELECT: admin user for goup
 # ========================================
     @classmethod
     def user_by_id(data):
@@ -117,7 +115,7 @@ class User:
         return results
 
 # ========================================
-# GET: one user info with group info
+# SELECT: one user info with group info
 # ========================================
     @classmethod
     def get_user_info(cls,data):
@@ -165,11 +163,11 @@ class User:
         return users_information
 
 # ============================================= 
-# SELECT : all data from a single flock
+# SELECT : all data from a single flock (changed name from  get_all_flock_info to get_all_users_in_flock in case something breaks)
 # ============================================= 
     @classmethod
-    def get_all_flock_info(cls,data):
-        query = "SELECT * FROM users LEFT JOIN flocks_users ON flocks_users.user_id = users.id LEFT JOIN flocks ON flocks.id = flocks_users.flock_id WHERE users.id = %(id)s;"
+    def get_all_users_in_flock(cls,data):
+        query = "SELECT * FROM users LEFT JOIN flocks_users ON flocks_users.user_id = users.id LEFT JOIN flocks ON flocks.id = flocks_users.flock_id WHERE users.id = %(id)s AND flocks_users.status != 'admin';"
         results = connectToMySQL('book_club').query_db(query,data)
 
         all_flock_info = []
@@ -201,6 +199,17 @@ class User:
             all_flock_info.append(one_user)
         return all_flock_info
 
+# ========================================
+# SELECT all users in flock
+# ========================================
+    # @classmethod
+    # def get_all_members(cls,data):
+    #     query =  "SELECT * FROM users LEFT JOIN flocks_users ON flocks_users.user_id = users.id LEFT JOIN flocks ON flocks.id = flocks_users.flock_id WHERE flock_id = 10 AND flocks_users.status != 'admin'"
+    #     results = connectToMySQL('book_club').query_db(query,data)
+
+
+        
+    #     return results
 
 # ========================================
 # CREATE: new user

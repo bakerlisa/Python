@@ -48,8 +48,9 @@ def render_dashboard():
             data = { "id": session['id'] }
             user_info = User.get_user_info(data)
             all_flocks = Flock.select_all_flocks(data)
+            flock_info = Flock.get_admin_info(data)
             # all_messages = Message.get_all_for_message(data)
-            return render_template('dashboard.html',user_info=user_info,all_flocks=all_flocks)
+            return render_template('dashboard.html',user_info=user_info,all_flocks=all_flocks,flock_info=flock_info)
         else:
             flash("Please Loin","info")
             return redirect('/')
@@ -242,7 +243,8 @@ def user_login():
 # ========================================
 @app.route('/logout')
 def logout():
-    if session["counter"] == 1:
+    session["counter"] = 0
+    if session["counter"] == 10:
         return redirect("/lock")
     else:
         session.clear()

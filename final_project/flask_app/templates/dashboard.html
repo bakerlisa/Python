@@ -38,8 +38,21 @@
                         </div>
                     {% endif %}
                 {% endwith %}
-                        
-                <h3>To Do:</h3>
+                    
+                <h3>Your Flocks</h3>
+                {% if flock_info|length == 0 %}
+                <p>You are currently not apart of a flock</p>
+                {% else %}
+                    {% for info in flock_info %}
+                        <h3>{{ info.title }}</h3>
+                        <p>Located: {{ info.city }}, {{ info.state }}</p>
+                        <p>Account Status: {{ info.status.status }} </p>
+                        <p>NEXT MEETING</p>
+                        <div class="nav"><a href="/flocks_dashboard/{{ info.id }}" class="past">Flock Dash</a> | <a href="/past_reads" class="past">Past Reads</a> | <a href="/flock_members" class="members">Flock Members</a></div>
+                    {% endfor %}
+                {% endif %}
+
+                <h3>More Flocks:</h3>
                 <div class="to-do">
                     <form action="/submit_join_request" method="POST" class="join-flock">
                         <!-- if they're not in a group yet -->

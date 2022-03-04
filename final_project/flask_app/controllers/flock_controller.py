@@ -12,8 +12,8 @@ def flock_dashboard():
     data = {
         "id": session['id']
     }
-    flock_info = Flock.get_all_flocks_info(data)
-    return render_template('flock_dashboard.html')
+    flock_info = Flock.get_admin_info(data)
+    return render_template('flock_dashboard.html',flock_info=flock_info)
 
 # =============================================  
 # ROUTE: join a flock
@@ -46,8 +46,9 @@ def new_flock_made():
 @app.route('/flock_settings/<int:flock_id>')
 def flock_settings(flock_id):
     data = { "id" : flock_id }
-    all_members = Flock.get_all_members(data)
-    return render_template('flock_settings.html',all_members = all_members)
+    flock_info = Flock.get_admin_info(data)
+    all_memebers = User.get_all_users_in_flock(data)
+    return render_template('flock_settings.html',flock_info = flock_info,all_memebers=all_memebers)
 
 # =============================================  
 # CREATE: a group
@@ -78,6 +79,30 @@ def create_new_flock():
 
         Flock.make_creator_admin(dataTwo)
         return redirect('/new_flock_made')
+
+# =============================================  
+# UPDATE : new admin
+# =============================================  
+@app.route('/set_new_admin',methods=["POST"])
+def set_new_admin():
+    data = {
+        "user_id":request.form['new_admin_id'],
+        "old_admin_id":request.form['old_admin_id'],
+        "flock_id":request.form['flock_id']
+    }
+    if not Flock.validate_new_admin(request.form):
+        return redirect(f"flock_settings/{data.flock_id}")
+    else:
+        Flock.remove_old_admin(data)
+        Flock.make_new_admin(data)
+        return redirect('/new_admin')
+
+@app.route('/new_admin')
+def new_admin():
+    flash("You are no longer admin! Thanks for all you did","info")
+    return redirect('/flocks_dashboard')
+
+
 
 # =============================================  
 # DELETE : leave group
