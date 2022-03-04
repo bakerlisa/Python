@@ -7,12 +7,13 @@ from flask_app.models.user_model import User
 # =============================================  
 # ROUTE:  group dashboard
 # =============================================  
-@app.route('/flocks_dashboard')
-def flock_dashboard():
+@app.route('/flocks_dashboard/<int:flock_id>')
+def flock_dashboard(flock_id):
     data = {
+        "flock_id": flock_id,
         "id": session['id']
     }
-    flock_info = Flock.get_admin_info(data)
+    flock_info = Flock.get_flock_info(data)
     return render_template('flock_dashboard.html',flock_info=flock_info)
 
 # =============================================  
@@ -100,7 +101,7 @@ def set_new_admin():
 @app.route('/new_admin')
 def new_admin():
     flash("You are no longer admin! Thanks for all you did","info")
-    return redirect('/flocks_dashboard')
+    return redirect('/dashboard')
 
 
 

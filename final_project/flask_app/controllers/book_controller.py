@@ -61,6 +61,7 @@ def add_new_book():
         "img": request.form['img'],
         "link": request.form['link']
     }
+    
     # 1. check uniquness
     unique_author = Author.is_author_unique(data)
     unquie_isbn =  Book.is_isbn_unique(data)
@@ -150,3 +151,35 @@ def add_new_book():
                 #     print(dataBookSeries)
             session.pop("books")
             return redirect(f"/single_book/{new_book_id}")
+
+# ============================================= 
+# SELECT : search 
+# ============================================= 
+@app.route('/search_for',methods=["POST"])
+def search_for():
+    data = {
+        "search_by": request.form['search_by'],
+        "title": request.form['book_title'],
+        "author": request.form['author'],
+        "genre": request.form['genres'],
+        "book_series": request.form['book_series']
+    }
+    if not Book.validate_search(request.form):
+        return redirect('/books')
+    else:
+        if request.form["search_by"] == "author":
+            Book.search_for_author(data)
+        # # elif request.form["search_by"] == "genres":
+        # # elif request.form["search_by"] == "title":
+        # # elif request.form["search_by"] == "series":
+        # # elif request.form["search_by"] == "author":
+            
+        # else:
+        #     flash("Hmmm...some sort of error. Try again","search")
+        #     return redirect('/books') 
+
+        return redirect('/search_submission')
+
+@app.route('/search_submission')
+def search_submission():
+    return render_template('search.html')

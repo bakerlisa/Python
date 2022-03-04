@@ -49,7 +49,7 @@ body{background-color:var(--gray);}
 
 /* titles */
 h1{font-size: 75px; color:var(--black); width: 100%; display: block;}
-    h1 span:not(.two){font-weight: 300; font-weight: 300; font-size: 25px;position: relative; top: 12px; display: block;}
+    h1 span:not(.two){font-weight: 300; font-weight: 300; font-size: 25px;position: relative; top: 12px; display: block; text-transform: capitalize;}
 h2{font-size: 45px;}
 h3{font-size: 35px; display: block;width: 100%; visibility: color:var(--black); }
 h4{font-size: 30px;}
@@ -196,12 +196,25 @@ PAGE
 /* SEARCH */
 .page-search .container{padding-top: 150px; padding-bottom: 50px;}
 .page-search form{width: 100%; padding-left: 50px;}
-.page-search form span{display: flex; align-items: center; justify-content: space-around;}
+.page-search form span{display: flex; align-items: center; justify-content: start; flex-wrap: wrap;}
 .page-search span input{margin: 0;}
 .page-search form label{display: block; padding: 15px 0 5px;}
-.page-search select{width: 25%; padding: 10px;}
+.page-search select{width: 75%; padding: 10px;}
 .page-search .search{width: 45%; padding-right: 10px;}
 .page-search .submit{width: 25%; padding: 12px;}
+.page-search .hide{display: none;}
+.page-search .active{display: block; width: 75%;}
+    .page-search .active input{width: 100%;}
+    .page-search .single select.search_by{margin-bottom:10px;}
+
+        /* title */
+        .all .search_by{margin-bottom: 10px;}
+        .all .title,.all .author{margin-bottom: 10px;}
+        .all .title,.all .author,.all .genres,.all .series{width: calc(37.5% - 10px); }
+            .all .title,.all .genres{margin-right: 10px;}
+            .all .author,.all .series{margin-left: 10px;}
+        .all .title input,.all .author input{width: 100% !important;}
+        
         /* books */
         .books-wrapper{padding-top: 50px; display: flex; flex-wrap: wrap; justify-content: start; align-items:start; gap:3.33%; position: relative;}
         .books-wrapper .indv-book{width: 30%; margin-bottom: 25px; position: relative;}

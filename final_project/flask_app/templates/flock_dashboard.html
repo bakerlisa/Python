@@ -6,7 +6,7 @@
         <div class="image-dec"></div>
             <div class="container flex">
                 <main>
-                    <h1><span>Flock(s) </span>  Dashboard</h1>
+                    <h1><span>Dashboard For: </span>  {{ flock_info[0].title }}</h1>
                     {% with errors = get_flashed_messages(category_filter=["info"]) %}
                         {% if errors %}
                             <div class="info-messages">
@@ -16,8 +16,21 @@
                             </div> 
                         {% endif %}
                     {% endwith %}
+                    <p><strong>Location: </strong>{{ flock_info[0].city }}, {{ flock_info[0].state }}  </p>
+                    <p><strong>Created</strong>: {{ flock_info[0].created_at.strftime('%B %d, %Y')  }} </p>
 
-
+                    
+                    <h3>Coming up Meeting:</h3>
+                    <p>Book image</p>
+                    <p>Book Title</p>
+                    <p>Book author</p>
+                    <p>Book genre</p>
+                    <p>Book series</p>
+                    <p>ect ect ect...</p>
+                    
+                    <h3>Host info</h3>
+                    <p>Where the book club will meet next:</p>
+                    <p> !! Google Map / link !! </p>
                     </main>
 
 

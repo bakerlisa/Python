@@ -107,7 +107,6 @@ class Flock:
 # =============================================
     @classmethod
     def get_admin_info(cls,data):
-        
         query =  "SELECT * FROM flocks LEFT JOIN flocks_users ON flocks_users.flock_id = flocks.id LEFT JOIN users ON users.id = flocks_users.user_id WHERE flocks_users.user_id = %(id)s;"
         
         results = connectToMySQL('book_club').query_db(query,data)
@@ -143,6 +142,16 @@ class Flock:
 
             flock_information.append(one_flock)
         return flock_information
+
+# ============================================= 
+# SELECT : one flock 
+# ============================================= 
+    @classmethod
+    def get_flock_info(cls,data):
+        query = "SELECT * FROM flocks WHERE id = %(flock_id)s;"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return results
+
 
 # =============================================  
 # SELECT: check if group name is unique

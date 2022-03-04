@@ -7,6 +7,7 @@ from flask_app.models import author_model
 from flask_app.models import series_model
 from flask_app.models import book_series_model
 
+
 class Book:
     def __init__(self,data):
         self.id = data['id']
@@ -38,6 +39,22 @@ class Book:
             is_valid = False
         if len(book['series_name']) > 1 and len(book['num_series']) == 0:
             flash("You've marked this book in a series. Please input what number in the series it is OR leave blank","books")
+            is_valid = False
+        return is_valid
+
+    def validate_search(search):
+        is_valid = True # we assume this is true
+        if (len(search['book_title']) < 3 and search['search_by'] == "all") or (search['search_by'] == "title" and len(search['book_title']) < 3):
+            flash("Um....You need a book title and it needs to be 3 characters long!","search")
+            is_valid = False
+        if (len(search['author']) < 3 and search['search_by'] == "all") or (search['search_by'] == "author" and len(search['author']) < 3):
+            flash("Don't forget to add an author that's 3 characters long","search")
+            is_valid = False
+        if (len(search['genres']) < 3 and search['search_by'] == "all") or (search['search_by'] == "genres" and len(search['genres']) < 3):
+            flash("Please choose a Genre","search")
+            is_valid = False
+        if (len(search['book_series']) < 3 and search['search_by'] == "all") or (search['search_by'] == "series" and len(search['book_series']) < 3 ):
+            flash("A book series is necesary for this search","search")
             is_valid = False
         return is_valid
 
@@ -142,6 +159,13 @@ class Book:
             all_new_book_information.append(one_book)
         
         return all_new_book_information
+
+# SELECT : search info
+    @classmethod
+    def search_for_all(cls,data):
+        query = "SELECT * FROM books LEFT JOIN books_authors ON books.id = books_authors.book_id LEFT JOIN authors ON authors.id = books_authors.author_id LEFT JOIN book_series_number ON book_series_number.book_id = books.id LEFT JOIN book_series ON book_series.id = book_series_number.series_id LEFT JOIN books_genres ON books_genres.book_id = books.id LEFT JOIN genre ON genre.id = books_genres.genre_id WHERE authors.first_name LIKE '%\%(author)s%' OR authors.last_name LIKE '%\%(author)s%';"
+        results = connectToMySQL('book_club').query_db(query,data)
+        return results
 
 # =============================================  
 # INSERT: new book

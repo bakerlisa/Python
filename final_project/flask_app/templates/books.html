@@ -5,32 +5,48 @@
     <main>
         <div class="container flex">
             <h1><span>NightOwl</span> Library: </h1>
-            <form action="/search_for" action="post">
-                <label for="search_by">Search by Category:</label>
+            <form class="search_by_wrp" action="/search_for" method="post">
+                {% with errors = get_flashed_messages(category_filter=["search"]) %}
+                    {% if errors %}
+                        <div class="error-messages">
+                            {%- for msg in errors %}
+                                <p class="error">{{ msg }}</p>
+                            {% endfor -%}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                <label for="search_by">Search by:</label>
                 <span>
-                    <input type="text" name="book_title" placeholder="Search Book Title..." class="search">
-                    <input type="text" name="author" placeholder="Search Author..." class="search">
-                    <select name="search_by" id="">
+                    <select class="search_by" name="search_by" onchange="alterSearch()">
                         <option value="" deactivate selected>Search By...</option>
                         <option value="author">Author</option>
-                        <option value="genre">Genre</option>
+                        <option value="genres">Genre</option>
                         <option value="title">Book Title</option>
                         <option value="series">Series Name</option>
                         <option value="all">All</option>
                     </select>
 
-                    <select name="genres" placeholder="Search by Genres">
+                    <span class="hide title">
+                        <input type="text" name="book_title" placeholder="Search Book Title..." class="search">
+                    </span>
+                    <span class="hide author">
+                        <input type="text" name="author" placeholder="Search Author..." class="search">
+                    </span>
+
+                    <select class="hide genres" name="genres" placeholder="Search by Genres">
                         <option value="" deactivate selected>Search by Genres...</option>
                         {% for book in all_genres %}
                             <option value="{{ book.id }}">{{ book.genre }}</option>
                         {% endfor %}
                     </select>
-                    <select name="book_series">
+
+                    <select class="hide series" name="book_series">
                         <option value="" deactivate selected>Search by Book Series...</option>
                         {% for series in all_series %}
                             <option value="{{ series.id }}">{{ series.series_name }}</option>
                         {% endfor %}
                     </select>
+
                     <input type="submit" value="Search" class="submit">
                 </span>
             </form> 
