@@ -7,16 +7,29 @@
             <div class="container flex">
                 <main>
                     <h1><span>Flock(s) </span>  Dashboard</h1>
-                    {% for info in flock_info %}
-                        <div class="nav"><a href="/past_reads" class="past">Past Books</a> | <a href="/flock_members" class="members">Flock Members</a></div>
-                        <h3>{{ info.flock.title }}</h3>
-                        <p>Location:</p>
-                        <p>Admin For Account: {{ info.flur.status }} </p>
-                    {% endfor %}
+                    {% with errors = get_flashed_messages(category_filter=["info"]) %}
+                        {% if errors %}
+                            <div class="info-messages">
+                                {%- for msg in errors %}
+                                    <p class="info">{{ msg }}</p>
+                                {% endfor -%}
+                            </div> 
+                        {% endif %}
+                    {% endwith %}
 
-                </main>
+                    {% if flock_info|length == 0 %}
+                    <p>You are currently not apart of a flock</p>
+                    <a href="/join_flock" class="button">Join a Flock</a>
+                    {% else %}
+                        {% for info in flock_info %}
+                            <div class="nav"><a href="/past_reads" class="past">Past Books</a> | <a href="/flock_members" class="members">Flock Members</a></div>
+                            <h3>{{ info.flock.title }}</h3>
+                            <p>Location:</p>
+                            <p>Admin For Account: {{ info.flur.status }} </p>
+                        {% endfor %}
+                    {% endif %}
+                    </main>
 
-    
 
     <!-- 3. list of flock members
     4. book for the month

@@ -1,14 +1,30 @@
 {% include 'header.html' %}
 
 <body class="page-search">
+    {% include 'navigation.html' %}
     <main>
         <div class="container flex">
-            {% include 'navigation.html' %}
             <h1>Search All books in NightOwl Database: </h1>
-            <input type="text" name="search" id="" placeholder="Search by: isbn, title, author">
-            <input type="submit" value="search">
+            <form action="/search_for" action="post">
+                <label for="search_by">Search by Category:</label>
+                <select name="search_by" id="">
+                    <option value="" deactivate selected>Search By...</option>
+                    <option value="genre">Author</option>
+                    <option value="genre">Genre</option>
+                    <option value="genre">Book Title</option>
+                    <option value="genre">Series Name</option>
+                </select>
+                <input type="text" name="search" id="" placeholder="Search...">
+                <input type="submit" value="Search">
+            </form>    
 
             1. List them in alabetcail order as well
+            2. paginate
+            <!-- 3. Search function
+                -search by author
+                -genre
+                -series
+                -or title -->
 
         </div>
     </main>

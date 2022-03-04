@@ -101,7 +101,9 @@ class Flock:
 # =============================================
     @classmethod
     def get_all_flocks_info(cls,data):
-        query =  "SELECT * FROM flocks LEFT JOIN flocks_users ON flocks_users.flock_id = flocks.id LEFT JOIN users ON users.id = flocks_users.user_id WHERE users.id = %(id)s;"
+        
+        query =  "SELECT * FROM flocks LEFT JOIN flocks_users ON flocks_users.flock_id = flocks.id LEFT JOIN users ON users.id = flocks_users.user_id WHERE flocks_users.user_id = %(id)s;"
+        
         results = connectToMySQL('book_club').query_db(query,data)
         
         flock_information = []
@@ -134,8 +136,6 @@ class Flock:
             one_flock.member = user_model.User(one_user)
 
             flock_information.append(one_flock)
-            print(" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ")
-            print(one_flock)
         return flock_information
 
 # =============================================  

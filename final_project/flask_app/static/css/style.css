@@ -41,7 +41,7 @@ body{background-color:var(--gray);}
 .col-4{width: 25%;}
 
 /* button */
-.button,.submit{transform-origin:center; transform:scale(1); transform: center; transition:all .2s ease-in;}
+.button,.submit{text-transform: uppercase; letter-spacing: 2px; border: none; transform-origin:center; transform:scale(1); transform: center; transition:all .2s ease-in;}
     .button:hover,.submit:hover{cursor: pointer; transform: scale(.9); transition:all .2s ease-in;
         box-shadow: 0px 2px 5px 2px rgba(0,0,0,0.24);
         -webkit-box-shadow: 0px 2px 5px 2px rgba(0,0,0,0.24);
@@ -59,6 +59,9 @@ h5{font-size: 20px;}
 .error-messages{padding: 25px; background-color:var(--red); margin-top: 25px;}
 .error{color:var(--white); padding-bottom: 5px;}
 .info{color:var(--blue);}
+        /* info */
+        .info-messages{border: solid 2px var(--blue); padding: 15px; color: var(--blue); margin-bottom: 15px;}
+        .info-messages p{color: var(--blue);}
 
 /* row */
 .row.flex.title p{font-weight: 900;}
@@ -121,6 +124,9 @@ PAGE
 .page-create-flock form > label,.city-state span label{padding-top: 15px; padding-bottom: 15px;display: block;}
 
 /* DASHBOARD */
+.page-dashboard{position: relative;}
+.page-dashboard:before{content:''; height:75px; width: 50%; background-color:var(--gray); position: absolute; bottom: 25px; left: 0; z-index: 10; opacity: .5;}
+.page-dashboard:after{content:''; height:25px; width: 50%; background-color:var(--gray); position: absolute;bottom: 110px;left: 50px; opacity: .25;}
 .page-dashboard .navigation .site-name{color:var(--white);}
 .page-dashboard .image-dec{height: 100vh; width: 50%;position: fixed; top: 0;left: 0; background-image: url('/static/img/owl-eyes.png'); background-size: cover; background-position: left center;}
         .page-dashboard.group .image-dec{background-image: url('/static/img/owl-group.png');} 
@@ -128,16 +134,18 @@ PAGE
 .page-dashboard .container main{width: 50%; padding: 50px;}
 .page-dashboard h3{text-transform: uppercase; font-size: 25px; margin-top: 25px;}
     /* to-do */
-    .page-dashboard  .to-do{display: flex;}
-    .page-dashboard  .to-do form{width: calc(100% - 200px); display: flex; flex-wrap: wrap;}
-    .page-dashboard  .to-do  input,.page-dashboard  .to-do  select{padding: 10px; margin: 0;}
+    .page-dashboard .to-do{display: flex;}
+    .page-dashboard .to-do form{width: calc(100% - 200px); display: flex; flex-wrap: wrap;}
+    .page-dashboard .to-do  input,.page-dashboard  .to-do  select{padding: 10px; margin: 0;}
         .page-dashboard  .to-do  select{width: calc(100% - 125px); border:solid 1px var(--brown);}
             .page-dashboard  .to-do  select:focus{outline: none !important; box-shadow: 0 0 3pt 2pt var(--burnt_orange);}
         .page-dashboard  .to-do  input{width: 125px; background-color:var(--brown); color:var(--white); border:none}
             .page-dashboard  .to-do  input:hover{cursor: pointer; opacity: .85;}
-    .page-dashboard  .to-do h3{width: 200px; padding: 0 25px; text-align: center; margin: 0;}
-    .page-dashboard  .to-do h3 a{text-decoration: none; color:var(--blood_orange);}
-    .page-dashboard  .to-do h3 a:hover{color:var(--black);}
+    .page-dashboard .to-do h3{width: 200px; padding: 0 25px; text-align: center; margin: 0;}
+    .page-dashboard .to-do h3 a{text-decoration: none; color:var(--blood_orange);}
+    .page-dashboard .to-do h3 a:hover{color:var(--black);}
+    /* button */
+    .page-dashboard .button{background-color:var(--blue); color:var(--white); text-decoration: none; display: block; max-width: 150px; text-align: center; padding: 15px; margin-left: auto; margin-top: 50px;}
     
 
 /* FLOCK DASHBOARD */
@@ -151,7 +159,7 @@ PAGE
 .page-join-flock .container h1 span{position: relative; left: 11px;}
 .page-join-flock .container p{text-align: left; padding: 25px 15px 15px 50px; font-size: 17px;}
 .page-join-flock form {padding-left: 50px; padding-top: 50px;}
-.page-join-flock .button{text-decoration: none; text-align: center; display: block; max-width:200px; margin: 0 0 0 50px; padding: 10px; background-color:var(--blue); color:var(--white); text-transform: uppercase; letter-spacing: 2px; border: none;}
+.page-join-flock .button{text-decoration: none; text-align: center; display: block; max-width:200px; margin: 0 0 0 50px; padding: 10px; background-color:var(--blue); color:var(--white); }
 .join-flock label{display: block; font-size: 20px;}
 .join-flock select{width: 100%;padding: 10px;margin: 10px 0;}
 .join-flock .submit{max-width: 150px; margin: 0 0 0 auto;}

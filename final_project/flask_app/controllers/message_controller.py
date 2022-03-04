@@ -54,8 +54,8 @@ def submit_join_request():
         }
 
         Message.save_to_from_info(dataTwo)
-
-        return redirect('/flock_dashboard')
+        flash("Your request to join the flock has been sent! Keep an eye on your inbox","info")
+        return redirect('/flocks_dashboard')
 
 # ============================================= 
 # DELETE: message
