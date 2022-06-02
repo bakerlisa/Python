@@ -1,5 +1,5 @@
-# python_coding_dojo
-🐍💻  Assignments and fun while learning python.
+# Python Folder!
+🐍💻  Most come from my time with Coding Dojo! 
 
 #### Languages / Technologies:
 Python, Flask, Jinja, HTML, CSS, JS, MySQLWorkbench, SQL
