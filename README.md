@@ -12,4 +12,6 @@ Python, Flask, Jinja, HTML, CSS, JS, MySQLWorkbench, SQL
 
 
 
-#### 
+#### I knew Harry Potter was my favorite, now I know why!
+![](https://github.com/lisabroadhead/python_coding_dojo/blob/main/Ei1-My3UMAAwJ4a.jpeg) 
+
