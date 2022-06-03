@@ -17,6 +17,6 @@ Python, Flask, Jinja, HTML, CSS, JS, MySQLWorkbench, SQL
 1. Ninjas vs. Pirates - https://github.com/lisabroadhead/Python/tree/main/ninjas_vs_pirates
 
 
-#### I knew Harry Potter was my favorite, now I know why!
+#### I knew Harry Potter was my favorite. Now I know why!
 ![](https://github.com/lisabroadhead/python_coding_dojo/blob/main/Ei1-My3UMAAwJ4a.jpeg) 
 
