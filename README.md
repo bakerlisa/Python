@@ -1,4 +1,4 @@
-# Python Folder!
+# "Sssssssso good you you to join ussssssssss!" said the Python to the developer
 🐍💻  Welcome to the world of Python! At first I didn't like this langauge. There was something about it that irked me. But now....I guess after being wrapped up in it for so long, it's gown on me. That or my brains doing weird things from lack of oxygen 😂
 
 #### Languages / Technologies:
