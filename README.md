@@ -6,7 +6,7 @@ Python, Flask, Jinja, HTML, CSS, JS, MySQLWorkbench, SQL
 
 ## Best of the Best
 1. NigthOwl: Book Club App - https://github.com/lisabroadhead/NightOwl
-2. Full CRUD application in 5 hours - https://github.com/lisabroadhead/black-belt-shows
+2. Shows - https://github.com/lisabroadhead/black-belt-shows
 
 ### Full Crud 
 1. Friendshsips - https://github.com/lisabroadhead/python_coding_dojo/tree/main/flask_mysql/friendships
