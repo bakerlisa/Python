@@ -1,5 +1,5 @@
 # Python Folder!
-🐍💻  Most come from my time with Coding Dojo! 
+🐍💻  Welcome to the world of Python! At first I didn't like this langauge. There was something about it that irked me. But now....I guess after being wrapped up in it for so long, it's gown on me. That or my brains doing weird things from lack of oxygen 😂
 
 #### Languages / Technologies:
 Python, Flask, Jinja, HTML, CSS, JS, MySQLWorkbench, SQL
