@@ -9,12 +9,12 @@ Python, Flask, Jinja, HTML, CSS, JS, MySQLWorkbench, SQL
 2. Shows - https://github.com/lisabroadhead/shows
 
 ### Full Crud 
-1. Friendshsips - https://github.com/lisabroadhead/python_coding_dojo/tree/main/flask_mysql/friendships
-2. Recipes - https://github.com/lisabroadhead/python_coding_dojo/tree/main/flask_mysql/recipes
-3. Authors and Books - https://github.com/lisabroadhead/python_coding_dojo/tree/main/flask_mysql/authors_books
+1. Friendshsips - https://github.com/lisabroadhead/Python/tree/main/flask_mysql/friendships
+3. Recipes - https://github.com/lisabroadhead/Python/tree/main/flask_mysql/recipes
+4. Authors and Books - https://github.com/lisabroadhead/Python/tree/main/flask_mysql/authors_books
 
 ### Samller Projects
-1. Ninjas vs. Pirates - https://github.com/lisabroadhead/python_coding_dojo/tree/main/ninjas_vs_pirates
+1. Ninjas vs. Pirates - https://github.com/lisabroadhead/Python/tree/main/ninjas_vs_pirates
 
 
 #### I knew Harry Potter was my favorite, now I know why!
