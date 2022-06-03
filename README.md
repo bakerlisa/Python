@@ -4,7 +4,7 @@
 #### Languages / Technologies:
 Python, Flask, Jinja, HTML, CSS, JS, MySQLWorkbench, SQL
 
-## Best of the Best
+## Personal Favorites
 1. NigthOwl: Book Club App - https://github.com/lisabroadhead/NightOwl
 2. Shows - https://github.com/lisabroadhead/black-belt-shows
 
