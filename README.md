@@ -5,7 +5,7 @@
 Python, Flask, Jinja, HTML, CSS, JS, MySQLWorkbench, SQL
 
 ## Personal Favorites
-1. NigthOwl: Book Club App - https://github.com/lisabroadhead/NightOwl
+1. NigthOwl - https://github.com/lisabroadhead/NightOwl
 2. Shows - https://github.com/lisabroadhead/shows
 
 ### Full Crud 
